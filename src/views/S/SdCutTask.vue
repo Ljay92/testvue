@@ -8,7 +8,7 @@
                         <h3 class="main-title">{{title}}</h3>
                     </el-col>
                     <el-col :span="4">
-                        <el-select v-model="form.draftTemplate" :placeholder="$lang('请选择模版')" @change="selectTemplate"  class="select-width-all">
+                        <el-select v-model="form.draftTemplate" :placeholder="$lang('请选择模版')" class="select-width-all">
                             <el-option v-for="item in draftNameList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                         </el-select>
                     </el-col>
@@ -412,12 +412,18 @@ export default {
   async mounted() {
     this.loadinginstace = Loading.service({ fullscreen: true });
       const taskDraftList = await subTaskDraftList();
+      console.log("hhahahahhahahahahha");
+
+      console.log(taskDraftList);
       this.draftNameList = taskDraftList.map(item => {
           return {
               label: item.templetName,
               id: item.id,
           };
       });
+      console.log("hhahahahhahahahahha22222");
+
+      console.log(this.draftNameList);
 
 
     const id = this.$route.query.id;
@@ -600,7 +606,22 @@ export default {
       async submitTaskDraft() {
           this.$refs["form"].validate(valid => {
               if (valid) {
-                  this.__submitTaskDraft();
+                  const me =this;
+                  this.$prompt('请输入模板名称', '提示', {
+                      confirmButtonText: '确定',
+                      cancelButtonText: '取消',
+                      inputPattern: /[A-Za-z0-9_\-\u4e00-\u9fa5]+/,
+                      inputErrorMessage: '模板名称格式不正确'
+                  }).then(({ value }) => {
+                      me.form.templetName = value;
+                      console.log(me.form)
+                      me.__submitTaskDraft()
+                  }).catch(() => {
+                      this.$message({
+                          type: 'info',
+                          message: '取消输入'
+                      });
+                  });
               } else {
                   return false;
               }
@@ -640,12 +661,12 @@ export default {
       async __submitTaskDraft() {
           const id = this.$route.query.id;
 
-          const validate = this.validatefn();
-          if (!validate) {
-              return false;
-          }
-          this.loadinginstace = Loading.service({ fullscreen: true });
+          // const validate = this.validatefn();
+          // if (!validate) {
+          //     return false;
+          // }
           const res = await this._CreateChildTaskDraft(this.form, this.form.state);
+          // this.loadinginstace = Loading.service({ fullscreen: true });
           this.loadinginstace.close();
       },
     validatefn() {
@@ -787,6 +808,7 @@ export default {
     },
       //TODO
       async _CreateChildTaskDraft(form, state) {
+          const me = this
           const treenode = this.$refs.tree.getCheckedNodes();
           this.form.chartlatProperty1 = treenode
               .filter(node => !node.children)
@@ -808,9 +830,8 @@ export default {
                   stageRemarks: this.stage.stageRemarks
               });
           }
-
           form.isModel = "1";
-          form.templetName = "TODO功能 用弹出框接收";
+          form.templetName=this.form.templetName
           const res = await CreateChildTaskDraft(form, state);
           if (res.success) {
               //删除java服务器文件
@@ -1010,15 +1031,10 @@ export default {
     },
     cancelStage(item) {
       item.editable = false;
-    },
-
-      selectTemplate(state) {
-          alert(state);
-      }
+    }
   },
   destroyed() {
     this.loadinginstace.close();
   }
-
 };
 </script>
