@@ -27,6 +27,9 @@
                 <li class="nav-li-jh" :badge="$root.count">
                     <a href="javascript:;" @click="$router.push({name:'V_Notices'})">{{$lang('通知中心')}}</a>
                 </li>
+                <li class="nav-li-jh">
+                    <a href="javascript:;" @click="$router.push({name:'V_VsSchool'})">{{$lang('vs-school')}}</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -39,8 +39,8 @@
             <el-row :gutter="20">
                 <el-col class="project-item" :span="8" v-for="(item,i) in projectList" :key="i">
                     <div class="project-name">{{item.name}}</div>
-                    <div class="project-img" @click="$router.push({name:'B_VsSchool-detail'})"><img :src="item.imgSrc"
-                                                                                                    alt=""></div>
+                    <div class="project-img" @click="clickItem(item)"><img :src="item.imgSrc"
+                                                                           alt=""></div>
                 </el-col>
             </el-row>
 
@@ -65,7 +65,7 @@
                 // 项目数据
                 projectList: [],
                 // 搜索框关键字
-                searchKeyword:''
+                searchKeyword: ''
             }
         },
         mounted () {
@@ -99,6 +99,15 @@
             // 处理分页改变
             handlePageChange () {
 
+            },
+            // 点击视频
+            clickItem (item) {
+                console.log('查看当前路由', this.$route.name);
+                let detailUrl;
+                this.$route.name === 'S_VsSchool' ?
+                    detailUrl = 'S_VsSchool-detail' : this.$route.name === 'V_VsSchool' ?
+                    detailUrl = 'V_VsSchool-detail' : detailUrl = 'B_VsSchool-detail';
+                this.$router.push({name: detailUrl});
             }
         }
     }
@@ -128,7 +137,7 @@
         border: none;
     }
 
-    .vs-school .search-keyword .input .el-input__icon{
+    .vs-school .search-keyword .input .el-input__icon {
         left: 0;
     }
 

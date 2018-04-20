@@ -103,6 +103,8 @@ const S = [
     {path: 'S_Proview', component: S_Proview, name: "S_Proview"},
 
     {path: 'notices', component: Notices, name: "S_Notices"},
+    {path: 'S_VsSchool', component: B_VsSchool, name: "S_VsSchool"},
+    {path: 'S_VsSchoolDetail', component: B_VsSchoolDetail, name: "S_VsSchool-detail"},
 ];
 //V端
 import V_TaskList from '@/views/V/list'
@@ -130,6 +132,8 @@ const V = [
     {path: 'V_Proview', component: V_Proview, name: "V_Proview"},
 
     {path: 'notices', component: Notices, name: "V_Notices"},
+    {path: 'V_VsSchool', component: B_VsSchool, name: "V_VsSchool"},
+    {path: 'V_VsSchoolDetail', component: B_VsSchoolDetail, name: "V_VsSchool-detail"},
 ];
 
 const router = new Router({
