@@ -115,7 +115,7 @@
                             <!--<el-input type="textarea" v-model="form1.remarks" :rows="5" :placeholder="$lang('请输入内容')" class="textarea-width-790"></el-input>-->
                         <!--</el-form-item>-->
                         <el-form-item :label="$lang('备注:')">
-                            <UE :defaultMsg=defaultMsg :config=config :id=ue1 ref="ue"></UE>
+                            <UE :defaultMsg="form1.remarks" :config=config :id=ue1 ref="ue"></UE>
                         </el-form-item>
                     </el-form>
                 </el-row>
@@ -288,9 +288,12 @@ export default {
         vevironments: data.vevironments,
         appType: data.appType,
         ambient: data.ambient,
-        //remarks: data.remarks
+        remarks: data.remarks,
           defaultMsg:data.remarks
       };
+
+      this.$refs.ue.setUEContent(data.remarks);
+
       this.TypeSelectValue = this.form1.appType;
       const fileList = await getAllFile("", id);
       //                console.log(fileList);
@@ -824,6 +827,8 @@ export default {
               message: content,
               type: 'success'
           });
+
+          return content;
           console.log(content)
       },
       getUEContentTxt() {
