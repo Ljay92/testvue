@@ -160,6 +160,11 @@ async function ChildTaskStageList(id) {
     return res.data;
 }
 
+//删除阶段
+async function deleteTemplet(id) {
+    const res = await axios.get(`/subtask/deleteTemplet/${id}`);
+    return res.data;
+}
 
 //删除阶段
 async function RemoveStage(id) {
@@ -366,5 +371,6 @@ export {
     removeTask,
 
     UpdateTime,
-    subTaskDraftList
+    subTaskDraftList,
+    deleteTemplet
 }
