@@ -8,9 +8,11 @@
                         <h3 class="main-title">{{title}}</h3>
                     </el-col>
                     <el-col :span="4">
-                        <el-select v-model="form.draftTemplate" :placeholder="$lang('请选择模版')" class="select-width-all">
-                            <el-option v-for="item in draftNameList" :key="item.id" :label="item.label"
-                                       :value="item.id"></el-option>
+                        <el-select v-model="form.draftTemplate" :placeholder="$lang('请选择模版')" class="select-width-all" @change="selectTemplet(form.draftTemplate)">
+                            <el-option v-for="(item,index) in draftNameList" :key="item.id" :label="item.label"
+                                       :value="item.subtaskId">
+                                <div class="l_templabel">{{item.label}}<i class="el-icon-delete l_deleteTempicon" @click="removeTemp($event,item.id,index)"></i></div>
+                            </el-option>
                         </el-select>
                     </el-col>
                 </el-row>
@@ -259,7 +261,15 @@
     .all-task-base {
         padding: 0;
     }
-
+.l_templabel{
+    padding-right:20px;
+    position:relative;
+}
+.l_deleteTempicon{
+    position:absolute;
+    top:2px;
+    right:0px;
+}
     .jdx-add-task > div {
         padding: 10px;
         margin-bottom: 25px;
@@ -294,7 +304,8 @@
         getSubTaskParam,
         CreateGroup,
         TaskInfoById,
-        RemoveStage
+        RemoveStage,
+        deleteTemplet
     } from "@/apis/task";
     import {addFileList, deleteFileByIds, getAllFile} from "@/apis/files";
     import {uploadFile, deleteOssFile} from "@/apis/uploadFile";
@@ -302,6 +313,7 @@
     import SlideBtns from "@/components/SlideBtns";
     import moment from "moment";
     import UE from '../../components/ue/ue.vue';
+    import axios from 'axios'
 
 
     export default {
@@ -453,6 +465,7 @@
                 return {
                     label: item.templetName,
                     id: item.id,
+                    subtaskId:item.subtaskId
                 };
             });
             console.log("hhahahahhahahahahha22222");
@@ -593,6 +606,213 @@
             this.loadinginstace.close();
         },
         methods: {
+            // 选中模板
+            selectTemplet(id){
+                let me = this
+                if(id==""){
+                    return false ;
+                }
+                this.title = $lang("任务编辑");
+                this.isUpdate = true;
+                axios.get(`/subtask/query/${id}`).then(function (response) {
+                    const resc = response.data
+                    console.log(resc)
+                    if (resc.success) {
+                        // this.form.entryEndTime=new Date(this.form.entryEndTime);
+                        // this.form.taskEndTime=new Date(this.form.taskEndTime);
+                        // 为富文本编辑器赋值
+                        me.$refs.ue.setUEContent(resc.data.subTask.remarks);
+                        me.form.rangeTime = [
+                            new Date(resc.data.subTask.entryEndTime),
+                            new Date(resc.data.subTask.taskEndTime)
+                        ];
+                        if (resc.data.subTask.chartlatProperty1) {
+                            if (resc.data.subTask.chartlatProperty1.indexOf(",") > -1) {
+                                resc.data.subTask.chartlatProperty1 = resc.data.subTask.chartlatProperty1.split(
+                                    ","
+                                );
+                            } else {
+                                resc.data.subTask.chartlatProperty1 = [
+                                    resc.data.subTask.chartlatProperty1
+                                ];
+                            }
+                        } else {
+                            resc.data.subTask.chartlatProperty1 = [];
+                        }
+
+                        me.$refs.tree.setCheckedKeys(resc.data.subTask.chartlatProperty1);
+                        console.log(
+                            "resc.data.subTask.chartlatProperty1",
+                            resc.data.subTask.chartlatProperty1
+                        );
+
+                        // if (resc.data.subTask.chartlatFormat) {
+                        //     if (resc.data.subTask.chartlatFormat.indexOf(',') > -1) {
+                        //         resc.data.subTask.chartlatFormat = resc.data.subTask.chartlatFormat.split(',')
+                        //     } else {
+                        //         resc.data.subTask.chartlatFormat = [resc.data.subTask.chartlatFormat];
+                        //     }
+                        // } else {
+                        //     resc.data.subTask.chartlatFormat = []
+                        // }
+                        if (resc.data.subTask.modelStyle) {
+                            if (resc.data.subTask.modelStyle.indexOf(",") > -1) {
+                                resc.data.subTask.modelStyle = resc.data.subTask.modelStyle.split(
+                                    ","
+                                );
+                            } else {
+                                resc.data.subTask.modelStyle = [resc.data.subTask.modelStyle];
+                            }
+                        } else {
+                            resc.data.subTask.modelStyle = [];
+                        }
+
+                        Object.assign(me.form, resc.data.subTask);
+                        me.form.taskStages = resc.data.taskStage.map(o =>
+                            Object.assign(o, {
+                                backup: {
+                                    stageName: o.stageName,
+                                    stageEndTime: o.stageEndTime,
+                                    stageRemarks: o.stageRemarks
+                                },
+                                editable: false
+                            })
+                        );
+                        // Object.assign(this.form.taskStages, resc.data.taskStage)
+                    } else {
+                        me.$message.warning(resc.msg);
+                    }
+                    // const fileList = await getAllFile("", childid);
+                    axios.post(`file/getAll`,{findex:"",bindid:id}).then(function (response) {
+                        const fileList = response.data
+                        console.log(fileList)
+                        if (fileList.success && fileList.data) {
+                            for (let i = 0, l = fileList.data.length; i < l; i++) {
+                                let findex = fileList.data[i].findex;
+                                if (findex == "referencechart") {
+                                    me.ReferencePictureFileList.push({
+                                        name: fileList.data[i].fileName,
+                                        alias: fileList.data[i].alias,
+                                        url: fileList.data[i].url,
+                                        id: fileList.data[i].id
+                                    });
+                                } else if (findex == "enclosure") {
+                                    me.EnclosureFileList.push({
+                                        name: fileList.data[i].fileName,
+                                        alias: fileList.data[i].alias,
+                                        url: fileList.data[i].url,
+                                        id: fileList.data[i].id
+                                    });
+                                }
+                            }
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+                // const resc = await ChildTaskInfo(id);
+                // if (resc.success) {
+                //     this.form.rangeTime = [
+                //         new Date(resc.data.subTask.entryEndTime),
+                //         new Date(resc.data.subTask.taskEndTime)
+                //     ];
+                //     if (resc.data.subTask.chartlatProperty1) {
+                //         if (resc.data.subTask.chartlatProperty1.indexOf(",") > -1) {
+                //             resc.data.subTask.chartlatProperty1 = resc.data.subTask.chartlatProperty1.split(
+                //                 ","
+                //             );
+                //         } else {
+                //             resc.data.subTask.chartlatProperty1 = [
+                //                 resc.data.subTask.chartlatProperty1
+                //             ];
+                //         }
+                //     } else {
+                //         resc.data.subTask.chartlatProperty1 = [];
+                //     }
+                //     this.$refs.tree.setCheckedKeys(resc.data.subTask.chartlatProperty1);
+                //     if (resc.data.subTask.modelStyle) {
+                //         if (resc.data.subTask.modelStyle.indexOf(",") > -1) {
+                //             resc.data.subTask.modelStyle = resc.data.subTask.modelStyle.split(
+                //                 ","
+                //             );
+                //         } else {
+                //             resc.data.subTask.modelStyle = [resc.data.subTask.modelStyle];
+                //         }
+                //     } else {
+                //         resc.data.subTask.modelStyle = [];
+                //     }
+                //
+                //     Object.assign(this.form, resc.data.subTask);
+                //     this.form.taskStages = resc.data.taskStage.map(o =>
+                //         Object.assign(o, {
+                //             backup: {
+                //                 stageName: o.stageName,
+                //                 stageEndTime: o.stageEndTime,
+                //                 stageRemarks: o.stageRemarks
+                //             },
+                //             editable: false
+                //         })
+                //     );
+                //     Object.assign(this.form.taskStages, resc.data.taskStage)
+                // } else {
+                //     this.$message.warning(resc.msg);
+                // }
+                // return false
+                // const fileList = await getAllFile("", id);
+                // if (fileList.success && fileList.data) {
+                //     for (let i = 0, l = fileList.data.length; i < l; i++) {
+                //         let findex = fileList.data[i].findex;
+                //         if (findex == "referencechart") {
+                //             this.ReferencePictureFileList.push({
+                //                 name: fileList.data[i].fileName,
+                //                 alias: fileList.data[i].alias,
+                //                 url: fileList.data[i].url,
+                //                 id: fileList.data[i].id
+                //             });
+                //         } else if (findex == "enclosure") {
+                //             this.EnclosureFileList.push({
+                //                 name: fileList.data[i].fileName,
+                //                 alias: fileList.data[i].alias,
+                //                 url: fileList.data[i].url,
+                //                 id: fileList.data[i].id
+                //             });
+                //         }
+                //     }
+                // }
+            },
+            // 下拉删除草稿
+            async _deleteTemplet(id,index) {
+                const me =this
+                const res = await deleteTemplet(id)
+                if (res.success) {
+                    me.draftNameList.splice(index,1)
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                } else {
+                    this.$message.error(res.msg);
+                }
+            },
+            removeTemp(e,id,index){
+                e.stopPropagation();
+                const me =this;
+                me.$confirm('此操作将永久删除该草稿, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    me._deleteTemplet(id,index)
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
             getUEContent () {
                 let content = this.$refs.ue.getUEContent(); // 调用子组件方法
                 this.$notify({
