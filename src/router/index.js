@@ -66,6 +66,7 @@ import B_VsSchoolDetail from '@/views/B/vs-school/detail.vue'
 import S_UserInfo from '@/views/S/userInfo.vue'
 import S_Base from '@/views/S/user/baseInfo.vue'
 import S_Manage from '@/views/S/user/manageInfo.vue'
+import S_Finance from '@/views/S/user/financeInfo.vue'
 import S_TaskList from '@/views/S/list'
 import S_CreateTask from '@/views/S/SdCutTask'
 import S_Lock from '@/views/S/lock'
@@ -254,7 +255,8 @@ const router = new Router({
                     children: [
                         {path: '', redirect: 'base'},
                         {path: 'base', component: V_Base, name: 'S-VuserInfo-base'},
-                        {path: 'ability', component: V_Ability, name: 'S-VuserInfo-ability'}
+                        {path: 'ability', component: V_Ability, name: 'S-VuserInfo-ability'},
+                        {path: 'finance', component: S_Finance, name: 'S-userInfo-finance'}
                     ]
                 }, {
                     path: 'BuserInfo', component: S_BUserInfo, name: 'S-BuserInfo',

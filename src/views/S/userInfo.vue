@@ -14,7 +14,9 @@
                      <li class="snu-li-03" :class="{ active: navIndx=='manage' }" >
                         <router-link :to="{ name: 'S-userInfo-manage' }">{{$lang('信息管理')}}</router-link>
                     </li>
-
+                      <li class="snu-li-03" :class="{ active: navIndx=='finance' }">
+                          <router-link :to="{ name: 'V-userInfo-finance' ,query: { userId: userId }}">{{$lang('财务信息')}}</router-link>
+                      </li>
                   </ul>
               </div>
               <div class="ui-slide-right">

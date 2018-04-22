@@ -18,19 +18,19 @@
                 <el-row class="l_detailwrapper">
                     <el-col class="l_detaillist" :span="8">
                         <div class="l_alldetail">
-                            <div class="l_detailprice">{{frost}}</div>
+                            <div class="l_detailprice">{{frozenMoney}}</div>
                             <div class="l_detailsrc">冻结资金（元）</div>
                         </div>
                     </el-col>
                     <el-col class="l_detaillist" :span="8">
                         <div class="l_alldetail">
-                            <div class="l_detailprice">{{withdraw}}</div>
+                            <div class="l_detailprice">{{allowMoney}}</div>
                             <div class="l_detailsrc">可提现资金（元）</div>
                         </div>
                     </el-col>
                     <el-col class="l_detaillist" :span="8">
                         <div class="l_alldetail">
-                            <div class="l_detailprice">{{withdrawed}}</div>
+                            <div class="l_detailprice">{{atmsMoney}}</div>
                             <div class="l_detailsrc">已申请提现资金（元）</div>
                         </div>
                     </el-col>
@@ -241,10 +241,10 @@
     .l_detailwrapper {
         padding: 0 20px;
         text-align: center;
-        margin-bottom:60px;
+        margin-bottom: 60px;
     }
 
-    .l_detaillist{
+    .l_detaillist {
         padding: 0 20px;
     }
 
@@ -259,8 +259,9 @@
         color: #00a0dc;
         line-height: 120px
     }
-    .l_detailsrc{
-        font-size:20px;
+
+    .l_detailsrc {
+        font-size: 20px;
     }
 </style>
 <script>
@@ -276,9 +277,9 @@
                 nextTo: false,
                 userId: "",
                 totalMoney: 0,
-                frost:0,
-                withdraw:0,
-                withdrawed:0,
+                frozenMoney: 0,
+                allowMoney: 0,
+                atmsMoney: 0,
                 navIndex: 1, //总nav
                 operateType: "index", //资金页操作类型
                 billIndex: 1, //账单页tab
@@ -366,10 +367,10 @@
                 const userId = this.$route.query.userId || getUser().userId;
                 const res = await getMoney({userId});
                 if (res.success) {
-                    this.totalMoney = res.data.money;
-                    this.frost=0;
-                    this.withdraw=0;
-                    this.withdrawed=0;
+                    this.totalMoney = res.data.totalMoney || 0;
+                    this.atmsMoney = res.atmsMoney || 0;
+                    this.allowMoney = res.money || 0;
+                    this.frozenMoney = res.frozenMoney || 0;
                 }
             },
             async recordList(type, index) {
