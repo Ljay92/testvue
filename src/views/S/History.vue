@@ -49,8 +49,10 @@ export default {
     const id = me.$route.query.id;
     const TaskStage = me.$route.query.TaskStage;
     const index = me.$route.query.index;
+
+    console.log('fasfsa',this.$route.query);
     let res = await getAllFileWithPage(
-      { "-2": "final", "-1": "checked" }[index] || "enclosure",
+      { "-2": "final", "-1": "checked", '-3':'supplement' }[index] || "enclosure",
       TaskStage
     );
     if (res.success) {

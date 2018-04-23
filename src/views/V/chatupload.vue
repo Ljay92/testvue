@@ -9,6 +9,17 @@
             </div>
             <div class="chart-left-list">
                 <ul class="chart-left-ul">
+                    <!--补充阶段,补充资料-->
+                    <li class="chart-left-li expand-stage" key="expand">
+                        <div class="stage-header">
+                            <i class="el-icon-upload"></i>
+                            <span>补充资料</span>
+                        </div>
+                        <div class="stage-body">
+                            <el-button size="small" type="info" @click="toRedirect('V_History', '-3')">查看记录</el-button>
+                        </div>
+                    </li>
+
                     <li class="chart-left-li" v-for="(item,i) in taskStage" :key="i">
                         <div class="box-flex-media-box cl-top">
                             <p class="num">
@@ -139,6 +150,26 @@
 .el-form-item__content .el-progress--line .el-progress-bar {
   margin-right: -70px;
   padding-right: 70px;
+}
+
+/*补充阶段样式*/
+.expand-stage .stage-header{
+    text-align: center;
+    border-top: 5px solid #161f40;
+    box-shadow: 2px 2px 2px 2px #ddd;
+    font-size: 18px;
+    color: #161f40;
+    height: 70px;
+    line-height: 70px;
+}
+.expand-stage .stage-body{
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+}
+
+.expand-stage .stage-body .el-button{
+    border-radius: 32px;
 }
 </style>
 <script>
