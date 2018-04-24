@@ -19,9 +19,9 @@
                         <div class="stage-body">
                             <el-button type="info" @click="()=>$refs.expandStageFile.click()" size="small">
                                 {{$lang('上传文件')}}
-                                <input type="file" @change="UploadExpandFile" accept="image/png, image/jpeg, *.zip " ref="expandStageFile" hidden/>
+                                <input type="file" @change="UploadExpandFile" multiple accept="image/png, image/jpeg, .zip " ref="expandStageFile" hidden/>
                             </el-button>
-                            <el-button size="small" type="info" @click="toRedirect('S_History', '-3')">查看记录</el-button>
+                            <el-button size="small" type="info" @click="viewUploadHistory">查看记录</el-button>
                         </div>
                     </li>
 
@@ -132,6 +132,22 @@
                 <el-button type="primary" @click="acceptance" v-if="['5','6'].includes(subTask.state)">{{$lang('提交验收')}}</el-button>
             </div>
         </el-dialog>
+        <el-dialog :title="$lang('查看记录')" ref="viewUploadHistory" :visible.sync="uploadHistoryVisible" size="small">
+            <div v-loading.body="uploadHistoryLoading">
+                <el-row :gutter="20" v-for="item in uploadHistoryList" style="margin-bottom: 20px;min-height: 100px;">
+                    <el-col :span="4" v-for="file in item" style="overflow: hidden;  text-overflow: ellipsis; white-space: nowrap; line-height: 100px">
+                        <img width="100%" height="100px" :src="file.url" alt="" v-if="getFileType(file.fileName) != 'zip'" @click="viewImage(file.url)">
+                        <a :href="file.url" v-else :title="file.fileName">{{file.fileName}}</a>
+                    </el-col>
+                </el-row>
+            </div>
+        </el-dialog>
+
+        <el-dialog :title="$lang('图片预览')" :visible.sync="viewImageVisible" size="large">
+            <div class="dialog-img-preview">
+                <img :src="currentImage" alt="">
+            </div>
+        </el-dialog>
     </div>
 </template>
 <style>
@@ -209,7 +225,13 @@ export default {
       sourcePath: "",
       submitAcceptance: -1,
       lastProgress: 0,
-      lastFileUpdated: false
+      lastFileUpdated: false,
+      uploadHistoryVisible: false,
+      uploadHistoryLoading: false,
+      uploadHistoryList: [],
+      // 查看大图变量
+      viewImageVisible: false,
+      currentImage:''
     };
   },
   async mounted() {
@@ -678,40 +700,82 @@ export default {
     },
     //  上传补充阶段文件
     UploadExpandFile(e) {
-      console.log('fasfasf',e);
+      console.log('fasfasf',e.target.files[0]);
+      if(e.target.files[6]){
+          return this.$message.warning($lang("一次最多只能上传六个文件"));
+      }
+
+      if(!e.target.files[0]){
+          return this.$message($lang("请选择要上传的文件"));
+      }
+        // 使用当前时间，上传参数updatetime，用来区分文件的同一上传批次
+        let currentTime = new Date().getTime();
         e.target.progress = 0;
-        let file = e.target.files[0];
-        if (file) {
-            client.then(oss => {
-                this.lastFileUpdated = true;
-                oss
-                .multipartUpload(
-                    `/task/${this.$route.query.id}/${this.$route.query
-                        .taskId}/${file.name}`,
-                    file,
-                    {
-                        *progress(p) {
-                            console.log(p);
-                            self.lastProgress = parseFloat((p * 100).toFixed(2));
-                        }
-                    }
-                )
-                .then(data => {
-                    this.lastFileUpdated = false;
-                    console.log(data.url || data.res.requestUrls[0]);
-                    this.addFileToServer({
-                        bindid: this.$route.query.id,
-                        findex: "supplement",
-                        url: data.url || data.res.requestUrls[0].replace(/\?.*/gm, ""),
-                        fileName: file.name,
-                        alias: file.name
-                    });
+
+        for(let key in e.target.files){
+            let file = e.target.files[key];
+            if(file){
+                client.then(oss => {
+                    this.lastFileUpdated = true;
+                    oss
+                        .multipartUpload(
+                            `/task/${this.$route.query.id}/${this.$route.query
+                                .taskId}/${file.name}`,
+                            file,
+                            {
+                                *progress(p) {
+                                    console.log(p);
+                                    self.lastProgress = parseFloat((p * 100).toFixed(2));
+                                }
+                            }
+                        )
+                        .then(data => {
+                            this.lastFileUpdated = false;
+                            console.log(data.url || data.res.requestUrls[0]);
+                            this.addFileToServer({
+                                bindid: this.$route.query.id,
+                                findex: "supplement",
+                                updateTime:currentTime,
+                                url: data.url || data.res.requestUrls[0].replace(/\?.*/gm, ""),
+                                fileName: file.name,
+                                alias: file.name
+                            });
+                        });
                 });
-            });
-        } else {
-            this.$message($lang("请选择要上传的文件"));
+            }
         }
     },
+    // 查看补充资料上传记录
+    async viewUploadHistory() {
+        this.uploadHistoryVisible = true;
+        this.uploadHistoryLoading = true;
+        let res = await getAllFile(
+            'supplement',
+            this.subTask.id
+        );
+        if (res.success) {
+           let arr = {};
+           // 通过updatetime将文件记录分组
+           res.data.forEach(item=>{
+               if(arr[item.updateTime]){
+                   arr[item.updateTime].push(item);
+               }
+               else {
+                   arr[item.updateTime] = [item];
+               }
+           })
+           this.uploadHistoryList = arr;
+           this.uploadHistoryLoading = false;
+        }
+    },
+    getFileType(str){
+        let type = str .substring(str .lastIndexOf("\.") + 1, str .length);
+        return type;
+    },
+    viewImage(url){
+        this.currentImage = url;
+        this.viewImageVisible = true;
+    }
   }
 };
 </script>
