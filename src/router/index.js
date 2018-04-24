@@ -39,6 +39,7 @@ const g = [
 import Index from '@/views/index'
 import C_Header from '@/views/Header'
 import C_Detail from '@/views/detail.vue'
+import Modocker from '../views/modocker/modocker';// 第三方集成
 //B端
 import B_List from '@/views/B/TaskList.vue'
 import B_TaskCreate from '@/views/B/TaskCreate.vue'
@@ -152,7 +153,8 @@ const router = new Router({
 
                 {path: "", redirect: 'index'},
                 {path: 'index', component: Index, name: "C_Index"},
-                {path: 'ddetail', component: C_Detail, name: "C_Detail"}
+                {path: 'ddetail', component: C_Detail, name: "C_Detail"},
+                {path: 'Modocker', component: Modocker, name: 'Modocker'}
             ]
         },
         {
