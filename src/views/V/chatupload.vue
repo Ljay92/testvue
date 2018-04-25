@@ -16,7 +16,7 @@
                             <span>补充资料</span>
                         </div>
                         <div class="stage-body">
-                            <el-button size="small" type="info" @click="toRedirect('V_History', '-3')">查看记录</el-button>
+                            <el-button size="small" type="info" @click="viewUploadHistory">查看记录</el-button>
                         </div>
                     </li>
 
@@ -130,6 +130,23 @@
                 <el-button type="primary" @click="acceptance" v-if="['5','6'].includes(subTask.state)">{{$lang('提交验收')}}</el-button>
             </div>
         </el-dialog>
+
+        <el-dialog :title="$lang('查看记录')" ref="viewUploadHistory" :visible.sync="uploadHistoryVisible" size="small">
+            <div v-loading.body="uploadHistoryLoading">
+                <el-row :gutter="20" v-for="item in uploadHistoryList" style="margin-bottom: 20px;min-height: 100px;">
+                    <el-col :span="4" v-for="file in item" style="overflow: hidden;  text-overflow: ellipsis; white-space: nowrap; line-height: 100px">
+                        <img width="100%" height="100px" :src="file.url" alt="" v-if="getFileType(file.fileName) != 'zip'" @click="viewImage(file.url)">
+                        <a :href="file.url" v-else :title="file.fileName">{{file.fileName}}</a>
+                    </el-col>
+                </el-row>
+            </div>
+        </el-dialog>
+
+        <el-dialog :title="$lang('图片预览')" :visible.sync="viewImageVisible" size="large">
+            <div class="dialog-img-preview">
+                <img :src="currentImage" alt="">
+            </div>
+        </el-dialog>
     </div>
 </template>
 <style>
@@ -207,7 +224,13 @@ export default {
       },
       sourcePath: "",
       lastProgress: 0,
-      lastFileUpdated: false
+      lastFileUpdated: false,
+      uploadHistoryVisible: false,
+      uploadHistoryLoading: false,
+      uploadHistoryList: [],
+      // 查看大图变量
+      viewImageVisible: false,
+      currentImage:''
     };
   },
   async mounted() {
@@ -663,7 +686,40 @@ export default {
       console.log(file, fileList);
       fileList.pop();
       this.selectedFile = null;
-    }
+    },
+    async viewUploadHistory() {
+          this.uploadHistoryVisible = true;
+          this.uploadHistoryLoading = true;
+          let res = await getAllFile(
+              'supplement',
+              this.subTask.id
+          );
+          if (res.success) {
+              let arr = {};
+              // 通过updatetime将文件记录分组
+              res.data.forEach(item=>{
+                  if(arr[item.updateTime]){
+                      arr[item.updateTime].push(item);
+                  }
+                  else {
+                      arr[item.updateTime] = [item];
+                  }
+              })
+              this.uploadHistoryList = arr;
+              this.uploadHistoryLoading = false;
+              if(res.data.length === 0){
+                  this.$message.warning($lang("暂无文件记录数据！"))
+              }
+          }
+      },
+    getFileType(str){
+          let type = str .substring(str .lastIndexOf("\.") + 1, str .length);
+          return type;
+      },
+    viewImage(url){
+          this.currentImage = url;
+          this.viewImageVisible = true;
+      }
   }
 };
 </script>
