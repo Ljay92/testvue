@@ -766,6 +766,10 @@ export default {
            })
            this.uploadHistoryList = arr;
            this.uploadHistoryLoading = false;
+
+            if(res.data.length === 0){
+                this.$message.warning($lang("暂无文件记录数据！"))
+            }
         }
     },
     getFileType(str){
