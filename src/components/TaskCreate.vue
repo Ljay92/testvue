@@ -27,7 +27,7 @@
                                 </el-col>
                             </el-form-item>
                             <el-form-item :label="$lang('任务时间:')" required>
-                                <el-date-picker v-model="form.taskEndTime" type="datetime" :picker-options="pickerOptions" :placeholder="$lang('请选择时间')" format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
+                                <el-date-picker v-model="form.taskEndTime" type="datetime" :picker-options="pickerOptions" :placeholder="$lang('请选择时间')" format="yyyy-MM-dd HH"></el-date-picker>
                             </el-form-item>
                             <el-form-item :label="$lang('任务组:')">
                                 <el-col :span="18">

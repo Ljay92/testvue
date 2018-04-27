@@ -35,7 +35,7 @@
                             </el-form-item>
                             <el-form-item :label="$lang('报名结束时间~任务截止时间:')" required>
                                 <el-date-picker v-model="form.rangeTime" type="datetimerange"
-                                                :placeholder="$lang('报名结束时间~任务截止时间')" format="yyyy-MM-dd HH:mm:ss"
+                                                :placeholder="$lang('报名结束时间~任务截止时间')" format="yyyy-MM-dd HH"
                                                 :picker-options="pickerOptions0"></el-date-picker>
                             </el-form-item>
                             <!--<el-form-item :label="$lang('任务截止时间:">
@@ -140,7 +140,7 @@
                                 </el-col>
                                 <el-col :span="12">
                                     <el-form-item :label="$lang('截止时间:')" required>
-                                        <el-date-picker v-model="item.backup.stageEndTime" format="yyyy-MM-dd HH:mm:ss"
+                                        <el-date-picker v-model="item.backup.stageEndTime" format="yyyy-MM-dd HH"
                                                         type="datetime" :placeholder="$lang('选择时间')"
                                                         :picker-options="pickerOptions0"
                                                         v-if="item.editable"></el-date-picker>
@@ -172,7 +172,7 @@
                                 </el-col>
                                 <el-col :span="12">
                                     <el-form-item :label="$lang('截止时间:')" required>
-                                        <el-date-picker v-model="stage.stageEndTime" format="yyyy-MM-dd HH:mm:ss"
+                                        <el-date-picker v-model="stage.stageEndTime" format="yyyy-MM-dd HH"
                                                         type="datetime" :placeholder="$lang('选择时间')"
                                                         :picker-options="pickerOptions0"></el-date-picker>
                                     </el-form-item>
