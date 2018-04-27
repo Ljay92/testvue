@@ -171,6 +171,8 @@
                             <a href="javascript:;" class="title flex1">
                                 <h4>{{$lang('完成')}}</h4>
                             </a>
+
+                            <el-button :disabled="getChilds(5).length === 0" type="sure" @click="openOfferFormDialog(getChilds(5),'已完成')">报价单</el-button>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(5).length">
                             <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(5)" :key="i">
