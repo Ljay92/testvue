@@ -49,6 +49,7 @@ export default {
     };
   },
   created() {
+      console.log(this.userId)
     this.navIndx = this.getStatus(this.$route.path);
     //拼接路由中的query
     if (this.$route.query && this.$route.query.userId) {

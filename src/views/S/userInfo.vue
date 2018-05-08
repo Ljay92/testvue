@@ -1,6 +1,6 @@
 <template>
   <div class="content-wrapper">
- 
+
       <div class="userInfo-wrap">
           <div class="user-info-banner">
               <img src="../../assets/images/user-info-banner.jpg"/>
@@ -15,7 +15,7 @@
                         <router-link :to="{ name: 'S-userInfo-manage' }">{{$lang('信息管理')}}</router-link>
                     </li>
                       <li class="snu-li-03" :class="{ active: navIndx=='finance' }">
-                          <router-link :to="{ name: 'V-userInfo-finance' ,query: { userId: userId }}">{{$lang('财务信息')}}</router-link>
+                          <router-link :to="{ name: 'S-userInfo-finance',query: { userId: userId }}">{{$lang('财务信息')}}</router-link>
                       </li>
                   </ul>
               </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { isLogin, getUser } from "@/apis/storage";
 import SlideBtns from '@/components/SlideBtns'
   export default {
     components:{
@@ -37,11 +38,19 @@ import SlideBtns from '@/components/SlideBtns'
     },
     data() {
         return {
-            navIndx:'base'
+            navIndx:'base',
+            userId: getUser().userId
         }
       },
     created () {
+        console.log(this.userId)
       this.navIndx=this.getStatus(this.$route.path);
+        //拼接路由中的query
+        if (this.$route.query && this.$route.query.userId) {
+            this.userId = this.$route.query.userId;
+        } else {
+            this.userId = getUser().userId;
+        }
     },
     watch:{
         '$route.path':function(val,oldVal){
