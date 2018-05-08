@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Loading, Message } from 'element-ui'
 
 //axios.defaults.baseURL = 'http://yietoo.com:8080/vsworkapi/api';//开发服
-axios.defaults.baseURL = 'http://47.95.202.72:18088/api/api';//新开发服务器
+axios.defaults.baseURL = 'http://47.97.210.51:80/api/api';//新开发服务器
 
 // axios.defaults.baseURL = 'http://api.vswork.com/api';//客户服务器
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
