@@ -321,6 +321,11 @@ async function UpdateTime(id, entryEndTime) {
     return res.data;
 }
 
+// 检查文件上传时间
+async function JudgeNew(id) {
+    const res = await axios.post(`/subtask/judgeNew`, JSON.stringify({ id}));
+    return res.data;
+}
 export {
     vsendToS,
     getChatConfig,
@@ -388,5 +393,7 @@ export {
 
     taskOfferList,
     taskDownloadExcel,
-    deleteTemplet
+    deleteTemplet,
+
+    JudgeNew
 }

@@ -54,7 +54,7 @@
                                 <em>{{taskStage.length + 1}}</em>
                             </p>
                             <a href="javascript:;" class="title flex1">
-                                <h4>{{$lang('验收')}}</h4>
+                                <h4>{{statemsg}}</h4>
 
                             </a>
                             <el-button type="info" size="small" @click="proview" v-if="subTask.state>=5">{{$lang('预览')}}</el-button>
@@ -71,22 +71,101 @@
                             <dd class="flex1">{{subTask.remarks}}</dd>
                         </dl>
                     </li>
-                    <li class="chart-left-li" v-if="subTask.state>=7">
-                        <div class="box-flex-media-box cl-top">
+
+                    <!--最终文件-->
+                    <li class="chart-left-li">
+                        <div class="box-flex-media-box cl-top"
+                             style="border-left: 0;padding-left: 20px;border-top: 5px solid #161f40;">
                             <p class="num">
                                 <em>{{taskStage.length + 2}}</em>
                             </p>
                             <a href="javascript:;" class="title flex1">
                                 <h4>{{$lang('最终文件')}}</h4>
                             </a>
-                            <el-button type="info" size="small" @click="downloadLastFile()" v-if="!isOnlyChat">{{$lang('下载')}}</el-button>
-                            <el-button type="info" @click="()=>$refs.file.click()" :loading="lastFileUpdated" size="small">
-                              {{$lang('上传文件')}}
-                              <input type="file" @change="uploadLastFile" ref="file" hidden/>
+                            <!--<el-button type="info" size="small" @click="downloadLastFile()" v-if="!isOnlyChat">-->
+                            <!--{{$lang('下载')}}-->
+                            <!--</el-button>-->
+                            <el-button type="info" @click="()=>$refs.file.click()" :loading="lastFileUpdated"
+                                       size="small">
+                                {{$lang('上传文件')}}
+                                <input type="file" @change="uploadLastFile" ref="file" hidden/>
                             </el-button>
-                            <el-button type="info" size="small" @click="toRedirect('V_History', '-2')">{{$lang('查看记录')}}</el-button>
+                            <el-button type="info" size="small" @click="toRedirect('S_History', '-2')">
+                                {{$lang('查看记录')}}
+                            </el-button>
+                        </div>
+                        <div style="padding:0 30px;">
+                            <div class="box-flex-media-box cl-top"
+                                 style="padding:0;border-left: 0;border-top: 2px solid #161f40;">
+                                <p class="num" style="width:26px;">
+                                    <em></em>
+                                </p>
+                                <a href="javascript:;" class="title flex1">
+                                    <h4>{{$lang('预览文件')}}</h4>
+                                </a>
+                                <el-button type="info" size="small" @click="proview" v-if="subTask.state>=5">
+                                    {{$lang('预览')}}
+                                </el-button>
+                                <el-button type="info" size="small" @click="uploadChecked"
+                                           v-if="!isOnlyChat&&['5','6','7'].includes(subTask.state)">{{$lang('上传文件')}}
+                                </el-button>
+                                <!-- <el-button type="info" size="small" @click="toSubmit" v-if="!isOnlyChat&&uploaded">{{$lang('提交验收')}}</el-button> -->
+                                <el-button type="info" size="small" @click="toRedirect('S_History', '-2')"
+                                           style="margin-right:-12px">
+                                    {{$lang('查看记录')}}
+                                </el-button>
+                            </div>
+                            <dl class="box-flex cl-info">
+                                <dt>{{$lang('截止时间：')}}</dt>
+                                <dd class="flex1">{{subTask.taskEndTime}}</dd>
+                            </dl>
+                            <dl class="box-flex cl-info">
+                                <dt>{{$lang('上次意见：')}}</dt>
+                                <dd class="flex1">
+                                    <div v-html="subTask.remarks"></div>
+                                </dd>
+                            </dl>
+                            <div class="box-flex-media-box cl-top"
+                                 style="padding:0;border-left: 0;border-top: 2px solid #161f40;">
+                                <p class="num" style="width:26px;">
+                                    <em></em>
+                                </p>
+                                <a href="javascript:;" class="title flex1">
+                                    <h4>{{$lang('提交验收')}}</h4>
+                                </a>
+                                <el-button type="info" size="small" @click="changefile" v-if="subTask.state>=5" style="position:relative;">
+                                    {{$lang('选择文件')}}<i :class="changestate?'el-icon-caret-bottom':'el-icon-caret-top'"
+                                                        style="margin-left:10px;"></i>
+                                    <div style="position:absolute;width:80px;text-align:center;background:#fff;z-index:9999;font-size:12px;color:#666666;top:25px;" v-show="changestate">
+                                        <div style="line-height:40px;" @click="selectfile">预览文件</div>
+                                        <hr width="60" style="border-top:1px solid #666666;margin:0 auto;">
+                                        <div style="line-height:40px;" @click="selectfile">最终文件</div>
+                                    </div>
+                                </el-button>
+                                <el-button type="info" size="small" @click="toSubmit()"
+                                           style="margin-right:-12px">
+                                    {{$lang('提交')}}
+                                </el-button>
+                            </div>
                         </div>
                     </li>
+
+                    <!--<li class="chart-left-li" v-if="subTask.state>=7">-->
+                        <!--<div class="box-flex-media-box cl-top">-->
+                            <!--<p class="num">-->
+                                <!--<em>{{taskStage.length + 2}}</em>-->
+                            <!--</p>-->
+                            <!--<a href="javascript:;" class="title flex1">-->
+                                <!--<h4>{{$lang('最终文件')}}</h4>-->
+                            <!--</a>-->
+                            <!--<el-button type="info" size="small" @click="downloadLastFile()" v-if="!isOnlyChat">{{$lang('下载')}}</el-button>-->
+                            <!--<el-button type="info" @click="()=>$refs.file.click()" :loading="lastFileUpdated" size="small">-->
+                              <!--{{$lang('上传文件')}}-->
+                              <!--<input type="file" @change="uploadLastFile" ref="file" hidden/>-->
+                            <!--</el-button>-->
+                            <!--<el-button type="info" size="small" @click="toRedirect('V_History', '-2')">{{$lang('查看记录')}}</el-button>-->
+                        <!--</div>-->
+                    <!--</li>-->
                 </ul>
             </div>
         </div>
@@ -200,6 +279,8 @@ export default {
   components: { Chat },
   data() {
     return {
+        changestate: false,
+        statemsg:'',
       subTask: {},
       taskStage: [],
       uploading: [],
@@ -282,6 +363,13 @@ export default {
       //                    res.data.subTask.latestVersion = latestVersion + 1;
       //                }
       this.subTask = res.data.subTask;
+        if(this.subTask.sSubmitAcceptance==0){
+            this.statemsg=$lang('验收中')
+        }else if(this.subTask.sSubmitAcceptance==1){
+            this.statemsg=$lang('验收中')
+        }else{
+            this.statemsg=$lang('验收中')
+        }
       this.taskStage = res.data.taskStage;
       const dir = "task/" + res.data.subTask.id + "/";
       client.then(oss => {
@@ -327,6 +415,17 @@ export default {
     this.versionList = [{ valueExp: "自定义路径", key: "__path__" }, ...r.data];
   },
   methods: {
+      changefile() {
+          this.changestate = !this.changestate;
+      },
+      async selectfile(){
+          this.changestate = this.changestate;
+          let res = await getFile("checked", this.$route.query.id);
+          this.$router.push({
+              name: "S_Proview",
+              query: {fileVersion: res.data.fileVersion, url: res.data.url}
+          });
+      },
     async acceptance() {
       let res = await AcceptanceTask(this.$route.query.id);
       this.toSubmitUploadShow = false;
