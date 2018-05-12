@@ -108,7 +108,7 @@
                                 {{$lang('上传文件')}}
                                 <input type="file" @change="uploadLastFile" ref="file" hidden/>
                             </el-button>
-                            <el-button type="info" size="small" @click="toRedirect('S_History', '-2')">
+                            <el-button type="info" size="small" @click="toRedirect('S_History', '-1')">
                                 {{$lang('查看记录')}}
                             </el-button>
                         </div>
@@ -684,13 +684,13 @@
                 this.$router.push({name, query: {id: id}});
             },
             async toSubmit() {
-                const id = this.$route.query.id;
-
-                // const res = await AcceptanceTask(id);
-                // this.$message({
-                //   message: res.msg,
-                //   type: res.success ? "success" : "error"
-                // });
+                let res = await AcceptanceTask(this.$route.query.id);
+                this.toSubmitUploadShow = false;
+                if (res.success) {
+                    this.$message.success(this.$lang("提交验收成功"));
+                } else {
+                    this.$message.error(res.msg);
+                }
             },
             uploadChecked() {
                 const me = this;

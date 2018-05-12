@@ -627,6 +627,13 @@ export default {
       //   message: res.msg,
       //   type: res.success ? "success" : "error"
       // });
+        let res = await AcceptanceTask(this.$route.query.id);
+        this.toSubmitUploadShow = false;
+        if (res.success) {
+            this.$message.success(this.$lang("提交验收成功"));
+        } else {
+            this.$message.error(res.msg);
+        }
     },
     uploadChecked() {
       const me = this;
