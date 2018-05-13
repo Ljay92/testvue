@@ -422,7 +422,7 @@ export default {
           this.changestate = this.changestate;
           let res = await getFile("checked", this.$route.query.id);
           this.$router.push({
-              name: "S_Proview",
+              name: "V_Proview",
               query: {fileVersion: res.data.fileVersion, url: res.data.url}
           });
       },
