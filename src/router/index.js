@@ -63,6 +63,7 @@ import B_TaskChildDetail from '@/views/B/TaskChildDetail.vue'
 import B_History from '@/views/B/History.vue'
 import B_VsSchool from '@/views/B/vs-school/list.vue'
 import B_VsSchoolDetail from '@/views/B/vs-school/detail.vue'
+import B_Proview from '@/views/B/proview.vue'
 //S端
 import S_UserInfo from '@/views/S/userInfo.vue'
 import S_Base from '@/views/S/user/baseInfo.vue'
@@ -185,7 +186,7 @@ const router = new Router({
                 {path: 'B_DTaskCheck', component: B_DTaskCheck, name: "B_DTaskCheck"},
                 {path: 'B_TaskChildDetail', component: B_TaskChildDetail, name: "B_TaskChildDetail"},
                 {path: 'B_History', component: B_History, name: "B_History"},
-
+                {path: 'B_Proview', component: B_Proview, name: "B_Proview"},
                 {path: 'notices', component: Notices, name: "B_Notices"},
 
                 {
