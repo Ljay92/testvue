@@ -12,28 +12,28 @@
             <div class="chart-left-list">
                 <ul class="chart-left-ul">
                     <!--补充资料-->
-                    <li class="chart-left-li">
-                        <div class="box-flex-media-box cl-top">
-                            <a href="javascript:;" class="title flex1">
-                                <h4>{{$lang('待补充资料')}}</h4>
-                            </a>
-                        </div>
-                        <ul class="chose-people-ul" v-if="getChilds(0).length">
-                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(0)" :key="i">
-                                <div class="flex1">
-                                    <div class="box-flex-media-box">
-                                        <p class="user-header">
-                                            <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
-                                        </p>
-                                        <p class="name">{{m.projectName}}</p>
-                                    </div>
-                                </div>
-                                <!--<a href="javascript:;" class="more" @click="changStateToPay(m.id)">{{$lang('确认')}}&gt;</a>&nbsp;&nbsp;&nbsp;-->
-                                <a href="javascript:;" class="more"
-                                   @click="$router.push({name:'S_SonTaskInfo',query: { id: m.id }})">{{$lang('查看')}}&gt;</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <!--<li class="chart-left-li">-->
+                        <!--<div class="box-flex-media-box cl-top">-->
+                            <!--<a href="javascript:;" class="title flex1">-->
+                                <!--<h4>{{$lang('待补充资料')}}</h4>-->
+                            <!--</a>-->
+                        <!--</div>-->
+                        <!--<ul class="chose-people-ul" v-if="getChilds(0).length">-->
+                            <!--<li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(0)" :key="i">-->
+                                <!--<div class="flex1">-->
+                                    <!--<div class="box-flex-media-box">-->
+                                        <!--<p class="user-header">-->
+                                            <!--<img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>-->
+                                        <!--</p>-->
+                                        <!--<p class="name">{{m.projectName}}</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;<a href="javascript:;" class="more" @click="changStateToPay(m.id)">{{$lang('确认')}}&gt;</a>&nbsp;&nbsp;&nbsp;&ndash;&gt;-->
+                                <!--<a href="javascript:;" class="more"-->
+                                   <!--@click="$router.push({name:'S_SonTaskInfo',query: { id: m.id }})">{{$lang('查看')}}&gt;</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
 
                     <!--待确认-->
                     <li class="chart-left-li">
@@ -582,6 +582,7 @@
             const res = await ChildTaskList(id);
 
             if (res.success) {
+                console.log(res.data)
                 const list = res.data ? res.data : [];
                 ChildTaskState("S").map((value, i) => {
                     const model = {
