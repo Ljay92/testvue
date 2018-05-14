@@ -32,12 +32,15 @@
                             <!--<el-button type="success" @click="chooseFile(i, $event)">上传</el-button>-->
                             <!--<input type="file" @click="chooseFile(i)">-->
                             <!--<span v-if="uploading[i]">{{progress[i]}}...</span>-->
-                            <el-progress type="circle" style="margin-right: 10px" v-if="uploading[i]" :percentage="progress[i]" :width='36'></el-progress>
+                            <el-progress type="circle" style="margin-right: 10px" v-if="uploading[i]"
+                                         :percentage="progress[i]" :width='36'></el-progress>
                             <div class="upload-sc" v-else>
                                 <el-button type="info" v-if="!isOnlyChat" size="small">{{$lang('上传文件')}}</el-button>
-                                <input class="upload-file-btn" type="file" v-if="!isOnlyChat" @change="chooseFile(i, $event.target.files[0])" />
+                                <input class="upload-file-btn" type="file" v-if="!isOnlyChat"
+                                       @change="chooseFile(i, $event.target.files[0])"/>
                             </div>
-                            <el-button type="info" size="small" @click="toRedirect('V_History', i)">{{$lang('查看记录')}}</el-button>
+                            <el-button type="info" size="small" @click="toRedirect('V_History', i)">{{$lang('查看记录')}}
+                            </el-button>
                         </div>
                         <dl class="box-flex cl-info">
                             <dt>{{$lang('截止时间：')}}</dt>
@@ -57,10 +60,16 @@
                                 <h4>{{statemsg}}</h4>
 
                             </a>
-                            <el-button type="info" size="small" @click="proview" v-if="subTask.state>=5">{{$lang('预览')}}</el-button>
-                            <el-button type="info" size="small" @click="uploadChecked" v-if="!isOnlyChat&&['5','6','7'].includes(subTask.state)">{{$lang('上传文件')}}</el-button>
+                            <el-button type="info" size="small" @click="proview" v-if="subTask.state>=5">
+                                {{$lang('预览')}}
+                            </el-button>
+                            <el-button type="info" size="small" @click="uploadChecked"
+                                       v-if="!isOnlyChat&&['5','6','7'].includes(subTask.state)">{{$lang('上传文件')}}
+                            </el-button>
                             <!-- <el-button type="info" size="small" @click="toSubmit" v-if="!isOnlyChat&&uploaded">{{$lang('提交验收')}}</el-button> -->
-                            <el-button type="info" size="small" @click="toRedirect('V_History', '-1')">{{$lang('查看记录')}}</el-button>
+                            <el-button type="info" size="small" @click="toRedirect('V_History', '-1')">
+                                {{$lang('查看记录')}}
+                            </el-button>
                         </div>
                         <dl class="box-flex cl-info">
                             <dt>{{$lang('截止时间：')}}</dt>
@@ -90,7 +99,7 @@
                                 {{$lang('上传文件')}}
                                 <input type="file" @change="uploadLastFile" ref="file" hidden/>
                             </el-button>
-                            <el-button type="info" size="small" @click="toRedirect('S_History', '-2')">
+                            <el-button type="info" size="small" @click="toRedirect('S_History', '-1')">
                                 {{$lang('查看记录')}}
                             </el-button>
                         </div>
@@ -133,15 +142,18 @@
                                 <a href="javascript:;" class="title flex1">
                                     <h4>{{$lang('提交验收')}}</h4>
                                 </a>
-                                <el-button type="info" size="small" @click="changefile" v-if="subTask.state>=5" style="position:relative;">
-                                    {{$lang('选择文件')}}<i :class="changestate?'el-icon-caret-bottom':'el-icon-caret-top'"
+                                <div style="display:inline-block;position:relative;margin-right: 10px;">
+                                    <el-button type="info" size="small" @click="changefile" v-if="subTask.state>=5"
+                                               style="position:relative;">
+                                        {{filesname}}<i :class="changestate?'el-icon-caret-bottom':'el-icon-caret-top'"
                                                         style="margin-left:10px;"></i>
-                                    <div style="position:absolute;width:80px;text-align:center;background:#fff;z-index:9999;font-size:12px;color:#666666;top:25px;" v-show="changestate">
-                                        <div style="line-height:40px;" @click="selectfile">预览文件</div>
+                                    </el-button>
+                                    <div style="position:absolute;width:80px;text-align:center;background:#fff;z-index:9999;font-size:12px;color:#666666;top:25px;z-index:9999" v-show="changestate">
+                                        <div style="line-height:40px;" @click="selectfile(0)">预览文件</div>
                                         <hr width="60" style="border-top:1px solid #666666;margin:0 auto;">
-                                        <div style="line-height:40px;" @click="selectfile">最终文件</div>
+                                        <div style="line-height:40px;" @click="selectfile(1)">最终文件</div>
                                     </div>
-                                </el-button>
+                                </div>
                                 <el-button type="info" size="small" @click="toSubmit()"
                                            style="margin-right:-12px">
                                     {{$lang('提交')}}
@@ -151,20 +163,20 @@
                     </li>
 
                     <!--<li class="chart-left-li" v-if="subTask.state>=7">-->
-                        <!--<div class="box-flex-media-box cl-top">-->
-                            <!--<p class="num">-->
-                                <!--<em>{{taskStage.length + 2}}</em>-->
-                            <!--</p>-->
-                            <!--<a href="javascript:;" class="title flex1">-->
-                                <!--<h4>{{$lang('最终文件')}}</h4>-->
-                            <!--</a>-->
-                            <!--<el-button type="info" size="small" @click="downloadLastFile()" v-if="!isOnlyChat">{{$lang('下载')}}</el-button>-->
-                            <!--<el-button type="info" @click="()=>$refs.file.click()" :loading="lastFileUpdated" size="small">-->
-                              <!--{{$lang('上传文件')}}-->
-                              <!--<input type="file" @change="uploadLastFile" ref="file" hidden/>-->
-                            <!--</el-button>-->
-                            <!--<el-button type="info" size="small" @click="toRedirect('V_History', '-2')">{{$lang('查看记录')}}</el-button>-->
-                        <!--</div>-->
+                    <!--<div class="box-flex-media-box cl-top">-->
+                    <!--<p class="num">-->
+                    <!--<em>{{taskStage.length + 2}}</em>-->
+                    <!--</p>-->
+                    <!--<a href="javascript:;" class="title flex1">-->
+                    <!--<h4>{{$lang('最终文件')}}</h4>-->
+                    <!--</a>-->
+                    <!--<el-button type="info" size="small" @click="downloadLastFile()" v-if="!isOnlyChat">{{$lang('下载')}}</el-button>-->
+                    <!--<el-button type="info" @click="()=>$refs.file.click()" :loading="lastFileUpdated" size="small">-->
+                    <!--{{$lang('上传文件')}}-->
+                    <!--<input type="file" @change="uploadLastFile" ref="file" hidden/>-->
+                    <!--</el-button>-->
+                    <!--<el-button type="info" size="small" @click="toRedirect('V_History', '-2')">{{$lang('查看记录')}}</el-button>-->
+                    <!--</div>-->
                     <!--</li>-->
                 </ul>
             </div>
@@ -175,10 +187,11 @@
         <div v-else class="chart-right" style="background: none">
             <div class="chart-msg">{{msg}}</div>
         </div>
-        <el-dialog :title="$lang('上传文件')" ref="toSubmitUpload" :visible.sync="toSubmitUploadShow" size="tiny" :before-close="toSubmitUploadClose" v-loading.body="loading">
+        <el-dialog :title="$lang('上传文件')" ref="toSubmitUpload" :visible.sync="toSubmitUploadShow" size="tiny"
+                   :before-close="toSubmitUploadClose" v-loading.body="loading">
             <el-form>
                 <el-form-item>
-                  <h2>验收预览</h2>
+                    <h2>验收预览</h2>
                 </el-form-item>
                 <el-form-item :label="$lang('格式选择：')">
                     <el-select v-model="form.fileVersion" :placeholder="$lang('请选择')">
@@ -186,35 +199,40 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item :label="$lang('资源文件：')">
-                    <el-input v-model.trim="sourcePath" :placeholder="$lang('请输入资源文件路径')" v-if="form.fileVersion=='__path__'"></el-input>
-                    <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" ref="indexFile" :file-list="IndexFileList" :on-change="IndexFileChange" :on-remove="IndexFileRemove" :autoUpload="false" v-else>
+                    <el-input v-model.trim="sourcePath" :placeholder="$lang('请输入资源文件路径')"
+                              v-if="form.fileVersion=='__path__'"></el-input>
+                    <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" ref="indexFile"
+                               :file-list="IndexFileList" :on-change="IndexFileChange" :on-remove="IndexFileRemove"
+                               :autoUpload="false" v-else>
                         <el-button size="small" type="primary">{{$lang('点击上传')}}</el-button>
                         <el-progress :percentage="progress.check" v-if="progress.check"></el-progress>
                     </el-upload>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="primary" @click="submit">{{$lang('确 定')}}</el-button>
+                    <el-button type="primary" @click="submit">{{$lang('确 定')}}</el-button>
                 </el-form-item>
-                <div style="border-bottom:1px solid #999999;margin-bottom:20px;"></div>
-                <el-form-item>
-                    <h2 style="display:inline;">{{$lang('最终文件')}}&nbsp;&nbsp;&nbsp;</h2>
-                    <el-button type="primary" @click="()=>$refs.file.click()" size="small">
-                      {{$lang('上传文件')}}
-                      <input type="file" @change="uploadLastFile" ref="file" hidden/>
-                    </el-button>
-                    <el-progress :percentage="lastProgress" v-if="lastProgress"></el-progress>
-                </el-form-item>
+                <!--<div style="border-bottom:1px solid #999999;margin-bottom:20px;"></div>-->
+                <!--<el-form-item>-->
+                <!--<h2 style="display:inline;">{{$lang('最终文件')}}&nbsp;&nbsp;&nbsp;</h2>-->
+                <!--<el-button type="primary" @click="()=>$refs.file.click()" size="small">-->
+                <!--{{$lang('上传文件')}}-->
+                <!--<input type="file" @change="uploadLastFile" ref="file" hidden/>-->
+                <!--</el-button>-->
+                <!--<el-progress :percentage="lastProgress" v-if="lastProgress"></el-progress>-->
+                <!--</el-form-item>-->
             </el-form>
-            <div slot="footer">
-                <el-button type="primary" @click="acceptance" v-if="['5','6'].includes(subTask.state)">{{$lang('提交验收')}}</el-button>
-            </div>
+            <!--<div slot="footer">-->
+            <!--<el-button type="primary" @click="acceptance" v-if="['5','6'].includes(subTask.state)">{{$lang('提交验收')}}</el-button>-->
+            <!--</div>-->
         </el-dialog>
 
         <el-dialog :title="$lang('查看记录')" ref="viewUploadHistory" :visible.sync="uploadHistoryVisible" size="small">
             <div v-loading.body="uploadHistoryLoading">
                 <el-row :gutter="20" v-for="item in uploadHistoryList" style="margin-bottom: 20px;min-height: 100px;">
-                    <el-col :span="4" v-for="file in item" style="overflow: hidden;  text-overflow: ellipsis; white-space: nowrap; line-height: 100px">
-                        <img width="100%" height="100px" :src="file.url" alt="" v-if="getFileType(file.fileName) != 'zip'" @click="viewImage(file.url)">
+                    <el-col :span="4" v-for="file in item"
+                            style="overflow: hidden;  text-overflow: ellipsis; white-space: nowrap; line-height: 100px">
+                        <img width="100%" height="100px" :src="file.url" alt=""
+                             v-if="getFileType(file.fileName) != 'zip'" @click="viewImage(file.url)">
                         <a :href="file.url" v-else :title="file.fileName">{{file.fileName}}</a>
                     </el-col>
                 </el-row>
@@ -229,603 +247,619 @@
     </div>
 </template>
 <style>
-.chatupload .undelete .el-icon-close {
-  display: none !important;
-}
-.chatupload .el-upload.el-upload--text {
-  width: 240px;
-}
-.chatupload .el-upload.el-upload--text .el-progress.el-progress--line {
-  width: 160px;
-  display: inline-block;
-}
-.chatupload .el-upload {
-  text-align: left;
-}
+    .chatupload .undelete .el-icon-close {
+        display: none !important;
+    }
 
-.el-form-item__content .el-progress--line .el-progress-bar {
-  margin-right: -70px;
-  padding-right: 70px;
-}
+    .chatupload .el-upload.el-upload--text {
+        width: 240px;
+    }
 
-/*补充阶段样式*/
-.expand-stage .stage-header{
-    text-align: center;
-    border-top: 5px solid #161f40;
-    box-shadow: 2px 2px 2px 2px #ddd;
-    font-size: 18px;
-    color: #161f40;
-    height: 70px;
-    line-height: 70px;
-}
-.expand-stage .stage-body{
-    text-align: center;
-    height: 70px;
-    line-height: 70px;
-}
+    .chatupload .el-upload.el-upload--text .el-progress.el-progress--line {
+        width: 160px;
+        display: inline-block;
+    }
 
-.expand-stage .stage-body .el-button{
-    border-radius: 32px;
-}
+    .chatupload .el-upload {
+        text-align: left;
+    }
+
+    .el-form-item__content .el-progress--line .el-progress-bar {
+        margin-right: -70px;
+        padding-right: 70px;
+    }
+
+    /*补充阶段样式*/
+    .expand-stage .stage-header {
+        text-align: center;
+        border-top: 5px solid #161f40;
+        box-shadow: 2px 2px 2px 2px #ddd;
+        font-size: 18px;
+        color: #161f40;
+        height: 70px;
+        line-height: 70px;
+    }
+
+    .expand-stage .stage-body {
+        text-align: center;
+        height: 70px;
+        line-height: 70px;
+    }
+
+    .expand-stage .stage-body .el-button {
+        border-radius: 32px;
+    }
 </style>
 <script>
-import Chat from "@/components/Chat";
-import { ChildTaskInfo, AcceptanceTask, getTalkByGroupId } from "@/apis/task";
-import { addFile } from "@/apis/files";
-import { client, uploadFile, progress } from "@/apis/uploadFile";
-import { getAllFile, getFileVersionList, getFile } from "@/apis/files";
+    import Chat from "@/components/Chat";
+    import {ChildTaskInfo, AcceptanceTask, getTalkByGroupId} from "@/apis/task";
+    import {addFile} from "@/apis/files";
+    import {client, uploadFile, progress} from "@/apis/uploadFile";
+    import {getAllFile, getFileVersionList, getFile} from "@/apis/files";
 
-export default {
-  components: { Chat },
-  data() {
-    return {
-        changestate: false,
-        statemsg:'',
-      subTask: {},
-      taskStage: [],
-      uploading: [],
-      progress: [],
-      toSubmitUploadShow: false,
-      IndexFileList: [],
-      ReleaseFileList: [],
-      chatConfig: {},
-      msg: $lang("正在加载中..."),
-      isOnlyChat: false,
+    export default {
+        components: {Chat},
+        data() {
+            return {
+                changestate: false,
+                submitstate:'checked',
+                filesname:'选择文件',
+                statemsg: '',
+                subTask: {},
+                taskStage: [],
+                uploading: [],
+                progress: [],
+                toSubmitUploadShow: false,
+                IndexFileList: [],
+                ReleaseFileList: [],
+                chatConfig: {},
+                msg: $lang("正在加载中..."),
+                isOnlyChat: false,
 
-      versionList: [],
-      selectedFile: null,
-      form: {
-        fileVersion: ""
-      },
-      uploaded: false,
-      loading: false,
-
-      progress: {
-        check: 0
-      },
-      sourcePath: "",
-      lastProgress: 0,
-      lastFileUpdated: false,
-      uploadHistoryVisible: false,
-      uploadHistoryLoading: false,
-      uploadHistoryList: [],
-      // 查看大图变量
-      viewImageVisible: false,
-      currentImage:''
-    };
-  },
-  async mounted() {
-    const me = this;
-
-    const id = this.$route.query.id;
-    if (!!this.$route.query.isOnlyChat) {
-      this.isOnlyChat = true;
-    }
-
-    const qq = await getTalkByGroupId(id);
-    console.log(id + "获取聊天组信息", qq);
-    if (qq.success) {
-      if (
-        qq.data &&
-        qq.data.groupDetails &&
-        qq.data.groupDetails.data &&
-        qq.data.targetChatUser &&
-        qq.data.targetChatUser.entities
-      ) {
-        this.chatConfig = {
-          groupid: qq.data.groupDetails.data[0].id,
-          userid: qq.data.targetChatUser.entities[0].username,
-          userimg: qq.data.targetUser.info.headUrl,
-          username:
-            qq.data.targetUser.info.nickName || qq.data.targetUser.phone,
-          userphone: qq.data.targetUser.phone,
-          userRole: "V",
-          youname: qq.data.sUser.info.nickName || qq.data.sUser.phone,
-          youimg: qq.data.sUser.info.headUrl,
-          youRole: "S",
-          youphone: qq.data.sUser.phone,
-          id: id
-        };
-      } else {
-        this.msg = $lang("聊天相关数据出现异常");
-      }
-    } else {
-      this.msg = qq.msg;
-    }
-
-    const res = await ChildTaskInfo(id);
-    if (res.success) {
-      //                debugger
-      //                const latestVersion = parseInt(res.data.subTask.latestVersion);
-      //                if (isNaN(latestVersion)) {
-      //                    res.data.subTask.latestVersion = 1;
-      //                } else {
-      //                    res.data.subTask.latestVersion = latestVersion + 1;
-      //                }
-      this.subTask = res.data.subTask;
-        if(this.subTask.sSubmitAcceptance==0){
-            this.statemsg=$lang('验收中')
-        }else if(this.subTask.sSubmitAcceptance==1){
-            this.statemsg=$lang('验收中')
-        }else{
-            this.statemsg=$lang('验收中')
-        }
-      this.taskStage = res.data.taskStage;
-      const dir = "task/" + res.data.subTask.id + "/";
-      client.then(oss => {
-        oss
-          .list({
-            prefix: dir,
-            delimiter: "/"
-          })
-          .then(data => {
-            let checkedData = [];
-
-            console.log(data);
-
-            (data.prefixes || []).map(item => {
-              var arr = item.split("/");
-              if (arr[arr.length - 2] && parseInt(arr[arr.length - 2])) {
-                checkedData.push(item);
-              }
-            });
-            this.subTask.latestVersion = checkedData.length + 1;
-            // debugger
-            //                        debugger
-            //                        if (data.prefixes && data.prefixes.length > 0) {
-            //                            this.subTask.latestVersion = data.prefixes.length + 1
-            //                        } else {
-            //                            this.subTask.latestVersion = 1
-            //                        }
-          });
-      });
-    } else {
-      this.$message.warning(res.msg);
-    }
-    if (!localStorage.localPoint) {
-      localStorage.localPoint = JSON.stringify([]);
-    }
-    //            const fileData = await getAllFile('checked', me.subTask.id);
-    //            console.log(fileData);
-    //            if (fileData.data.length > 0) {
-    //                debugger
-    //            }
-
-    const r = await getFileVersionList();
-    this.versionList = [{ valueExp: "自定义路径", key: "__path__" }, ...r.data];
-  },
-  methods: {
-      changefile() {
-          this.changestate = !this.changestate;
-      },
-      async selectfile(){
-          this.changestate = this.changestate;
-          let res = await getFile("checked", this.$route.query.id);
-          this.$router.push({
-              name: "V_Proview",
-              query: {fileVersion: res.data.fileVersion, url: res.data.url}
-          });
-      },
-    async acceptance() {
-      let res = await AcceptanceTask(this.$route.query.id);
-      this.toSubmitUploadShow = false;
-      if (res.success) {
-        this.$message.success(this.$lang("提交验收成功"));
-      } else {
-        this.$message.error(res.msg);
-      }
-    },
-    async proview() {
-      let res = await getFile("checked", this.$route.query.id);
-      this.$router.push({
-        name: "V_Proview",
-        query: { fileVersion: res.data.fileVersion, url: res.data.url }
-      });
-    },
-    async downloadLastFile() {
-      let res = await getFile("final", this.$route.query.id);
-      var a = document.createElement("a");
-      a.href = res.data.url;
-      a.download = res.data.fileName;
-      var ev = document.createEvent("MouseEvents");
-      ev.initEvent("click", false, true);
-      a.dispatchEvent(ev);
-    },
-    uploadLastFile(e) {
-      e.target.progress = 0;
-      let self = this,
-        file = e.target.files[0];
-      if (file) {
-        client.then(oss => {
-          this.lastFileUpdated = true;
-          oss
-            .multipartUpload(
-              `/task/${this.$route.query.id}/${this.$route.query
-                .taskId}/${file.name}`,
-              file,
-              {
-                *progress(p) {
-                  console.log(p);
-                  self.lastProgress = parseFloat((p * 100).toFixed(2));
-                }
-              }
-            )
-            .then(data => {
-              this.lastFileUpdated = false;
-              console.log(data.url || data.res.requestUrls[0]);
-              this.addFileToServer({
-                bindid: this.$route.query.id,
-                findex: "final",
-                url: data.url || data.res.requestUrls[0].replace(/\?.*/gm, ""),
-                fileName: file.name,
-                alias: file.name
-              });
-            });
-        });
-      } else {
-        this.$message($lang("请选择要上传的文件"));
-      }
-    },
-    chooseFile(index, file) {
-      const me = this;
-      //加载断点
-      let localPoint = JSON.parse(localStorage.localPoint);
-      let currCheckPoint = localPoint[index];
-      //判断是否有断点存在，有则添加文件对象
-      if (file) {
-        if (currCheckPoint) currCheckPoint.file = file;
-        me.$set(me.uploading, index, true); //直接改变数组不刷新DOM
-        //                    /task/子任务ID/阶段ID/
-        let fileName;
-        //                    ！！！！！！index == me.taskStage.length 原来用于上传完成阶段的文件，更改之后将不存在，完成阶段的文件上传调用其他方法
-        if (index == me.taskStage.length) {
-          me.subTask.latestVersion = parseInt(me.subTask.latestVersion) + 1;
-          if (
-            me.subTask.latestVersion == "NaN" ||
-            isNaN(me.subTask.latestVersion)
-          ) {
-            me.subTask.latestVersion = 1;
-          }
-          fileName =
-            me.subTask.projectName +
-            "-" +
-            "验收" +
-            "-" +
-            me.subTask.latestVersion;
-        } else {
-          me.taskStage[index].latestVersion =
-            parseInt(me.taskStage[index].latestVersion) + 1;
-          if (
-            me.taskStage[index].latestVersion == "NaN" ||
-            isNaN(me.taskStage[index].latestVersion)
-          ) {
-            me.taskStage[index].latestVersion = 1;
-          }
-          fileName =
-            me.subTask.projectName +
-            "-" +
-            me.taskStage[index].stageName +
-            "-" +
-            me.taskStage[index].latestVersion;
-        }
-        const fileType = file.name.slice(file.name.lastIndexOf("."));
-        client.then(oss => {
-          oss
-            .multipartUpload(
-              `/task/${me.$route.query.id}/${me.$route.query
-                .taskId}/${fileName}${fileType}`,
-              file,
-              {
-                checkpoint: currCheckPoint,
-                progress: function*(progress, point) {
-                  me.$set(me.progress, index, parseInt(progress * 100));
-                  let localPoint = JSON.parse(localStorage.localPoint);
-                  localPoint[index] = point;
-                  localStorage.localPoint = JSON.stringify(localPoint);
-                  //                                console.log('上传中...', me.progress[index], point);
-                }
-              }
-            )
-            .then(data => {
-              //                        me.$message(`文件${file.name}上传完成，文件名为${fileName}`);
-              me.$set(me.uploading, index, false);
-              let localPoint = JSON.parse(localStorage.localPoint);
-              localPoint[index] = null;
-              localStorage.localPoint = JSON.stringify(localPoint);
-              //保存到java服务器
-              me.addFileToServer(
-                {
-                  bindid:
-                    index == me.taskStage.length
-                      ? me.subTask.id
-                      : me.taskStage[index].id,
-                  findex: "enclosure",
-                  url: data.url
-                    ? data.url
-                    : data.res.requestUrls[0].replace(/\?.*/gm, ""),
-                  fileName: fileName + fileType,
-                  alias: fileName + fileType
-                  //                            me.taskStage[index].latestVersion
+                versionList: [],
+                selectedFile: null,
+                form: {
+                    fileVersion: ""
                 },
-                index
-              );
-              //                            console.log('上传完成', data);
-            })
-            .catch(data => {
-              me.$message({
-                message: data.message + $lang(" 将清除当前文件断点信息"),
-                type: "error"
-              });
-              me.$set(me.uploading, index, false);
-              let localPoint = JSON.parse(localStorage.localPoint);
-              localPoint[index] = null;
-              localStorage.localPoint = JSON.stringify(localPoint);
-            });
-        });
-      } else {
-        this.$message($lang("请选择要上传的文件"));
-      }
-    },
-    async addFileToServer(param, index) {
-      const me = this;
-      const res = await addFile(param);
-      if (res.success) {
-        // if (index == me.taskStage.length) {
-        //   const id = this.$route.query.id;
-        //   const res = await AcceptanceTask(id);
-        //   this.$message({
-        //     message: res.msg,
-        //     type: res.success ? "success" : "error"
-        //   });
-        // }
-      }
-    },
-    toRedirect(name, index) {
-      const me = this;
-      let TaskStage;
-      if (index >= 0) {
-        TaskStage = me.taskStage[index].id;
-      } else {
-        // ！！！有疑问，路过看看这个 id 对不对
-        //                    TaskStage = me.taskStage[me.taskStage.length - 1].id
-        TaskStage = me.subTask.id;
-      }
-      const id = this.$route.query.id;
-      this.$router.push({
-        name,
-        query: { id: id, TaskStage: TaskStage, index: index }
-      });
-    },
-    toDetail(name) {
-      const id = this.$route.query.id;
-      this.$router.push({ name, query: { id: id } });
-    },
-    async toSubmit() {
-      // const id = this.$route.query.id;
-      // const res = await AcceptanceTask(id);
-      // this.$message({
-      //   message: res.msg,
-      //   type: res.success ? "success" : "error"
-      // });
-        let res = await AcceptanceTask(this.$route.query.id);
-        this.toSubmitUploadShow = false;
-        if (res.success) {
-            this.$message.success(this.$lang("提交验收成功"));
-        } else {
-            this.$message.error(res.msg);
-        }
-    },
-    uploadChecked() {
-      const me = this;
-      this.lastProgress = 0;
-      this.sourcePath = "";
-      this.IndexFileList = [];
-      this.form.fileVersion = "";
-      this.toSubmitUploadShow = true;
-    },
-    toSubmitUploadClose() {
-      const me = this;
-      // me.$confirm($lang('确认关闭当前窗口？(如果上传过index.html并且关闭弹框，重新打开将生成新的版本号)')).then(data => {
-      //     if (data == 'confirm') {
-      //         me.toSubmitUploadShow = false;
-      //         if (me.$refs.indexFile.uploadFiles.length > 0) {
-      //             //                        me.subTask.latestVersion++
-      //             history.go(0)
-      //             //                        const closeBtn = document.querySelectorAll('#myUploadBtn .el-icon-close')
-      //             //                        closeBtn.forEach(item => {
-      //             //                            item.click();
-      //             //                        })
-      //         }
-      //     }
-      //     //                    me.$refs.indexFile.clearFiles();
-      //     //                    me.$refs.ReleaseFile.clearFiles();
-      // }).catch(data => {
+                uploaded: false,
+                loading: false,
 
-      // });
-      me.toSubmitUploadShow = false;
-    },
-    async addFileToServer(param) {
-      const me = this;
-      const res = await addFile(param);
-      if (res.success) {
-        me.$message($lang("保存文件成功，文件名为") + param.alias);
-        me.$refs.chat.sendMessage(param.alias);
-        this.subTask.state < 7 && this.toSubmit();
-      }
-    },
-    IndexFileChange(file, fileList) {
-      if (fileList.length > 1) {
-        this.$message.warning($lang("最多只能上传一个文件"));
-        fileList.pop();
-        // } else if ((/.vsdata$/).test(file.name)) {
-      } else if (/.*$/.test(file.name)) {
-        this.selectedFile = file;
-      } else {
-        this.$message.warning($lang("选择的文件格式不正确"));
-        fileList.pop();
-      }
-    },
-    submit() {
-      let file = this.selectedFile,
-        version = this.form.fileVersion,
-        path = this.sourcePath,
-        findex = "checked";
-      if (!version) {
-        this.$message.warning($lang("请先选择"));
-      } else if (version == "__path__" ? !path : !file) {
-        this.$message.warning(
-          $lang(version == "__path__" ? "请输入资源文件路径" : "请上传资源文件")
-        );
-      } else {
-        const barId = null;
-        console.log("client", client);
-        if (version == "__path__") {
-          this.addFileToServer({
-            bindid: this.subTask.id,
-            findex,
-            url: path,
-            fileName: `自定义路径 ${path}`,
-            alias: `自定义路径 ${path}`,
-            subvsion: this.subTask.latestVersion,
-            fileVersion: version
-          });
-          this.loading = false;
-          this.uploaded = true;
-        } else
-          client.then(oss => {
-            console.log("oss", oss, oss.multipartUpload);
-            oss
-              .multipartUpload(
-                `/task/${this.subTask.id}/${this.subTask.latestVersion}/${file
-                  .raw.name}`,
-                file.raw,
-                {
-                  progress: p => {
-                    console.log("progress", p);
-                    this.progress.check = p * 100;
-                    return progress(p, barId);
-                  }
+                progress: {
+                    check: 0
+                },
+                sourcePath: "",
+                lastProgress: 0,
+                lastFileUpdated: false,
+                uploadHistoryVisible: false,
+                uploadHistoryLoading: false,
+                uploadHistoryList: [],
+                // 查看大图变量
+                viewImageVisible: false,
+                currentImage: ''
+            };
+        },
+        async mounted() {
+            const me = this;
+
+            const id = this.$route.query.id;
+            if (!!this.$route.query.isOnlyChat) {
+                this.isOnlyChat = true;
+            }
+
+            const qq = await getTalkByGroupId(id);
+            console.log(id + "获取聊天组信息", qq);
+            if (qq.success) {
+                if (
+                    qq.data &&
+                    qq.data.groupDetails &&
+                    qq.data.groupDetails.data &&
+                    qq.data.targetChatUser &&
+                    qq.data.targetChatUser.entities
+                ) {
+                    this.chatConfig = {
+                        groupid: qq.data.groupDetails.data[0].id,
+                        userid: qq.data.targetChatUser.entities[0].username,
+                        userimg: qq.data.targetUser.info.headUrl,
+                        username:
+                        qq.data.targetUser.info.nickName || qq.data.targetUser.phone,
+                        userphone: qq.data.targetUser.phone,
+                        userRole: "V",
+                        youname: qq.data.sUser.info.nickName || qq.data.sUser.phone,
+                        youimg: qq.data.sUser.info.headUrl,
+                        youRole: "S",
+                        youphone: qq.data.sUser.phone,
+                        id: id
+                    };
+                } else {
+                    this.msg = $lang("聊天相关数据出现异常");
                 }
-              )
-              .then(data => {
-                console.log("data", data);
-                this.addFileToServer({
-                  bindid: this.subTask.id,
-                  findex,
-                  url:
-                    data.url || data.res.requestUrls[0].replace(/\?.*/gm, ""),
-                  fileName: file.raw.name,
-                  alias: file.raw.name,
-                  subvsion: this.subTask.latestVersion,
-                  fileVersion: version
+            } else {
+                this.msg = qq.msg;
+            }
+
+            const res = await ChildTaskInfo(id);
+            if (res.success) {
+                //                debugger
+                //                const latestVersion = parseInt(res.data.subTask.latestVersion);
+                //                if (isNaN(latestVersion)) {
+                //                    res.data.subTask.latestVersion = 1;
+                //                } else {
+                //                    res.data.subTask.latestVersion = latestVersion + 1;
+                //                }
+                this.subTask = res.data.subTask;
+                if (this.subTask.sSubmitAcceptance == 0) {
+                    this.statemsg = $lang('验收中')
+                } else if (this.subTask.sSubmitAcceptance == 1) {
+                    this.statemsg = $lang('验收中')
+                } else {
+                    this.statemsg = $lang('验收中')
+                }
+                this.taskStage = res.data.taskStage;
+                const dir = "task/" + res.data.subTask.id + "/";
+                client.then(oss => {
+                    oss
+                        .list({
+                            prefix: dir,
+                            delimiter: "/"
+                        })
+                        .then(data => {
+                            let checkedData = [];
+
+                            console.log(data);
+
+                            (data.prefixes || []).map(item => {
+                                var arr = item.split("/");
+                                if (arr[arr.length - 2] && parseInt(arr[arr.length - 2])) {
+                                    checkedData.push(item);
+                                }
+                            });
+                            this.subTask.latestVersion = checkedData.length + 1;
+                            // debugger
+                            //                        debugger
+                            //                        if (data.prefixes && data.prefixes.length > 0) {
+                            //                            this.subTask.latestVersion = data.prefixes.length + 1
+                            //                        } else {
+                            //                            this.subTask.latestVersion = 1
+                            //                        }
+                        });
                 });
-                this.loading = false;
-                this.uploaded = true;
-              });
-          });
-      }
-    },
-    ReleaseFileChange(file, fileList) {
-      const me = this;
-      console.log(file, fileList);
-      if (me.$refs.indexFile.uploadFiles.length == 0) {
-        me.$message($lang("请先上传主文件index.html"));
-        me.$refs.ReleaseFile.clearFiles();
-        return;
-      }
-      if (file) {
-        const barId = null;
-        client.then(oss => {
-          oss
-            .multipartUpload(
-              `/task/${me.subTask.id}/${me.subTask.latestVersion}/Release/${file
-                .raw.name}`,
-              file.raw,
-              {
-                progress: p => progress(p, barId)
-              }
-            )
-            .then(function(data) {
-              me.addFileToServer({
-                bindid: me.subTask.id,
-                findex: "checked",
-                url: data.url
-                  ? data.url
-                  : data.res.requestUrls[0].replace(/\?.*/gm, ""),
-                fileName: file.raw.name,
-                alias: file.raw.name,
-                subvsion: me.subTask.latestVersion
-              });
-            });
-        });
-      }
-    },
-    IndexFileRemove(file, fileList) {
-      const me = this;
-      console.log(file, fileList);
-      fileList.pop();
-      this.selectedFile = null;
-      this.progress.check = 0;
-    },
-    ReleaseFileRemove(file, fileList) {
-      const me = this;
-      console.log(file, fileList);
-      fileList.pop();
-      this.selectedFile = null;
-    },
-    async viewUploadHistory() {
-          this.uploadHistoryVisible = true;
-          this.uploadHistoryLoading = true;
-          let res = await getAllFile(
-              'supplement',
-              this.subTask.id
-          );
-          if (res.success) {
-              let arr = {};
-              // 通过updatetime将文件记录分组
-              res.data.forEach(item=>{
-                  if(arr[item.updateTime]){
-                      arr[item.updateTime].push(item);
-                  }
-                  else {
-                      arr[item.updateTime] = [item];
-                  }
-              })
-              this.uploadHistoryList = arr;
-              this.uploadHistoryLoading = false;
-              if(res.data.length === 0){
-                  this.$message.warning($lang("暂无文件记录数据！"))
-              }
-          }
-      },
-    getFileType(str){
-          let type = str .substring(str .lastIndexOf("\.") + 1, str .length);
-          return type;
-      },
-    viewImage(url){
-          this.currentImage = url;
-          this.viewImageVisible = true;
-      }
-  }
-};
+            } else {
+                this.$message.warning(res.msg);
+            }
+            if (!localStorage.localPoint) {
+                localStorage.localPoint = JSON.stringify([]);
+            }
+            //            const fileData = await getAllFile('checked', me.subTask.id);
+            //            console.log(fileData);
+            //            if (fileData.data.length > 0) {
+            //                debugger
+            //            }
+            this.versionList=[
+                {key:'__path__',valueExp:'自定义路径'},
+                {valueExp:'全景图(jpg、png)',id:'DataSource-bfb236a75b28f449',key:'panorama'}
+            ]
+            // const r = await getFileVersionList();
+            // this.versionList = [{valueExp: "自定义路径", key: "__path__"}, ...r.data];
+        },
+        methods: {
+            changefile() {
+                this.changestate = !this.changestate;
+            },
+            async selectfile(i) {
+                this.changestate = false;
+                if (i == 1) {
+                    this.submitstate = 'final';
+                    this.filesname = '最终文件';
+                } else {
+                    this.submitstate = 'checked';
+                    this.filesname = '预览文件'
+                }
+                // let res = await getFile("checked", this.$route.query.id);
+                // this.$router.push({
+                //     name: "V_Proview",
+                //     query: {fileVersion: res.data.fileVersion, url: res.data.url}
+                // });
+            },
+            async acceptance() {
+                let res = await AcceptanceTask(this.$route.query.id);
+                this.toSubmitUploadShow = false;
+                if (res.success) {
+                    this.$message.success(this.$lang("提交验收成功"));
+                } else {
+                    this.$message.error(res.msg);
+                }
+            },
+            async proview() {
+                let res = await getFile("checked", this.$route.query.id);
+                this.$router.push({
+                    name: "V_Proview",
+                    query: {fileVersion: res.data.fileVersion, url: res.data.url}
+                });
+            },
+            async downloadLastFile() {
+                let res = await getFile("final", this.$route.query.id);
+                var a = document.createElement("a");
+                a.href = res.data.url;
+                a.download = res.data.fileName;
+                var ev = document.createEvent("MouseEvents");
+                ev.initEvent("click", false, true);
+                a.dispatchEvent(ev);
+            },
+            uploadLastFile(e) {
+                e.target.progress = 0;
+                let self = this,
+                    file = e.target.files[0];
+                if (file) {
+                    client.then(oss => {
+                        this.lastFileUpdated = true;
+                        oss
+                            .multipartUpload(
+                                `/task/${this.$route.query.id}/${this.$route.query
+                                    .taskId}/${file.name}`,
+                                file,
+                                {
+                                    * progress(p) {
+                                        console.log(p);
+                                        self.lastProgress = parseFloat((p * 100).toFixed(2));
+                                    }
+                                }
+                            )
+                            .then(data => {
+                                this.lastFileUpdated = false;
+                                console.log(data.url || data.res.requestUrls[0]);
+                                this.addFileToServer({
+                                    bindid: this.$route.query.id,
+                                    findex: "final",
+                                    url: data.url || data.res.requestUrls[0].replace(/\?.*/gm, ""),
+                                    fileName: file.name,
+                                    alias: file.name
+                                });
+                            });
+                    });
+                } else {
+                    this.$message($lang("请选择要上传的文件"));
+                }
+            },
+            chooseFile(index, file) {
+                const me = this;
+                //加载断点
+                let localPoint = JSON.parse(localStorage.localPoint);
+                let currCheckPoint = localPoint[index];
+                //判断是否有断点存在，有则添加文件对象
+                if (file) {
+                    if (currCheckPoint) currCheckPoint.file = file;
+                    me.$set(me.uploading, index, true); //直接改变数组不刷新DOM
+                    //                    /task/子任务ID/阶段ID/
+                    let fileName;
+                    //                    ！！！！！！index == me.taskStage.length 原来用于上传完成阶段的文件，更改之后将不存在，完成阶段的文件上传调用其他方法
+                    if (index == me.taskStage.length) {
+                        me.subTask.latestVersion = parseInt(me.subTask.latestVersion) + 1;
+                        if (
+                            me.subTask.latestVersion == "NaN" ||
+                            isNaN(me.subTask.latestVersion)
+                        ) {
+                            me.subTask.latestVersion = 1;
+                        }
+                        fileName =
+                            me.subTask.projectName +
+                            "-" +
+                            "验收" +
+                            "-" +
+                            me.subTask.latestVersion;
+                    } else {
+                        me.taskStage[index].latestVersion =
+                            parseInt(me.taskStage[index].latestVersion) + 1;
+                        if (
+                            me.taskStage[index].latestVersion == "NaN" ||
+                            isNaN(me.taskStage[index].latestVersion)
+                        ) {
+                            me.taskStage[index].latestVersion = 1;
+                        }
+                        fileName =
+                            me.subTask.projectName +
+                            "-" +
+                            me.taskStage[index].stageName +
+                            "-" +
+                            me.taskStage[index].latestVersion;
+                    }
+                    const fileType = file.name.slice(file.name.lastIndexOf("."));
+                    client.then(oss => {
+                        oss
+                            .multipartUpload(
+                                `/task/${me.$route.query.id}/${me.$route.query
+                                    .taskId}/${fileName}${fileType}`,
+                                file,
+                                {
+                                    checkpoint: currCheckPoint,
+                                    progress: function* (progress, point) {
+                                        me.$set(me.progress, index, parseInt(progress * 100));
+                                        let localPoint = JSON.parse(localStorage.localPoint);
+                                        localPoint[index] = point;
+                                        localStorage.localPoint = JSON.stringify(localPoint);
+                                        //                                console.log('上传中...', me.progress[index], point);
+                                    }
+                                }
+                            )
+                            .then(data => {
+                                //                        me.$message(`文件${file.name}上传完成，文件名为${fileName}`);
+                                me.$set(me.uploading, index, false);
+                                let localPoint = JSON.parse(localStorage.localPoint);
+                                localPoint[index] = null;
+                                localStorage.localPoint = JSON.stringify(localPoint);
+                                //保存到java服务器
+                                me.addFileToServer(
+                                    {
+                                        bindid:
+                                            index == me.taskStage.length
+                                                ? me.subTask.id
+                                                : me.taskStage[index].id,
+                                        findex: "enclosure",
+                                        url: data.url
+                                            ? data.url
+                                            : data.res.requestUrls[0].replace(/\?.*/gm, ""),
+                                        fileName: fileName + fileType,
+                                        alias: fileName + fileType
+                                        //                            me.taskStage[index].latestVersion
+                                    },
+                                    index
+                                );
+                                //                            console.log('上传完成', data);
+                            })
+                            .catch(data => {
+                                me.$message({
+                                    message: data.message + $lang(" 将清除当前文件断点信息"),
+                                    type: "error"
+                                });
+                                me.$set(me.uploading, index, false);
+                                let localPoint = JSON.parse(localStorage.localPoint);
+                                localPoint[index] = null;
+                                localStorage.localPoint = JSON.stringify(localPoint);
+                            });
+                    });
+                } else {
+                    this.$message($lang("请选择要上传的文件"));
+                }
+            },
+            async addFileToServer(param, index) {
+                const me = this;
+                const res = await addFile(param);
+                if (res.success) {
+                    // if (index == me.taskStage.length) {
+                    //   const id = this.$route.query.id;
+                    //   const res = await AcceptanceTask(id);
+                    //   this.$message({
+                    //     message: res.msg,
+                    //     type: res.success ? "success" : "error"
+                    //   });
+                    // }
+                }
+            },
+            toRedirect(name, index) {
+                const me = this;
+                let TaskStage;
+                if (index >= 0) {
+                    TaskStage = me.taskStage[index].id;
+                } else {
+                    // ！！！有疑问，路过看看这个 id 对不对
+                    //                    TaskStage = me.taskStage[me.taskStage.length - 1].id
+                    TaskStage = me.subTask.id;
+                }
+                const id = this.$route.query.id;
+                this.$router.push({
+                    name,
+                    query: {id: id, TaskStage: TaskStage, index: index}
+                });
+            },
+            toDetail(name) {
+                const id = this.$route.query.id;
+                this.$router.push({name, query: {id: id}});
+            },
+            async toSubmit() {
+                // const id = this.$route.query.id;
+                // const res = await AcceptanceTask(id);
+                // this.$message({
+                //   message: res.msg,
+                //   type: res.success ? "success" : "error"
+                // });
+                let res = await AcceptanceTask(this.$route.query.id, this.submitstate);
+                this.toSubmitUploadShow = false;
+                if (res.success) {
+                    this.$message.success(this.$lang("提交验收成功"));
+                } else {
+                    this.$message.error(res.msg);
+                }
+            },
+            uploadChecked() {
+                const me = this;
+                this.lastProgress = 0;
+                this.sourcePath = "";
+                this.IndexFileList = [];
+                this.form.fileVersion = "";
+                this.toSubmitUploadShow = true;
+            },
+            toSubmitUploadClose() {
+                const me = this;
+                // me.$confirm($lang('确认关闭当前窗口？(如果上传过index.html并且关闭弹框，重新打开将生成新的版本号)')).then(data => {
+                //     if (data == 'confirm') {
+                //         me.toSubmitUploadShow = false;
+                //         if (me.$refs.indexFile.uploadFiles.length > 0) {
+                //             //                        me.subTask.latestVersion++
+                //             history.go(0)
+                //             //                        const closeBtn = document.querySelectorAll('#myUploadBtn .el-icon-close')
+                //             //                        closeBtn.forEach(item => {
+                //             //                            item.click();
+                //             //                        })
+                //         }
+                //     }
+                //     //                    me.$refs.indexFile.clearFiles();
+                //     //                    me.$refs.ReleaseFile.clearFiles();
+                // }).catch(data => {
+
+                // });
+                me.toSubmitUploadShow = false;
+            },
+            async addFileToServer(param) {
+                const me = this;
+                const res = await addFile(param);
+                if (res.success) {
+                    me.$message($lang("保存文件成功，文件名为") + param.alias);
+                    me.$refs.chat.sendMessage(param.alias);
+                    this.subTask.state < 7 && this.toSubmit();
+                }
+            },
+            IndexFileChange(file, fileList) {
+                if (fileList.length > 1) {
+                    this.$message.warning($lang("最多只能上传一个文件"));
+                    fileList.pop();
+                    // } else if ((/.vsdata$/).test(file.name)) {
+                } else if (/.*$/.test(file.name)) {
+                    this.selectedFile = file;
+                } else {
+                    this.$message.warning($lang("选择的文件格式不正确"));
+                    fileList.pop();
+                }
+            },
+            submit() {
+                let file = this.selectedFile,
+                    version = this.form.fileVersion,
+                    path = this.sourcePath,
+                    findex = "checked";
+                if (!version) {
+                    this.$message.warning($lang("请先选择"));
+                } else if (version == "__path__" ? !path : !file) {
+                    this.$message.warning(
+                        $lang(version == "__path__" ? "请输入资源文件路径" : "请上传资源文件")
+                    );
+                } else {
+                    const barId = null;
+                    console.log("client", client);
+                    if (version == "__path__") {
+                        this.addFileToServer({
+                            bindid: this.subTask.id,
+                            findex,
+                            url: path,
+                            fileName: `自定义路径 ${path}`,
+                            alias: `自定义路径 ${path}`,
+                            subvsion: this.subTask.latestVersion,
+                            fileVersion: version
+                        });
+                        this.loading = false;
+                        this.uploaded = true;
+                    } else
+                        client.then(oss => {
+                            console.log("oss", oss, oss.multipartUpload);
+                            oss
+                                .multipartUpload(
+                                    `/task/${this.subTask.id}/${this.subTask.latestVersion}/${file
+                                        .raw.name}`,
+                                    file.raw,
+                                    {
+                                        progress: p => {
+                                            console.log("progress", p);
+                                            this.progress.check = p * 100;
+                                            return progress(p, barId);
+                                        }
+                                    }
+                                )
+                                .then(data => {
+                                    console.log("data", data);
+                                    this.addFileToServer({
+                                        bindid: this.subTask.id,
+                                        findex,
+                                        url:
+                                        data.url || data.res.requestUrls[0].replace(/\?.*/gm, ""),
+                                        fileName: file.raw.name,
+                                        alias: file.raw.name,
+                                        subvsion: this.subTask.latestVersion,
+                                        fileVersion: version
+                                    });
+                                    this.loading = false;
+                                    this.uploaded = true;
+                                });
+                        });
+                }
+            },
+            ReleaseFileChange(file, fileList) {
+                const me = this;
+                console.log(file, fileList);
+                if (me.$refs.indexFile.uploadFiles.length == 0) {
+                    me.$message($lang("请先上传主文件index.html"));
+                    me.$refs.ReleaseFile.clearFiles();
+                    return;
+                }
+                if (file) {
+                    const barId = null;
+                    client.then(oss => {
+                        oss
+                            .multipartUpload(
+                                `/task/${me.subTask.id}/${me.subTask.latestVersion}/Release/${file
+                                    .raw.name}`,
+                                file.raw,
+                                {
+                                    progress: p => progress(p, barId)
+                                }
+                            )
+                            .then(function (data) {
+                                me.addFileToServer({
+                                    bindid: me.subTask.id,
+                                    findex: "checked",
+                                    url: data.url
+                                        ? data.url
+                                        : data.res.requestUrls[0].replace(/\?.*/gm, ""),
+                                    fileName: file.raw.name,
+                                    alias: file.raw.name,
+                                    subvsion: me.subTask.latestVersion
+                                });
+                            });
+                    });
+                }
+            },
+            IndexFileRemove(file, fileList) {
+                const me = this;
+                console.log(file, fileList);
+                fileList.pop();
+                this.selectedFile = null;
+                this.progress.check = 0;
+            },
+            ReleaseFileRemove(file, fileList) {
+                const me = this;
+                console.log(file, fileList);
+                fileList.pop();
+                this.selectedFile = null;
+            },
+            async viewUploadHistory() {
+                this.uploadHistoryVisible = true;
+                this.uploadHistoryLoading = true;
+                let res = await getAllFile(
+                    'supplement',
+                    this.subTask.id
+                );
+                if (res.success) {
+                    let arr = {};
+                    // 通过updatetime将文件记录分组
+                    res.data.forEach(item => {
+                        if (arr[item.updateTime]) {
+                            arr[item.updateTime].push(item);
+                        }
+                        else {
+                            arr[item.updateTime] = [item];
+                        }
+                    })
+                    this.uploadHistoryList = arr;
+                    this.uploadHistoryLoading = false;
+                    if (res.data.length === 0) {
+                        this.$message.warning($lang("暂无文件记录数据！"))
+                    }
+                }
+            },
+            getFileType(str) {
+                let type = str.substring(str.lastIndexOf("\.") + 1, str.length);
+                return type;
+            },
+            viewImage(url) {
+                this.currentImage = url;
+                this.viewImageVisible = true;
+            }
+        }
+    };
 </script>

@@ -237,8 +237,8 @@ async function AssignedTask(id, vUserId, state) {
     return res.data;
 }
 //验收任务
-async function AcceptanceTask(id) {
-    const res = await axios.post(`/subtask/acceptanceTask`, JSON.stringify({ id }))
+async function AcceptanceTask(id,acceptanceType) {
+    const res = await axios.post(`/subtask/acceptanceTask`, JSON.stringify({ id,acceptanceType }))
     return res.data;
 }
 //完成验收任务

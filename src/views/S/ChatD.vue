@@ -108,7 +108,7 @@
                                 {{$lang('上传文件')}}
                                 <input type="file" @change="uploadLastFile" ref="file" hidden/>
                             </el-button>
-                            <el-button type="info" size="small" @click="toRedirect('S_History', '-1')">
+                            <el-button type="info" size="small" @click="toRedirect('S_History', '-2')">
                                 {{$lang('查看记录')}}
                             </el-button>
                         </div>
@@ -128,7 +128,7 @@
                                            v-if="!isOnlyChat&&['5','6','7'].includes(subTask.state)">{{$lang('上传文件')}}
                                 </el-button>
                                 <!-- <el-button type="info" size="small" @click="toSubmit" v-if="!isOnlyChat&&uploaded">{{$lang('提交验收')}}</el-button> -->
-                                <el-button type="info" size="small" @click="toRedirect('S_History', '-2')"
+                                <el-button type="info" size="small" @click="toRedirect('S_History', '-1')"
                                            style="margin-right:-12px">
                                     {{$lang('查看记录')}}
                                 </el-button>
@@ -151,15 +151,18 @@
                                 <a href="javascript:;" class="title flex1">
                                     <h4>{{$lang('提交验收')}}</h4>
                                 </a>
-                                <el-button type="info" size="small" @click="changefile" v-if="subTask.state>=5" style="position:relative;">
-                                    {{$lang('选择文件')}}<i :class="changestate?'el-icon-caret-bottom':'el-icon-caret-top'"
+                                <div style="display:inline-block;position:relative;margin-right: 10px;">
+                                    <el-button type="info" size="small" @click="changefile" v-if="subTask.state>=5"
+                                               style="position:relative;">
+                                        {{filesname}}<i :class="changestate?'el-icon-caret-bottom':'el-icon-caret-top'"
                                                         style="margin-left:10px;"></i>
-                                    <div style="position:absolute;width:80px;text-align:center;background:#fff;z-index:9999;font-size:12px;color:#666666;top:25px;" v-show="changestate">
-                                        <div style="line-height:40px;" @click="selectfile">预览文件</div>
+                                    </el-button>
+                                    <div style="position:absolute;width:80px;text-align:center;background:#fff;z-index:9999;font-size:12px;color:#666666;top:25px;z-index:9999" v-show="changestate">
+                                        <div style="line-height:40px;" @click="selectfile(0)">预览文件</div>
                                         <hr width="60" style="border-top:1px solid #666666;margin:0 auto;">
-                                        <div style="line-height:40px;" @click="selectfile">最终文件</div>
+                                        <div style="line-height:40px;" @click="selectfile(1)">最终文件</div>
                                     </div>
-                                </el-button>
+                                </div>
                                 <el-button type="info" size="small" @click="toSubmit()"
                                            style="margin-right:-12px">
                                     {{$lang('提交')}}
@@ -223,21 +226,21 @@
                 <el-form-item>
                     <el-button type="primary" @click="submit">{{$lang('确 定')}}</el-button>
                 </el-form-item>
-                <div style="border-bottom:1px solid #999999;margin-bottom:20px;"></div>
-                <el-form-item>
-                    <h2 style="display:inline;">{{$lang('最终文件')}}&nbsp;&nbsp;&nbsp;</h2>
-                    <el-button type="primary" @click="()=>$refs.file.click()" size="small">
-                        {{$lang('上传文件')}}
-                        <input type="file" @change="uploadLastFile" ref="file" hidden/>
-                    </el-button>
-                    <el-progress :percentage="lastProgress" v-if="lastProgress"></el-progress>
-                </el-form-item>
+                <!--<div style="border-bottom:1px solid #999999;margin-bottom:20px;"></div>-->
+                <!--<el-form-item>-->
+                    <!--<h2 style="display:inline;">{{$lang('最终文件')}}&nbsp;&nbsp;&nbsp;</h2>-->
+                    <!--<el-button type="primary" @click="()=>$refs.file.click()" size="small">-->
+                        <!--{{$lang('上传文件')}}-->
+                        <!--<input type="file" @change="uploadLastFile" ref="file" hidden/>-->
+                    <!--</el-button>-->
+                    <!--<el-progress :percentage="lastProgress" v-if="lastProgress"></el-progress>-->
+                <!--</el-form-item>-->
             </el-form>
-            <div slot="footer">
-                <el-button type="primary" @click="acceptance" v-if="['5','6'].includes(subTask.state)">
-                    {{$lang('提交验收')}}
-                </el-button>
-            </div>
+            <!--<div slot="footer">-->
+                <!--<el-button type="primary" @click="acceptance" v-if="['5','6'].includes(subTask.state)">-->
+                    <!--{{$lang('提交验收')}}-->
+                <!--</el-button>-->
+            <!--</div>-->
         </el-dialog>
         <el-dialog :title="$lang('查看记录')" ref="viewUploadHistory" :visible.sync="uploadHistoryVisible" size="small">
             <div v-loading.body="uploadHistoryLoading">
@@ -315,6 +318,8 @@
         data() {
             return {
                 changestate: false,
+                submitstate:'checked',
+                filesname:'选择文件',
                 statemsg: '',
                 subTask: {},
                 taskStage: [],
@@ -451,21 +456,34 @@
             //            if (fileData.data.length > 0) {
             //                debugger
             //            }
-
-            const r = await getFileVersionList();
-            this.versionList = [{valueExp: "自定义路径", key: "__path__"}, ...r.data];
+            this.versionList=[
+                {key:'__path__',valueExp:'自定义路径'},
+                {valueExp:'全景图(jpg、png)',id:'DataSource-bfb236a75b28f449',key:'panorama'}
+                ]
+            // 获取文件类型
+            // const r = await getFileVersionList();
+            // this.versionList = [{valueExp: "自定义路径", key: "__path__"}, ...r.data];
+            // console.log(this.versionList)
         },
         methods: {
             changefile() {
                 this.changestate = !this.changestate;
             },
-            async selectfile(){
+            selectfile(i){
                 this.changestate = this.changestate;
-                let res = await getFile("checked", this.$route.query.id);
-                this.$router.push({
-                    name: "S_Proview",
-                    query: {fileVersion: res.data.fileVersion, url: res.data.url}
-                });
+                console.log(1)
+                if(i==1){
+                    this.submitstate = 'final';
+                    this.filesname='最终文件';
+                }else{
+                    this.submitstate = 'checked';
+                    this.filesname='预览文件'
+                }
+                // let res = await getFile("checked", this.$route.query.id);
+                // this.$router.push({
+                //     name: "S_Proview",
+                //     query: {fileVersion: res.data.fileVersion, url: res.data.url}
+                // });
             },
             async acceptance() {
                 let res = await AcceptanceTask(this.$route.query.id);
@@ -684,7 +702,7 @@
                 this.$router.push({name, query: {id: id}});
             },
             async toSubmit() {
-                let res = await AcceptanceTask(this.$route.query.id);
+                let res = await AcceptanceTask(this.$route.query.id,this.submitstate);
                 this.toSubmitUploadShow = false;
                 if (res.success) {
                     this.$message.success(this.$lang("提交验收成功"));
