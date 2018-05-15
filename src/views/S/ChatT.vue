@@ -72,7 +72,6 @@
                         <ul class="chose-people-ul" v-if="getChilds(1).length">
                             <el-checkbox-group v-model="zhifuIds">
                                 <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(1)" :key="i">
-
                                     <div class="flex1">
                                         <div class="box-flex-media-box">
                                             <p class="user-header">
@@ -146,7 +145,7 @@
                     <li class="chart-left-li">
                         <div class="box-flex-media-box cl-top">
                             <a href="javascript:;" class="title flex1">
-                                <h4>{{$lang('S验收中/B验收中')}}</h4>
+                                <h4>{{acceptancemsg}}</h4>
                             </a>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(4).length">
@@ -467,6 +466,7 @@
         components: {Chat, SlideBtns},
         data () {
             return {
+                acceptancemsg:$lang('验收中'),
                 zhifuIds: [],
                 dialogVisible: false, //去支付
                 stateGroup: [],
@@ -600,9 +600,14 @@
 
                 stateGroup.splice(3, 1);
                 stateGroup.shift();
-                console.log("stateGroup", stateGroup);
+                // console.log("stateGroup", stateGroup);
 
                 this.stateGroup = stateGroup;
+                if(this.getChilds(4).sSubmitAcceptance==0){
+                    this.acceptancemsg =$lang('S验收中')
+                }else if(this.getChilds(4).sSubmitAcceptance==1){
+                    this.acceptancemsg =$lang('B验收中')
+                }
             } else {
                 this.$message.warning(res.msg);
             }
