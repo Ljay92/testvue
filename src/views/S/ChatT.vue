@@ -77,7 +77,8 @@
                                             <p class="user-header">
                                                 <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
                                             </p>
-                                            <p class="name flex1">{{m.projectName}}</p>
+                                            <p class="name" style="width:90px;">{{m.projectName}}</p>
+                                            <p style="text-align:center;width:150px;"><CountDown :time="m.taskEndTime"></CountDown></p>
                                         </div>
                                     </div>
                                     <div class="moey">
@@ -103,7 +104,8 @@
                                         <p class="user-header">
                                             <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
                                         </p>
-                                        <p class="name">{{m.projectName}}</p>
+                                        <p class="name" style="width:90px;">{{m.projectName}}</p>
+                                        <p style="text-align:center;width:150px;"><CountDown :time="m.taskEndTime"></CountDown></p>
                                     </div>
                                 </div>
                                 <a href="javascript:;" class="more"
@@ -446,6 +448,7 @@
 
 <script>
     import Chat from "@/components/Chat";
+    import CountDown from "@/components/countdown";
     import SlideBtns from "@/components/SlideBtns";
     import {
         ChildTaskList,
@@ -463,7 +466,7 @@
 
     var shouji = require("../../assets/images/phone.jpg");
     export default {
-        components: {Chat, SlideBtns},
+        components: {Chat, SlideBtns,CountDown},
         data () {
             return {
                 acceptancemsg:$lang('验收中'),
@@ -582,7 +585,6 @@
             const res = await ChildTaskList(id);
 
             if (res.success) {
-                console.log(res.data)
                 const list = res.data ? res.data : [];
                 ChildTaskState("S").map((value, i) => {
                     const model = {
@@ -608,6 +610,7 @@
                 }else if(this.getChilds(4).sSubmitAcceptance==1){
                     this.acceptancemsg =$lang('B验收中')
                 }
+                console.log(this.getChilds(2))
             } else {
                 this.$message.warning(res.msg);
             }

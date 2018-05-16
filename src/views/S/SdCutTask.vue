@@ -33,7 +33,7 @@
                                     <el-radio label="1">{{$lang('私密')}}</el-radio>
                                 </el-radio-group>
                             </el-form-item>
-                            <el-form-item :label="$lang('服务比例:')" required>
+                            <el-form-item :label="$lang('服务比例:')" required v-show="editservicepermissoins=='0'">
                                 <div>0.
                                     <el-dropdown @command="handleCommandone">
                                         <el-button type="primary">
@@ -368,6 +368,8 @@
                     one: 0,
                     two: 0
                 },
+                editservicepermissoins:'0',
+                page_type_permissoins:'0',
                 title: $lang("任务拆分"),
                 pickerOptions0: {
                     disabledDate(time) {
@@ -563,6 +565,8 @@
                 this.isUpdate = true;
                 const resc = await ChildTaskInfo(childid);
                 if (resc.success) {
+                    console.log(123)
+                    console.log(resc.data)
                     // this.form.entryEndTime=new Date(this.form.entryEndTime);
                     // this.form.taskEndTime=new Date(this.form.taskEndTime);
                     // 为富文本编辑器赋值
