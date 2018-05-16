@@ -8,10 +8,13 @@
                         <h3 class="main-title">{{title}}</h3>
                     </el-col>
                     <el-col :span="4">
-                        <el-select v-model="form.draftTemplate" :placeholder="$lang('请选择模版')" class="select-width-all" @change="selectTemplet(form.draftTemplate)">
+                        <el-select v-model="form.draftTemplate" :placeholder="$lang('请选择模版')" class="select-width-all"
+                                   @change="selectTemplet(form.draftTemplate)">
                             <el-option v-for="(item,index) in draftNameList" :key="item.id" :label="item.label"
                                        :value="item.subtaskId">
-                                <div class="l_templabel">{{item.label}}<i class="el-icon-delete l_deleteTempicon" @click="removeTemp($event,item.id,index)"></i></div>
+                                <div class="l_templabel">{{item.label}}<i class="el-icon-delete l_deleteTempicon"
+                                                                          @click="removeTemp($event,item.id,index)"></i>
+                                </div>
                             </el-option>
                         </el-select>
                     </el-col>
@@ -30,12 +33,50 @@
                                     <el-radio label="1">{{$lang('私密')}}</el-radio>
                                 </el-radio-group>
                             </el-form-item>
+                            <el-form-item :label="$lang('服务比例:')" required>
+                                <div>0.
+                                    <el-dropdown @command="handleCommandone">
+                                        <el-button type="primary">
+                                            {{number.one}}<i class="el-icon-arrow-down el-icon--right"></i>
+                                        </el-button>
+                                        <el-dropdown-menu slot="dropdown">
+                                            <el-dropdown-item command="0">0</el-dropdown-item>
+                                            <el-dropdown-item command="1">1</el-dropdown-item>
+                                            <el-dropdown-item command="2">2</el-dropdown-item>
+                                            <el-dropdown-item command="3">3</el-dropdown-item>
+                                            <el-dropdown-item command="4">4</el-dropdown-item>
+                                            <el-dropdown-item command="5">5</el-dropdown-item>
+                                            <el-dropdown-item command="6">6</el-dropdown-item>
+                                            <el-dropdown-item command="7">7</el-dropdown-item>
+                                            <el-dropdown-item command="8">8</el-dropdown-item>
+                                            <el-dropdown-item command="9">9</el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </el-dropdown>
+                                    <el-dropdown @command="handleCommandtwo">
+                                        <el-button type="primary">
+                                            {{number.two}}<i class="el-icon-arrow-down el-icon--right"></i>
+                                        </el-button>
+                                        <el-dropdown-menu slot="dropdown">
+                                            <el-dropdown-item command="0">0</el-dropdown-item>
+                                            <el-dropdown-item command="1">1</el-dropdown-item>
+                                            <el-dropdown-item command="2">2</el-dropdown-item>
+                                            <el-dropdown-item command="3">3</el-dropdown-item>
+                                            <el-dropdown-item command="4">4</el-dropdown-item>
+                                            <el-dropdown-item command="5">5</el-dropdown-item>
+                                            <el-dropdown-item command="6">6</el-dropdown-item>
+                                            <el-dropdown-item command="7">7</el-dropdown-item>
+                                            <el-dropdown-item command="8">8</el-dropdown-item>
+                                            <el-dropdown-item command="9">9</el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </el-dropdown>
+                                </div>
+                            </el-form-item>
                             <el-form-item :label="$lang('意向出价:')" required>
                                 <el-input v-model="form.total"></el-input>
                             </el-form-item>
-                            <el-form-item :label="$lang('报名结束时间~任务截止时间:')" required>
-                                <el-date-picker v-model="form.rangeTime" type="datetimerange"
-                                                :placeholder="$lang('报名结束时间~任务截止时间')" format="yyyy-MM-dd HH"
+                            <el-form-item :label="$lang('任务截止时间:')" required>
+                                <el-date-picker v-model="form.rangeTime" type="datetime" :placeholder="$lang('任务截止时间')"
+                                                format="yyyy-MM-dd HH"
                                                 :picker-options="pickerOptions0"></el-date-picker>
                             </el-form-item>
                             <!--<el-form-item :label="$lang('任务截止时间:">
@@ -261,15 +302,18 @@
     .all-task-base {
         padding: 0;
     }
-.l_templabel{
-    padding-right:20px;
-    position:relative;
-}
-.l_deleteTempicon{
-    position:absolute;
-    top:2px;
-    right:0px;
-}
+
+    .l_templabel {
+        padding-right: 20px;
+        position: relative;
+    }
+
+    .l_deleteTempicon {
+        position: absolute;
+        top: 2px;
+        right: 0px;
+    }
+
     .jdx-add-task > div {
         padding: 10px;
         margin-bottom: 25px;
@@ -318,11 +362,15 @@
 
     export default {
         components: {TypeSelect, SlideBtns, UE},
-        data () {
+        data() {
             return {
+                number: {
+                    one: 0,
+                    two: 0
+                },
                 title: $lang("任务拆分"),
                 pickerOptions0: {
-                    disabledDate (time) {
+                    disabledDate(time) {
                         return time.getTime() < Date.now() - 8.64e7;
                     }
                 },
@@ -332,6 +380,7 @@
                 //     }
                 // },
                 form: {
+                    sServiceRate: "",
                     // totalType: '1',
                     projectName: "",
                     packageType: "0",
@@ -343,7 +392,7 @@
                     groupId: "",
                     // taskEndTime: "",
                     // entryEndTime: "",
-                    rangeTime: [],
+                    rangeTime: "",
                     chartlatProperty1: [],
                     chartlatProperty2: "",
                     chartlatProperty3: "",
@@ -455,7 +504,7 @@
                 ue1: "ue1", // 不同编辑器必须不同的id
             };
         },
-        async mounted () {
+        async mounted() {
             this.loadinginstace = Loading.service({fullscreen: true});
             const taskDraftList = await subTaskDraftList();
             console.log("hhahahahhahahahahha");
@@ -465,7 +514,7 @@
                 return {
                     label: item.templetName,
                     id: item.id,
-                    subtaskId:item.subtaskId
+                    subtaskId: item.subtaskId
                 };
             });
             console.log("hhahahahhahahahahha22222");
@@ -476,7 +525,17 @@
             const id = this.$route.query.id;
             this.form.taskId = id;
             const res = await getSubTaskParam(id);
-            console.log("res.data.mapAtrr", res.data);
+            if (res.success) {
+                if (res.data.sServiceRate != null && res.data.sServiceRate.length != 0) {
+                    this.form.sServiceRate = res.data.sServiceRate[0];
+                    this.number.one = res.data.sServiceRate[0].substring(2, 3);
+                    this.number.two = res.data.sServiceRate[0].substring(3, 4)
+                } else {
+                    this.form.sServiceRate = '0.00';
+                    this.number.one = '0';
+                    this.number.two = '0';
+                }
+            }
             res.data.mapAtrr = res.data.mapAtrr.map(item => {
                 return {
                     label: item.cnValue,
@@ -606,11 +665,21 @@
             this.loadinginstace.close();
         },
         methods: {
+            handleCommandone(command) {
+                this.number.one = command;
+                this.form.sServiceRate = '0.' + command + this.number.two;
+                console.log(this.form.sServiceRate);
+            },
+            handleCommandtwo(command) {
+                this.number.two = command;
+                this.form.sServiceRate = '0.' + command + this.number.one;
+                console.log(this.form.sServiceRate)
+            },
             // 选中模板
-            selectTemplet(id){
+            selectTemplet(id) {
                 let me = this
-                if(id==""){
-                    return false ;
+                if (id == "") {
+                    return false;
                 }
                 this.title = $lang("任务编辑");
                 this.isUpdate = true;
@@ -683,7 +752,7 @@
                         me.$message.warning(resc.msg);
                     }
                     // const fileList = await getAllFile("", childid);
-                    axios.post(`file/getAll`,{findex:"",bindid:id}).then(function (response) {
+                    axios.post(`file/getAll`, {findex: "", bindid: id}).then(function (response) {
                         const fileList = response.data
                         console.log(fileList)
                         if (fileList.success && fileList.data) {
@@ -784,11 +853,11 @@
                 // }
             },
             // 下拉删除草稿
-            async _deleteTemplet(id,index) {
-                const me =this
+            async _deleteTemplet(id, index) {
+                const me = this
                 const res = await deleteTemplet(id)
                 if (res.success) {
-                    me.draftNameList.splice(index,1)
+                    me.draftNameList.splice(index, 1)
                     this.$message({
                         type: 'success',
                         message: '删除成功!'
@@ -797,15 +866,15 @@
                     this.$message.error(res.msg);
                 }
             },
-            removeTemp(e,id,index){
+            removeTemp(e, id, index) {
                 e.stopPropagation();
-                const me =this;
+                const me = this;
                 me.$confirm('此操作将永久删除该草稿, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    me._deleteTemplet(id,index)
+                    me._deleteTemplet(id, index)
                 }).catch(() => {
                     this.$message({
                         type: 'info',
@@ -813,7 +882,7 @@
                     });
                 });
             },
-            getUEContent () {
+            getUEContent() {
                 let content = this.$refs.ue.getUEContent(); // 调用子组件方法
                 this.$notify({
                     title: '获取成功，可在控制台查看！',
@@ -822,7 +891,7 @@
                 });
                 console.log(content)
             },
-            getUEContentTxt () {
+            getUEContentTxt() {
                 let content = this.$refs.ue.getUEContentTxt(); // 调用子组件方法
                 this.$notify({
                     title: '获取成功，可在控制台查看！',
@@ -831,10 +900,10 @@
                 });
                 console.log(content)
             },
-            AppClassChange (value, arrs) {
+            AppClassChange(value, arrs) {
                 this.form.appType = value;
             },
-            async submitGroup () {
+            async submitGroup() {
                 if (this.groupName) {
                     const res = await CreateGroup(this.groupName);
                     this.$message({
@@ -851,7 +920,7 @@
                     this.$message.warning($lang("分组名称不可为空"));
                 }
             },
-            async submitTask () {
+            async submitTask() {
                 this.$refs["form"].validate(valid => {
                     if (valid) {
                         this.__submitTask();
@@ -860,7 +929,7 @@
                     }
                 });
             },
-            async submitTaskDraft () {
+            async submitTaskDraft() {
                 this.$refs["form"].validate(valid => {
                     if (valid) {
                         const me = this;
@@ -884,7 +953,7 @@
                     }
                 });
             },
-            async updateTask () {
+            async updateTask() {
                 this.$refs["form"].validate(valid => {
                     if (valid) {
                         this.__updateTask();
@@ -893,7 +962,7 @@
                     }
                 });
             },
-            async __submitTask () {
+            async __submitTask() {
                 const id = this.$route.query.id;
 
                 const validate = this.validatefn();
@@ -915,7 +984,7 @@
                 //     }
                 // });
             },
-            async __submitTaskDraft () {
+            async __submitTaskDraft() {
                 const id = this.$route.query.id;
 
                 // const validate = this.validatefn();
@@ -927,7 +996,7 @@
                 // this.loadinginstace = Loading.service({ fullscreen: true });
                 this.loadinginstace.close();
             },
-            validatefn () {
+            validatefn() {
                 // rules: {
                 //     projectName: [{required: true, message: '请输入活动名称', trigger: 'blur'}],
                 //     total: [{required: true, message: '请输入意向出价', trigger: 'change'}],
@@ -1007,7 +1076,7 @@
                 }
                 return true;
             },
-            async __updateTask () {
+            async __updateTask() {
                 const id = this.$route.query.id;
                 const treenode = this.$refs.tree.getCheckedNodes();
                 this.form.chartlatProperty1 = treenode
@@ -1035,7 +1104,7 @@
                 }
                 this.loadinginstace.close();
             },
-            async _CreateChildTask (form, state) {
+            async _CreateChildTask(form, state) {
                 const treenode = this.$refs.tree.getCheckedNodes();
                 this.form.chartlatProperty1 = treenode
                     .filter(node => !node.children)
@@ -1070,7 +1139,7 @@
                 return res;
             },
             //TODO
-            async _CreateChildTaskDraft (form, state) {
+            async _CreateChildTaskDraft(form, state) {
                 const me = this
                 const treenode = this.$refs.tree.getCheckedNodes();
                 this.form.chartlatProperty1 = treenode
@@ -1106,7 +1175,7 @@
                 }
                 return res;
             },
-            async createStage () {
+            async createStage() {
                 if (!this.stage.stageName) {
                     this.$message.warning($lang("请填入阶段名称"));
                     return;
@@ -1147,20 +1216,20 @@
                 //     }
                 // });
             },
-            async liststage () {
+            async liststage() {
                 const res = await ChildTaskStageList();
             },
-            handleClose (done) {
+            handleClose(done) {
                 done();
             },
 
-            async removeFile (file) {
+            async removeFile(file) {
                 if (file.id) {
                     this.removeFileList.push({id: file.id});
                     this.removeFileNameList.push(`/task/${this.childid}/${file.alias}`);
                 }
             },
-            ReferencePictureChange (file) {
+            ReferencePictureChange(file) {
                 const me = this;
 
                 const fileName = file.name
@@ -1177,7 +1246,7 @@
                     return false;
                 }
             },
-            async addAllFileList (fileList) {
+            async addAllFileList(fileList) {
                 const id = this.$route.query.id;
                 const res = await addFileList(fileList);
                 // this.$message({
@@ -1191,7 +1260,7 @@
                 // });
                 this.$router.push({name: "toEdit", query: {id}});
             },
-            uploadAllFile (id) {
+            uploadAllFile(id) {
                 const me = this;
                 //获取上传的文件列表，并且通过1、2、3确定是哪个地方的文件
                 let file = [],
@@ -1272,7 +1341,7 @@
                     this.loadinginstace.close();
                 });
             },
-            editStage (item) {
+            editStage(item) {
                 item.editable = true;
                 item.backup = {
                     stageName: item.stageName,
@@ -1280,11 +1349,11 @@
                     stageRemarks: item.stageRemarks
                 };
             },
-            saveStage (item) {
+            saveStage(item) {
                 Object.assign(item, item.backup);
                 item.editable = false;
             },
-            async removeStage (item) {
+            async removeStage(item) {
                 const res = await RemoveStage(item.id);
                 if (res.success) {
                     this.form.taskStages.splice(this.form.taskStages.indexOf(item), 1);
@@ -1292,11 +1361,11 @@
                     this.$message.error(res.msg);
                 }
             },
-            cancelStage (item) {
+            cancelStage(item) {
                 item.editable = false;
             }
         },
-        destroyed () {
+        destroyed() {
             this.loadinginstace.close();
         }
     };
