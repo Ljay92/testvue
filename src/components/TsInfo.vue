@@ -70,7 +70,7 @@
                 <img :src="User.headUrl" />
             </div>
             <p>{{$lang('雇主：')}}{{User.nickName}}</p>
-            <p>{{User.companyName}}</p>
+            <p>{{User.name}}</p>
         </div>
         <SlideBtns :type="'back'" v-if="!tid"></SlideBtns>
 
@@ -201,6 +201,9 @@ export default {
           this.form.bUserInfo.headUrl ||
           "http://vsdata.oss-cn-hangzhou.aliyuncs.com/head.jpg";
         this.User.nickName = this.form.bUserInfo.nickName || "";
+        if(this.User.bUserType === '1'){
+            this.User.name = this.form.bUserInfo.name || "";
+        }
       }
     }
     const fileRes = await getAllFile("", id);
