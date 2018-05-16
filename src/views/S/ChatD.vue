@@ -370,6 +370,11 @@
                     qq.data.sChatUser &&
                     qq.data.sChatUser.entities
                 ) {
+                    var showNmae = qq.data.targetUser.info.nickName;
+
+                    if(qq.data.targetUser.info.bUserType === '1' && qq.data.targetUser.userType === 'B'){
+                        showNmae = qq.data.targetUser.info.name + '/' + qq.data.targetUser.info.nickName;
+                    }
                     this.chatConfig = {
                         groupid: qq.data.groupDetails.data[0].id,
                         userid: qq.data.sChatUser.entities[0].username,
@@ -379,7 +384,7 @@
                         userphone: qq.data.sUser.phone,
                         // youname:qq.data.targetUser.info.nickName||qq.data.targetUser.phone,
                         youname:
-                        qq.data.targetUser.info.nickName +
+                        showNmae +
                         '<img class="shoujiicon" src="' +
                         shouji +
                         '" /> ' +
