@@ -336,6 +336,7 @@
 
 
 <script>
+    import { getUserInfo } from '@/apis/storage.js';
     import {Loading, Message} from "element-ui";
     import {
         CreateChildTask,
@@ -368,8 +369,8 @@
                     one: 0,
                     two: 0
                 },
-                editservicepermissoins:'0',
-                page_type_permissoins:'0',
+                editServicePermissoins:'0',
+                pageTypePermissoins:'0',
                 title: $lang("任务拆分"),
                 pickerOptions0: {
                     disabledDate(time) {
@@ -505,6 +506,10 @@
                 },
                 ue1: "ue1", // 不同编辑器必须不同的id
             };
+        },
+        created() {
+            this.editServicePermissoins = getUserInfo().editServicePermissoins;
+            this.pageTypePermissoins = getUserInfo().pageTypePermissoins;
         },
         async mounted() {
             this.loadinginstace = Loading.service({fullscreen: true});
