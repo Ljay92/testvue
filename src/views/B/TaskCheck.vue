@@ -93,22 +93,23 @@
                 <div class="tag-wrap">
                   <button v-for="tagLable in tagLableArr" :key="tagLable" class="tag-button" @click="tagSelected($lang(tagLable))" v-bind:class="{'tag-button-selected':tagLableSelected===$lang(tagLable)}">{{$lang(tagLable)}}</button>
                 </div>
-                <div class="reject-reason-wrap">
-                  <textarea class="reject-reason-input" v-model="rejectReason" placeholder="请输入驳回理由..."></textarea>
+                <div class="reject-reason-wrap" v-show="isReject">
+                  <textarea class="reject-reason-input" v-model="textarea" placeholder="请输入驳回理由..."></textarea>
                 </div>
               </div>
             </div>
             <div class="set-btn-wrap">
                 <el-button type="sure" @click='toPass'>{{$lang('通过')}}</el-button>
-                <el-button type="danger" @click='isReject=true'>{{$lang('驳回')}}</el-button>
+                <el-button type="danger" @click='toReject'>{{submitmsg}}</el-button>
+              <el-button type="sure" v-show="isReject" @click='isReject=false;submitmsg=$lang("驳回")'>{{$lang('取消')}}</el-button>
             </div>
-            <div class="reject-wrap" v-show="isReject">
-                <el-input type="textarea" :rows="5" :placeholder="$lang('请输入内容')" v-model="textarea"></el-input>
-                <div class="set-btn-right">
-                    <el-button type="sure" @click='toReject'>{{$lang('提交')}}</el-button>
-                    <el-button type="danger" @click='isReject=false'>{{$lang('取消')}}</el-button>
-                </div>
-            </div>
+            <!--<div class="reject-wrap" v-show="isReject">-->
+                <!--&lt;!&ndash;<el-input type="textarea" :rows="5" :placeholder="$lang('请输入内容')" v-model="textarea"></el-input>&ndash;&gt;-->
+                <!--<div class="set-btn-right">-->
+                    <!--<el-button type="sure" @click='toReject'>{{$lang('提交')}}</el-button>-->
+                    <!--<el-button type="danger" @click='isReject=false'>{{$lang('取消')}}</el-button>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 </template>
@@ -205,6 +206,7 @@ import { client } from "@/apis/uploadFile";
 export default {
   data() {
     return {
+        submitmsg:$lang('驳回'),
       star_num: 5, //星级评价的星星个数
       tagLableArr: ["预期差异太大", "颜色太亮", "不想要了，设计师没懂我的想法", "画面太满"],
       tagLableSelected: "", //选中的评价标签
@@ -286,21 +288,27 @@ export default {
       });
     },
     async toReject() {
-      const id = this.$route.query.id;
-      if (!this.textarea) {
-        this.$message.warning($lang("驳回内容不可为空"));
-        return;
-      }
-      const res = await OverruleTask(id, this.textarea);
-      this.$message({
-        message: res.msg,
-        type: res.success ? "success" : "error",
-        onClose: () => {
-          if (res.success) {
-            this.$router.go(-1);
-          }
+        let that = this;
+        if(that.isReject) {
+            const id = this.$route.query.id;
+            if (!this.textarea) {
+                this.$message.warning($lang("驳回内容不可为空"));
+                return;
+            }
+            const res = await OverruleTask(id, this.textarea);
+            this.$message({
+                message: res.msg,
+                type: res.success ? "success" : "error",
+                onClose: () => {
+                    if (res.success) {
+                        this.$router.go(-1);
+                    }
+                }
+            });
+        }else{
+            that.isReject =true;
+            that.submitmsg=$lang('提交')
         }
-      });
     },
     fullScreen() {
       let iframe = this.$refs.demo;
