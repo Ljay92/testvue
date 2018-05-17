@@ -1,7 +1,7 @@
 <template>
   <div class="lr-content-wrapper register">
     <div class="login-logo" @click="$router.push({ path: '/'})"></div>
-     <div class="lr-main">
+     <div class="lr-main" style="height:540px;">
         <div class="box-flex-media-box login-left">
             <div class="flex1">
                 <div class="lr-radius">
@@ -13,7 +13,10 @@
                 <div class="lr-main-right reg-wrapper">
                    <h3 class="main-title">{{$lang('欢迎注册VSWORK成为会员')}}</h3>
                    <div class="lr-form-wrap">
-                        <el-form ref="form" :model="form" label-width="20" :rules="rules">      
+                        <el-form ref="form" :model="form" label-width="20" :rules="rules">
+                            <el-form-item prop=nickName' label=" " required  v-show="userType=='V'">
+                                <el-input v-model="form.nickName" type="text" :placeholder="$lang('昵称')"></el-input>
+                            </el-form-item>
                             <VerifyCode ref="VerifyCode" :phone="form.phone"  :code="form.code" :getData="getData" :parentClass="'reg-wrapper'" :type="'register'" ></VerifyCode>
                             <el-form-item prop='password1' label=" " required>
                                <el-input v-model="form.password1" type="password" :placeholder="$lang('请输入密码')"></el-input>
@@ -57,6 +60,7 @@ export default {
     return {
       userType: "B", //用户类型
       form: {
+          nickName:"",
         phone: "",
         password1: "",
         password2: "",

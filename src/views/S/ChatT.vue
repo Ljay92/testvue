@@ -78,7 +78,7 @@
                                                 <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
                                             </p>
                                             <p class="name" style="width:90px;">{{m.projectName}}</p>
-                                            <p style="text-align:center;width:150px;"><CountDown :time="m.taskEndTime"></CountDown></p>
+                                            <p style="text-align:center;width:150px;"><CountDown :time="m.taskEndTime" type="pay" :id="m.id"></CountDown></p>
                                         </div>
                                     </div>
                                     <div class="moey">
@@ -105,7 +105,7 @@
                                             <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
                                         </p>
                                         <p class="name" style="width:90px;">{{m.projectName}}</p>
-                                        <p style="text-align:center;width:150px;"><CountDown :time="m.taskEndTime"></CountDown></p>
+                                        <p style="text-align:center;width:150px;"><CountDown :time="m.entryEndTime" type="entry" :id="m.id"></CountDown></p>
                                     </div>
                                 </div>
                                 <a href="javascript:;" class="more"
@@ -469,6 +469,7 @@
         components: {Chat, SlideBtns,CountDown},
         data () {
             return {
+                id:'',
                 acceptancemsg:$lang('验收中'),
                 zhifuIds: [],
                 dialogVisible: false, //去支付
@@ -530,6 +531,7 @@
         async mounted () {
 
             // alert(this.tabState)
+            this.id=this.$route.query.id;
             let id = this.$route.query.id;
             if (id.indexOf("SubTask-") > -1) {
                 id = this.$route.query.taskId;
@@ -611,6 +613,7 @@
                     this.acceptancemsg =$lang('B验收中')
                 }
                 console.log(this.getChilds(2))
+                console.log(this.getChilds(1))
             } else {
                 this.$message.warning(res.msg);
             }

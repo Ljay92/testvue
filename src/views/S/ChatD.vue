@@ -59,43 +59,43 @@
                             <dd class="flex1">{{item.stageRemarks}}</dd>
                         </dl>
                     </li>
-                    <li class="chart-left-li">
-                        <div class="box-flex-media-box cl-top">
-                            <p class="num">
-                                <em>{{taskStage.length + 1}}</em>
-                            </p>
-                            <a href="javascript:;" class="title flex1">
-                                <h4>{{statemsg}}</h4>
-                            </a>
-                            <el-button type="info" size="small" @click="proview" v-if="subTask.state>=5">
-                                {{$lang('预览')}}
-                            </el-button>
-                            <el-button type="info" size="small" @click="uploadChecked"
-                                       v-if="!isOnlyChat&&['5','6','7'].includes(subTask.state)">{{$lang('上传文件')}}
-                            </el-button>
-                            <!-- <el-button type="info" size="small" @click="toSubmit" v-if="!isOnlyChat&&uploaded">{{$lang('提交验收')}}</el-button> -->
-                            <el-button type="info" size="small" @click="toRedirect('S_History', '-1')">
-                                {{$lang('查看记录')}}
-                            </el-button>
-                        </div>
-                        <dl class="box-flex cl-info">
-                            <dt>{{$lang('截止时间：')}}</dt>
-                            <dd class="flex1">{{subTask.taskEndTime}}</dd>
-                        </dl>
-                        <dl class="box-flex cl-info">
-                            <dt>{{$lang('阶段详情：')}}</dt>
-                            <dd class="flex1">
-                                <div v-html="subTask.remarks"></div>
-                            </dd>
-                        </dl>
-                    </li>
+                    <!--<li class="chart-left-li">-->
+                        <!--<div class="box-flex-media-box cl-top">-->
+                            <!--<p class="num">-->
+                                <!--<em>{{taskStage.length + 1}}</em>-->
+                            <!--</p>-->
+                            <!--<a href="javascript:;" class="title flex1">-->
+                                <!--<h4>{{statemsg}}</h4>-->
+                            <!--</a>-->
+                            <!--<el-button type="info" size="small" @click="proview" v-if="subTask.state>=5">-->
+                                <!--{{$lang('预览')}}-->
+                            <!--</el-button>-->
+                            <!--<el-button type="info" size="small" @click="uploadChecked"-->
+                                       <!--v-if="!isOnlyChat&&['5','6','7'].includes(subTask.state)">{{$lang('上传文件')}}-->
+                            <!--</el-button>-->
+                            <!--&lt;!&ndash; <el-button type="info" size="small" @click="toSubmit" v-if="!isOnlyChat&&uploaded">{{$lang('提交验收')}}</el-button> &ndash;&gt;-->
+                            <!--<el-button type="info" size="small" @click="toRedirect('S_History', '-1')">-->
+                                <!--{{$lang('查看记录')}}-->
+                            <!--</el-button>-->
+                        <!--</div>-->
+                        <!--<dl class="box-flex cl-info">-->
+                            <!--<dt>{{$lang('截止时间：')}}</dt>-->
+                            <!--<dd class="flex1">{{subTask.taskEndTime}}</dd>-->
+                        <!--</dl>-->
+                        <!--<dl class="box-flex cl-info">-->
+                            <!--<dt>{{$lang('阶段详情：')}}</dt>-->
+                            <!--<dd class="flex1">-->
+                                <!--<div v-html="subTask.remarks"></div>-->
+                            <!--</dd>-->
+                        <!--</dl>-->
+                    <!--</li>-->
 
                     <!--最终文件-->
                     <li class="chart-left-li">
                         <div class="box-flex-media-box cl-top"
                              style="border-left: 0;padding-left: 20px;border-top: 5px solid #161f40;">
                             <p class="num">
-                                <em>{{taskStage.length + 2}}</em>
+                                <em>{{taskStage.length + 1}}</em>
                             </p>
                             <a href="javascript:;" class="title flex1">
                                 <h4>{{$lang('最终文件')}}</h4>

@@ -85,7 +85,8 @@
                             <!--</dl>-->
                             <dl class="box-flex info-show">
                                 <dt>{{$lang('备注:')}}</dt>
-                                <dd class="flex1" style="word-break: break-all;">{{form.remarks}}
+                                <dd class="flex1" style="word-break: break-all;">
+                                    <p v-html="form.remarks"></p>
                                     <!--{{$lang('这些看上去彼此没有太多联系的连续创业者，现在有了一个共同的身份——共享电单车玩家。当然，除了李如彬、夏涛和张天雄这些互联网创业者之外，扎堆在这一领域的还有十几位来自传统电动车行业的“老炮儿”。而他们的共同目标是——成为共享电单车界的摩拜或ofo。')}}-->
                                 </dd>
                             </dl>
