@@ -371,7 +371,9 @@
                     qq.data.sChatUser.entities
                 ) {
                     var showNmae = qq.data.targetUser.info.nickName;
-
+ // alert('aaaaaa');
+ //                     alert(qq.data.targetUser.info.name);
+ //                     alert(qq.data.targetUser.info.nickName);
                     if(qq.data.targetUser.info.bUserType === '1' && qq.data.targetUser.userType === 'B'){
                         showNmae = qq.data.targetUser.info.name + '/' + qq.data.targetUser.info.nickName;
                     }

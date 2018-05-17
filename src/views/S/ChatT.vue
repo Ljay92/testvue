@@ -544,14 +544,25 @@
                     qq.data.sChatUser &&
                     qq.data.sChatUser.entities
                 ) {
-                    const LoginUser = JSON.parse(localStorage.getItem('LoginUser'));
-                    let bUserType = LoginUser.bUserType || "0";
-                    let name = '';
-                    if (bUserType === '1') {
-                        name = qq.data.targetUser.info.nickName + '/' + qq.data.targetUser.info.name;
-                    } else {
-                        name = qq.data.targetUser.info.name;
+                    //const LoginUser = JSON.parse(localStorage.getItem('LoginUser'));
+                    //let bUserType = LoginUser.bUserType || "0";
+                    //let name = '';
+                    // if (bUserType === '1') {
+                    //     name = qq.data.targetUser.info.nickName + '/' + qq.data.targetUser.info.name;
+                    // } else {
+                    //     name = qq.data.targetUser.info.name;
+                    // }
+
+                    var showNmae = qq.data.targetUser.info.nickName;
+
+                    // alert('bbbbbb');
+                    // alert(qq.data.targetUser.info.name);
+                    // alert(qq.data.targetUser.info.nickName);
+
+                    if(qq.data.targetUser.info.bUserType === '1' && qq.data.targetUser.userType === 'B'){
+                        showNmae = qq.data.targetUser.info.name + '/' + qq.data.targetUser.info.nickName;
                     }
+
 
                     this.chatConfig = {
                         groupid: qq.data.groupDetails.data[0].id,
@@ -561,7 +572,7 @@
                         userphone: qq.data.sUser.phone,
                         username: qq.data.sUser.info.nickName || qq.data.sUser.phone,
                         youname:
-                        name +
+                        showNmae +
                         '<img class="shoujiicon" src="' +
                         shouji +
                         '" /> ' +
