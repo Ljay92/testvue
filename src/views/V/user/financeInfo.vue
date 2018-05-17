@@ -367,10 +367,10 @@
                 const userId = this.$route.query.userId || getUser().userId;
                 const res = await getMoney({userId});
                 if (res.success) {
-                    this.totalMoney = res.data.totalMoney || 0;
-                    this.atmsMoney = res.atmsMoney || 0;
-                    this.allowMoney = res.money || 0;
-                    this.frozenMoney = res.frozenMoney || 0;
+                    this.totalMoney = res.data.totalMoney;
+                    this.atmsMoney = res.data.atmsMoney;
+                    this.allowMoney = res.data.money;
+                    this.frozenMoney = res.data.frozenMoney;
                 }
             },
             async recordList(type, index) {

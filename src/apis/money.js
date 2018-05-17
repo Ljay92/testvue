@@ -62,7 +62,7 @@ async function timingPay({id}) {
 }
 // 定时任务--报名
 async function timingEntry({id}) {
-    const res = await axios.post(`/order/timingEntry`, JSON.stringify({id}));
+    const res = await axios.post(`/subtask/timingEntry`, JSON.stringify({id}));
     return res.data;
 }
 //取消支付订单
