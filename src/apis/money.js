@@ -56,13 +56,13 @@ async function addOrder({subtaskId}) {
     return res.data;
 }
 // 定时任务--支付
-async function timingPay({orderId}) {
-    const res = await axios.post(`/order/timingPay`, JSON.stringify({orderId}));
+async function timingPay({id}) {
+    const res = await axios.post(`/order/timingPay`, JSON.stringify({id}));
     return res.data;
 }
 // 定时任务--报名
-async function timingEntry({orderId}) {
-    const res = await axios.post(`/order/timingEntry`, JSON.stringify({orderId}));
+async function timingEntry({id}) {
+    const res = await axios.post(`/order/timingEntry`, JSON.stringify({id}));
     return res.data;
 }
 //取消支付订单

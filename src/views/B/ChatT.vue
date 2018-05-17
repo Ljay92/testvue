@@ -87,7 +87,8 @@
                                             <p class="user-header">
                                                 <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
                                             </p>
-                                            <p class="name flex1">{{m.projectName}}</p>
+                                            <p class="name" style="width:50px;">{{m.projectName}}</p>
+                                            <p style="text-align:center;width:120px;"><CountDown :time="m.taskEndTime" type="pay" :id="m.id"></CountDown></p>
                                         </div>
                                     </div>
                                     <div class="moey">
@@ -116,7 +117,8 @@
                                         <p class="user-header">
                                             <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
                                         </p>
-                                        <p class="name">{{m.projectName}}</p>
+                                        <p class="name" style="width:50px;">{{m.projectName}}</p>
+                                        <p style="text-align:center;width:120px;"><CountDown :time="m.entryEndTime" type="entry" :id="m.id"></CountDown></p>
                                     </div>
                                 </div>
                                 <a href="javascript:;" class="more"
@@ -152,7 +154,7 @@
                     <li class="chart-left-li">
                         <div class="box-flex-media-box cl-top">
                             <a href="javascript:;" class="title flex1">
-                                <h4>{{$lang('验收中')}}</h4>
+                                <h4>{{acceptancemsg}}</h4>
                             </a>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(5).length">
@@ -419,6 +421,7 @@
 <script>
     import Chat from "@/components/Chat";
     import SlideBtns from "@/components/SlideBtns";
+    import CountDown from "@/components/countdown";
     import {
         ChildTaskList,
         ChildTaskState,
@@ -442,9 +445,10 @@
     import {getUser} from "@/apis/storage";
 
     export default {
-        components: {Chat, SlideBtns},
+        components: {Chat, SlideBtns,CountDown},
         data () {
             return {
+                acceptancemsg:$lang('验收中'),
                 zhifuIds: [],
                 payDialogVisible: false, //去支付
                 cashType: 1,
@@ -544,6 +548,11 @@
                 stateGroup.shift();
                 console.log(stateGroup);
                 this.stateGroup = stateGroup;
+                if(this.getChilds(5).sSubmitAcceptance==0){
+                    this.acceptancemsg =$lang('S验收中')
+                }else if(this.getChilds(5).sSubmitAcceptance==1){
+                    this.acceptancemsg =$lang('B验收中')
+                }
             } else {
                 this.$message.warning(res.msg);
             }

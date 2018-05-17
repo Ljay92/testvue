@@ -57,11 +57,12 @@
         },
         methods: {
             async timingPay(id){
-                const res = await timingPay({id});
+                console.log(id)
+                const res = await timingPay({id:id});
                 console.log(res)
             },
             async timingEntry(id){
-                const res = await timingEntry({id});
+                const res = await timingEntry({id:id});
                 console.log(res)
             }
         }
