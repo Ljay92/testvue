@@ -3,7 +3,7 @@ import { addFile } from './files'
 //登陆
 async function Login({ phone, password }) {
     //var base = new Base64();
-    var result = encode(password);
+    password = encode(password);
     //alert(result);
 
     const res = await axios.post(`/user/login`, JSON.stringify({ phone, password }))
@@ -12,7 +12,7 @@ async function Login({ phone, password }) {
 //注册
 async function Register({ phone, password, userType, code, type }) {
     //var base = new Base64();
-    var result = encode(password);
+    password = encode(password);
     //alert(result);
     let param = {
         phone: phone,
