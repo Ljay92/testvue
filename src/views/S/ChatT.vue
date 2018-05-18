@@ -642,13 +642,6 @@
                 // console.log("stateGroup", stateGroup);
 
                 this.stateGroup = stateGroup;
-                console.log(stateGroup)
-                const sSubmitAcceptance=stateGroup[4].childs[0].sSubmitAcceptance;
-                if(sSubmitAcceptance==0){
-                    this.acceptancemsg =$lang('S验收中')
-                }else if(sSubmitAcceptance==1){
-                    this.acceptancemsg =$lang('B验收中')
-                }
             } else {
                 this.$message.warning(res.msg);
             }

@@ -153,7 +153,7 @@
                     <li class="chart-left-li">
                         <div class="box-flex-media-box cl-top">
                             <a href="javascript:;" class="title flex1">
-                                <h4>{{$('B验收中')}}</h4>
+                                <h4>{{$lang('B验收中')}}</h4>
                             </a>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(5).length">
@@ -179,11 +179,11 @@
                     <li class="chart-left-li">
                         <div class="box-flex-media-box cl-top">
                             <a href="javascript:;" class="title flex1">
-                                <h4>{{$('S验收中')}}</h4>
+                                <h4>{{$lang('S验收中')}}</h4>
                             </a>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(5).length">
-                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(5)" :key="i"  v-show="m.sSubmitAcceptance==0">
+                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(5)" :key="i" v-show="m.sSubmitAcceptance==0">
                                 <div class="flex1">
                                     <div class="box-flex-media-box">
                                         <p class="user-header">
@@ -572,13 +572,6 @@
                 // // delete stateGroup[2]
                 stateGroup.shift();
                 this.stateGroup = stateGroup;
-                console.log(stateGroup[5].childs[0])
-                const sSubmitAcceptance=stateGroup[5].childs[0].sSubmitAcceptance;
-                if(sSubmitAcceptance==0){
-                    this.acceptancemsg =$lang('S验收中')
-                }else if(sSubmitAcceptance==1){
-                    this.acceptancemsg =$lang('B验收中')
-                }
             } else {
                 this.$message.warning(res.msg);
             }

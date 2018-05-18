@@ -86,6 +86,7 @@ import S_VUserInfo from '@/views/S/VUserInfo'
 import S_BUserInfo from '@/views/S/BUserInfo'
 import S_Dakuan from '@/views/S/Dakuan'
 import S_History from '@/views/S/History'
+import S_taskHistory from '@/views/S/taskHistory'
 import S_Proview from '@/views/S/proview.vue'
 
 const S = [
@@ -104,6 +105,7 @@ const S = [
     {path: 'S_ChatD', component: S_ChatD, name: "S_ChatD"},//S_Dakuan
     {path: 'S_Dakuan', component: S_Dakuan, name: "S_Dakuan"},
     {path: 'S_History', component: S_History, name: "S_History"},
+    {path: 'S_taskHistory', component: S_taskHistory, name: "S_taskHistory"},
     {path: 'S_Proview', component: S_Proview, name: "S_Proview"},
 
     {path: 'notices', component: Notices, name: "S_Notices"},

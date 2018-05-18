@@ -26,6 +26,7 @@
                                        accept="image/png, image/jpeg, .zip " ref="expandStageFile" hidden/>
                             </el-button>
                             <el-button size="small" type="info" @click="viewUploadHistory">查看记录</el-button>
+                            <el-button size="small" type="info" @click="viewHistory">查看记录2</el-button>
                         </div>
                     </li>
 
@@ -900,6 +901,13 @@
                         });
                     }
                 }
+            },
+            viewHistory(){
+                const id = this.$route.query.id;
+                this.$router.push({
+                    name:'S_taskHistory',
+                    query: {id: id}
+                });
             },
             // 查看补充资料上传记录
             async viewUploadHistory() {
