@@ -27,13 +27,13 @@
                             <el-form-item :label="$lang('任务名称:')" required>
                                 <el-input v-model="form.projectName"></el-input>
                             </el-form-item>
-                            <el-form-item :label="$lang('发包类型:')" required v-show="pagetypepermissoins=='0'">
+                            <el-form-item :label="$lang('发包类型:')" required v-show="pageTypePermissoins=='0'">
                                 <el-radio-group v-model="form.packageType">
                                     <el-radio label="0">{{$lang('公开')}}</el-radio>
                                     <el-radio label="1">{{$lang('私密')}}</el-radio>
                                 </el-radio-group>
                             </el-form-item>
-                            <el-form-item :label="$lang('服务比例:')" required v-show="editservicepermissoins=='0'">
+                            <el-form-item :label="$lang('服务比例:')" required v-show="editServicePermissoins=='0'">
                                 <div>0.
                                     <el-dropdown @command="handleCommandone">
                                         <el-button type="primary">
