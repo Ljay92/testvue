@@ -367,6 +367,7 @@
                 const userId = this.$route.query.userId || getUser().userId;
                 const res = await getMoney({userId});
                 if (res.success) {
+                    console.log(res.data)
                     this.totalMoney = res.data.totalMoney;
                     this.atmsMoney = res.data.atmsMoney;
                     this.allowMoney = res.data.money;
