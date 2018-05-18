@@ -69,8 +69,8 @@
             <div class="user-header" @click="toBuserInfo">
                 <img :src="User.headUrl" />
             </div>
-            <p>{{$lang('雇主：')}}{{User.nickName}}</p>
-            <p>{{User.name}}</p>
+            <p>{{$lang('雇主：')}}{{User.firstName}}</p>
+            <p>{{User.secondName}}</p>
         </div>
         <SlideBtns :type="'back'" v-if="!tid"></SlideBtns>
 
@@ -131,8 +131,8 @@ export default {
       },
       User: {
         success: false,
-        nickName: "",
-          companyName:"",
+          firstName:"",
+          secondName:"",
         headUrl: "http://vsdata.oss-cn-hangzhou.aliyuncs.com/head.jpg"
       },
       imageUrl: "",
@@ -200,9 +200,12 @@ export default {
         this.User.headUrl =
           this.form.bUserInfo.headUrl ||
           "http://vsdata.oss-cn-hangzhou.aliyuncs.com/head.jpg";
-        this.User.nickName = this.form.bUserInfo.nickName || "";
+        // this.User.firstName = this.form.bUserInfo.nickName || "";
         if(this.User.bUserType === '1'){
-            this.User.name = this.form.bUserInfo.name || "";
+            this.User.firstName = this.form.bUserInfo.nickName || "";
+            this.User.secondName = this.form.bUserInfo.name || "";
+        } else {
+            this.User.firstName = this.form.bUserInfo.name || "";
         }
       }
     }
