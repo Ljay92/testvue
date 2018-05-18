@@ -91,7 +91,7 @@
                   </div>
                 </div>
                 <div class="tag-wrap">
-                  <button v-for="tagLable in tagLableArr" :key="tagLable" class="tag-button" @click="tagSelected($lang(tagLable))" v-bind:class="{'tag-button-selected':tagLableSelected===$lang(tagLable)}">{{$lang(tagLable)}}</button>
+                  <button v-for="tagLable in tagLableArr" :key="tagLable.id" class="tag-button" @click="tagSelected($lang(tagLable.id))" v-bind:class="{'tag-button-selected':tagLableSelected===$lang(tagLable.id)}">{{$lang(tagLable.valueExp)}}</button>
                 </div>
                 <div class="reject-reason-wrap" v-show="isReject">
                   <textarea class="reject-reason-input" v-model="textarea" placeholder="请输入驳回理由..."></textarea>
@@ -199,7 +199,7 @@
 </style>
 
 <script>
-import { AccomplishTask, OverruleTask } from "@/apis/task";
+import { AccomplishTask, OverruleTask,getReasonParam } from "@/apis/task";
 import { getAllFile } from "@/apis/files";
 import { client } from "@/apis/uploadFile";
 
@@ -232,7 +232,8 @@ export default {
     } else {
       this.$message.warning($lang("未找到文件"));
     }
-
+      let res =  await getReasonParam('b_user')
+      this.tagLableArr = res.data.score;
     //            console.log(fileData);
     //             const dir = 'task/' + id + '/';
     //             client.then(oss => {

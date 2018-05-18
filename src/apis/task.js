@@ -320,13 +320,18 @@ async function UpdateTime(id, entryEndTime) {
     const res = await axios.post(`/subtask/updateTime`, JSON.stringify({ id, entryEndTime }));
     return res.data;
 }
-
+// 获取评分
+async function getReasonParam(i) {
+    const res = await axios.get(`/dataSource/getReasonParam/${i}`);
+    return res.data;
+}
 // 检查文件上传时间
 async function JudgeNew(id) {
     const res = await axios.post(`/subtask/judgeNew`, JSON.stringify({ id}));
     return res.data;
 }
 export {
+    getReasonParam,
     vsendToS,
     getChatConfig,
     entryList,
