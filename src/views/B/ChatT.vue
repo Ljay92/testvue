@@ -88,7 +88,7 @@
                                                 <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
                                             </p>
                                             <p class="name" style="width:50px;">{{m.projectName}}</p>
-                                            <p style="text-align:center;width:120px;"><CountDown :time="m.taskEndTime" type="pay" :id="m.id"></CountDown></p>
+                                            <p style="text-align:center;width:120px;"><CountDown :time="m.payEndTime" type="pay" :id="m.id"></CountDown></p>
                                         </div>
                                     </div>
                                     <div class="moey">
@@ -546,11 +546,12 @@
                 stateGroup[7].childs = stateGroup[7].childs.concat(stateGroup[8].childs);
                 // // delete stateGroup[2]
                 stateGroup.shift();
-                console.log(stateGroup);
                 this.stateGroup = stateGroup;
-                if(this.getChilds(5).sSubmitAcceptance==0){
+                console.log(stateGroup[5].childs[0])
+                const sSubmitAcceptance=stateGroup[5].childs[0].sSubmitAcceptance;
+                if(sSubmitAcceptance==0){
                     this.acceptancemsg =$lang('S验收中')
-                }else if(this.getChilds(5).sSubmitAcceptance==1){
+                }else if(sSubmitAcceptance==1){
                     this.acceptancemsg =$lang('B验收中')
                 }
             } else {
