@@ -78,7 +78,7 @@
                                                 <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
                                             </p>
                                             <p class="name" style="width:50px;">{{m.projectName}}</p>
-                                            <p style="text-align:center;width:120px;"><CountDown :time="m.taskEndTime" type="pay" :id="m.id"></CountDown></p>
+                                            <p style="text-align:center;width:120px;"><CountDown :time="m.payEndTime" type="pay" :id="m.id"></CountDown></p>
                                         </div>
                                     </div>
                                     <div class="moey">
@@ -160,6 +160,8 @@
                                         <p class="name">{{m.projectName}}</p>
                                     </div>
                                 </div>
+                                <a href="javascript:;" class="more"
+                                   @click="$router.push({name:'S_TaskCheck',query: { id: m.id, taskId:m.taskId }})">{{$lang('去验收')}}&gt;</a>&nbsp;&nbsp;&nbsp;
                                 <a href="javascript:;" class="more"
                                    @click="$router.push({name:'S_ChatD',query: { id: m.id }})">{{$lang('查看')}}&gt;</a>
                             </li>
@@ -616,13 +618,12 @@
                 // console.log("stateGroup", stateGroup);
 
                 this.stateGroup = stateGroup;
-                if(this.getChilds(4).sSubmitAcceptance==0){
+                const sSubmitAcceptance=stateGroup[4].childs[0].sSubmitAcceptance;
+                if(sSubmitAcceptance==0){
                     this.acceptancemsg =$lang('S验收中')
-                }else if(this.getChilds(4).sSubmitAcceptance==1){
+                }else if(sSubmitAcceptance==1){
                     this.acceptancemsg =$lang('B验收中')
                 }
-                console.log(this.getChilds(2))
-                console.log(this.getChilds(1))
             } else {
                 this.$message.warning(res.msg);
             }

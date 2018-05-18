@@ -81,6 +81,7 @@ import S_Header from '@/views/S/Header'
 import S_SonTaskInfo from '@/views/S/SonTaskInfo'
 import S_ChatT from '@/views/S/ChatT'
 import S_ChatD from '@/views/S/ChatD'
+import S_TaskCheck from '@/views/S/TaskCheck.vue'
 import S_VUserInfo from '@/views/S/VUserInfo'
 import S_BUserInfo from '@/views/S/BUserInfo'
 import S_Dakuan from '@/views/S/Dakuan'
@@ -252,6 +253,7 @@ const router = new Router({
             },
             children: [
                 {path: '', redirect: 'index'},
+                {path: 'S_TaskCheck', component: S_TaskCheck, name: "S_TaskCheck"},
                 ...S,
                 {
                     path: 'VuserInfo', component: S_VUserInfo, name: 'S-VuserInfo',
