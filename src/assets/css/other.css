@@ -266,10 +266,10 @@
 .zd-list-wrap{ margin: 0 30px; height: 20px;}
 .zd-list-li p:last-child{ text-align: right}
 .zd-list-li p:nth-child(2){ text-align: center}
-.zd-list-ul{border-bottom: 1px dashed #dcdcdc; margin-bottom:5px; }
+.zd-list-ul{border-bottom: 1px dashed #dcdcdc; margin-bottom:5px;}
 .base-account-show{ position: relative;}
 .bus-account-show p em{ display: block; width: 100%; margin: 0 auto;}
-.zffs-li{float:left; width: auto; margin-right: 25px; text-align: center; cursor: pointer}
+.zffs-li{ flex:1; width: auto; margin-right: 25px; text-align: center; cursor: pointer}
 .zffs-li span{ width: 47px; height: 47px; display: inline-block; position:relative; }
 .zffs-li .zf-zfb{ background:url('../images/fk-zfb.png') no-repeat center center;}
 .zffs-li .zf-wx{ background:url('../images/fk-wx.png') no-repeat center center;}
@@ -459,7 +459,7 @@
 .zffs-div .zffs-li span{ width: 56px; height: 56px; background-size: cover}
 .zffs-div .zffs-li.active i{ width: 56px; height: 56px;}
 .zffs-div .zffs-li{ margin: 0 10px;}
-.zffs-div ul{ width: 235px; margin: 30px auto 10px;}
+.zffs-div ul{ width: 300px; margin: 30px auto 10px;display:flex; }
 .yebz-tips{ color:#e01414; line-height: 22px;}
 .marg-left-10{ margin-left: 10px;}
 .fqfk-wrap { padding: 10px 0; text-align: center}
