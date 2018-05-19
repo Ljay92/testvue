@@ -27,13 +27,13 @@
                             <el-form-item :label="$lang('任务名称:')" required>
                                 <el-input v-model="form.projectName"></el-input>
                             </el-form-item>
-                            <el-form-item :label="$lang('发包类型:')" required v-show="pageTypePermissoins=='0'">
+                            <el-form-item :label="$lang('发包类型:')" required v-show="Pshowstatus">
                                 <el-radio-group v-model="form.packageType">
                                     <el-radio label="0">{{$lang('公开')}}</el-radio>
                                     <el-radio label="1">{{$lang('私密')}}</el-radio>
                                 </el-radio-group>
                             </el-form-item>
-                            <el-form-item :label="$lang('服务比例:')" required v-show="editServicePermissoins=='0'">
+                            <el-form-item :label="$lang('服务比例:')" required v-show="Eshowstatus">
                                 <div>0.
                                     <el-dropdown @command="handleCommandone">
                                         <el-button type="primary">
@@ -367,6 +367,8 @@
                     one: 0,
                     two: 0
                 },
+                Eshowstatus:'',
+                Pshowstatus:'',
                 editServicePermissoins:'0',
                 pageTypePermissoins:'0',
                 title: $lang("任务拆分"),
@@ -506,10 +508,15 @@
             };
         },
         created() {
-            this.editServicePermissoins = getUserInfo().editServicePermissoins;
-            this.pageTypePermissoins = getUserInfo().pageTypePermissoins;
+
         },
         async mounted() {
+            this.editServicePermissoins = getUserInfo().editServicePermissoins;
+            this.pageTypePermissoins = getUserInfo().pageTypePermissoins;
+            // 创建子任务
+            this.Eshowstatus = this.editServicePermissoins==1 // 发包类型
+            this.Pshowstatus = this.pageTypePermissoins==1   // 服务比例
+
             this.loadinginstace = Loading.service({fullscreen: true});
             const taskDraftList = await subTaskDraftList();
             console.log("hhahahahhahahahahha");
@@ -563,10 +570,15 @@
 
             const childid = this.$route.query.childid;
             if (childid) {
+                // 编辑子任务
+                this.Eshowstatus = this.editServicePermissoins==0 // 发包类型
+                this.Pshowstatus = this.pageTypePermissoins==0   // 服务比例
+
                 this.title = $lang("任务编辑");
                 this.childid = childid;
                 this.isUpdate = true;
                 const resc = await ChildTaskInfo(childid);
+                console.log(resc)
                 if (resc.success) {
                     // this.form.entryEndTime=new Date(this.form.entryEndTime);
                     // this.form.taskEndTime=new Date(this.form.taskEndTime);
