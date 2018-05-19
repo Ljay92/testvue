@@ -75,9 +75,7 @@
                                 <el-input v-model="form.total"></el-input>
                             </el-form-item>
                             <el-form-item :label="$lang('任务截止时间:')" required>
-                                <el-date-picker v-model="form.rangeTime" type="datetime" :placeholder="$lang('任务截止时间')"
-                                                format="yyyy-MM-dd HH"
-                                                :picker-options="pickerOptions0"></el-date-picker>
+                                <el-date-picker v-model="form.rangeTime" type="datetime" :placeholder="$lang('任务截止时间')" format="yyyy-MM-dd HH" :picker-options="pickerOptions0"></el-date-picker>
                             </el-form-item>
                             <!--<el-form-item :label="$lang('任务截止时间:">
                                                                                                                                                                                     <el-date-picker v-model="form.taskEndTime" type="datetime" placeholder="请选择时间" format="yyyy-MM-dd HH:mm:ss" :picker-options="pickerOptions0"></el-date-picker>
@@ -570,17 +568,16 @@
                 this.isUpdate = true;
                 const resc = await ChildTaskInfo(childid);
                 if (resc.success) {
-                    console.log(123)
-                    console.log(resc.data)
                     // this.form.entryEndTime=new Date(this.form.entryEndTime);
                     // this.form.taskEndTime=new Date(this.form.taskEndTime);
                     // 为富文本编辑器赋值
                     this.$refs.ue.setUEContent(resc.data.subTask.remarks);
-
-                    this.form.rangeTime = [
-                        new Date(resc.data.subTask.entryEndTime),
-                        new Date(resc.data.subTask.taskEndTime)
-                    ];
+                    this.form.rangeTime = new Date(resc.data.subTask.taskEndTime)
+                    // this.form.rangeTime = [
+                    //     new Date(resc.data.subTask.entryEndTime),
+                    //     new Date(resc.data.subTask.taskEndTime)
+                    // ];
+                    console.log(this.form.rangeTime)
                     if (resc.data.subTask.chartlatProperty1) {
                         if (resc.data.subTask.chartlatProperty1.indexOf(",") > -1) {
                             resc.data.subTask.chartlatProperty1 = resc.data.subTask.chartlatProperty1.split(
