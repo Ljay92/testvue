@@ -538,6 +538,8 @@
             this.form.taskId = id;
             const res = await getSubTaskParam(id);
             if (res.success) {
+                console.log(123)
+                console.log(res.data.sServiceRate)
                 if (res.data.sServiceRate != null && res.data.sServiceRate.length != 0) {
                     this.form.sServiceRate = res.data.sServiceRate[0];
                     this.number.one = res.data.sServiceRate[0].substring(2, 3);
@@ -1052,8 +1054,9 @@
                 //     this.$message.warning("报名时间不可为空")
                 //     return false
                 // }
-                if (!(this.form.rangeTime == '')) {
-                    this.$message.warning($lang("请输入报名时间和截至时间"));
+                console.log()
+                if (!(this.form.rangeTime != '')) {
+                    this.$message.warning($lang("请选择截至时间"));
                     return false;
                 }
                 // if(new Date(this.form.taskEndTime)<new Date(this.form.entryEndTime)){

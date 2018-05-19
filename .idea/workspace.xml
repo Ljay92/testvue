@@ -20,7 +20,7 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="960">
               <caret line="72" column="19" lean-forward="false" selection-start-line="72" selection-start-column="7" selection-end-line="72" selection-end-column="19" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -37,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/src/views/S/SdCutTask.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="519" column="70" lean-forward="true" selection-start-line="519" selection-start-column="70" selection-end-line="519" selection-end-column="70" />
+              <caret line="1057" column="43" lean-forward="false" selection-start-line="1057" selection-start-column="43" selection-end-line="1057" selection-end-column="43" />
               <folding>
                 <element signature="n#el-row#0;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
                 <element signature="n#div#1;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
@@ -53,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/src/apis/task.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="9600">
-              <caret line="321" column="1" lean-forward="true" selection-start-line="321" selection-start-column="1" selection-end-line="321" selection-end-column="1" />
+              <caret line="321" column="1" lean-forward="false" selection-start-line="321" selection-start-column="1" selection-end-line="321" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -70,9 +70,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tagSelected</find>
-      <find>tagLableSelected</find>
-      <find>$</find>
       <find>getReasonParam</find>
       <find>B_TaskCheck</find>
       <find>toRedirect</find>
@@ -100,6 +97,9 @@
       <find>submitstate</find>
       <find>任务编辑</find>
       <find>Eshowstatus</find>
+      <find>number</find>
+      <find>提交任务</find>
+      <find>submitTask</find>
     </findStrings>
     <dirStrings>
       <dir>G:\vue\testvue\src\views\V</dir>
@@ -180,6 +180,29 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="testvue" type="cbb8eebc:String" user="testvue" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="testvue" type="cbb8eebc:String" user="testvue" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="testvue" type="cbb8eebc:String" user="testvue" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="apis" type="cbb8eebc:String" user="apis" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -232,29 +255,6 @@
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="V" type="462c0819:PsiDirectoryNode" />
               <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="testvue" type="cbb8eebc:String" user="testvue" />
-            </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="testvue" type="cbb8eebc:String" user="testvue" />
-              <item name="src" type="cbb8eebc:String" user="src" />
-            </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="testvue" type="cbb8eebc:String" user="testvue" />
-              <item name="src" type="cbb8eebc:String" user="src" />
-              <item name="apis" type="cbb8eebc:String" user="apis" />
             </path>
           </expand>
           <select />
@@ -342,11 +342,12 @@
       <workItem from="1526605993041" duration="23122000" />
       <workItem from="1526709162477" duration="4339000" />
       <workItem from="1526720409480" duration="1561000" />
+      <workItem from="1526726798872" duration="642000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="152421000" />
+    <option name="totallyTimeSpent" value="153063000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -361,13 +362,13 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1721225" sideWeight="0.375" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1721225" sideWeight="0.36993244" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5042239" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1721225" sideWeight="0.625" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1721225" sideWeight="0.6300676" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.49788806" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3385475" sideWeight="0.49577615" order="7" side_tool="false" content_ui="tabs" />
@@ -476,12 +477,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="125" column="34" lean-forward="false" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
-          <folding>
-            <element signature="e#23913#25523#0" expanded="false" />
-            <element signature="e#25561#31024#0" expanded="false" />
-            <element signature="e#31074#31612#0" expanded="false" />
-            <marker date="1526283171628" expanded="false" signature="13117:13132" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -608,7 +603,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="18" column="55" lean-forward="true" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="73" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -687,9 +681,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-44">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#25#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -697,10 +688,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="451">
           <caret line="70" column="10" lean-forward="true" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="10" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#img#0;n#template#0;n#el-table-column#2;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -708,15 +695,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="18" column="26" lean-forward="false" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="39" />
-          <folding>
-            <element signature="e#1719#1769#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="960">
           <caret line="72" column="19" lean-forward="false" selection-start-line="72" selection-start-column="7" selection-end-line="72" selection-end-column="19" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -731,7 +715,7 @@
     <entry file="file://$PROJECT_DIR$/src/apis/task.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9600">
-          <caret line="321" column="1" lean-forward="true" selection-start-line="321" selection-start-column="1" selection-end-line="321" selection-end-column="1" />
+          <caret line="321" column="1" lean-forward="false" selection-start-line="321" selection-start-column="1" selection-end-line="321" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -740,19 +724,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
           <caret line="565" column="51" lean-forward="false" selection-start-line="565" selection-start-column="51" selection-end-line="565" selection-end-column="51" />
-          <folding>
-            <element signature="n#style#0;n#el-row#0;n#div#0;n#el-dialog#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
-            <element signature="e#17299#17336#0" expanded="true" />
-            <element signature="e#24362#24431#0" expanded="false" />
-            <element signature="e#33582#33622#0" expanded="false" />
-            <element signature="e#36188#36970#0" expanded="false" />
-            <element signature="e#37016#37481#0" expanded="false" />
-            <element signature="e#37504#40248#0" expanded="false" />
-            <element signature="e#40296#41867#0" expanded="false" />
-            <element signature="e#42869#44519#0" expanded="false" />
-            <marker date="1526638326634" expanded="false" signature="14457:14472" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -760,9 +731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
           <caret line="278" column="21" lean-forward="false" selection-start-line="278" selection-start-column="18" selection-end-line="278" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -770,9 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
           <caret line="30" column="72" lean-forward="true" selection-start-line="30" selection-start-column="72" selection-end-line="30" selection-end-column="72" />
-          <folding>
-            <element signature="e#10274#12125#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -780,10 +745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="236" column="22" lean-forward="false" selection-start-line="236" selection-start-column="11" selection-end-line="236" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#!!top" expanded="false" />
-            <element signature="e#8407#8443#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -791,16 +752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="62" column="27" lean-forward="false" selection-start-line="62" selection-start-column="24" selection-end-line="62" selection-end-column="27" />
-          <folding>
-            <element signature="n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#li#7;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#li#8;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#li#9;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#el-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
-            <element signature="e#25847#27983#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -808,14 +759,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="58" column="156" lean-forward="false" selection-start-line="58" selection-start-column="156" selection-end-line="58" selection-end-column="156" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/S/SdCutTask.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="519" column="70" lean-forward="true" selection-start-line="519" selection-start-column="70" selection-end-line="519" selection-end-column="70" />
+          <caret line="1057" column="43" lean-forward="false" selection-start-line="1057" selection-start-column="43" selection-end-line="1057" selection-end-column="43" />
           <folding>
             <element signature="n#el-row#0;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#div#1;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
