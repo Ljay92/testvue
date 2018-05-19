@@ -1040,7 +1040,7 @@
                 //     this.$message.warning("报名时间不可为空")
                 //     return false
                 // }
-                if (!(this.form.rangeTime.length == 2)) {
+                if (!(this.form.rangeTime == '')) {
                     this.$message.warning($lang("请输入报名时间和截至时间"));
                     return false;
                 }
