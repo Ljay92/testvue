@@ -149,15 +149,15 @@
                             </li>
                         </ul>
                     </li>
-                    <!--B验收中-->
+                    <!--验收中-->
                     <li class="chart-left-li">
                         <div class="box-flex-media-box cl-top">
                             <a href="javascript:;" class="title flex1">
-                                <h4>{{$lang('B验收中')}}</h4>
+                                <h4>{{$lang('验收中')}}</h4>
                             </a>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(5).length">
-                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(5)" :key="i"  v-show="m.sSubmitAcceptance==1">
+                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(5)" :key="i" >
                                 <div class="flex1">
                                     <div class="box-flex-media-box">
                                         <p class="user-header">
@@ -175,31 +175,31 @@
                         </ul>
                     </li>
 
-                    <!--S验收中-->
-                    <li class="chart-left-li">
-                        <div class="box-flex-media-box cl-top">
-                            <a href="javascript:;" class="title flex1">
-                                <h4>{{$lang('S验收中')}}</h4>
-                            </a>
-                        </div>
-                        <ul class="chose-people-ul" v-if="getChilds(5).length">
-                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(5)" :key="i" v-show="m.sSubmitAcceptance==0">
-                                <div class="flex1">
-                                    <div class="box-flex-media-box">
-                                        <p class="user-header">
-                                            <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
-                                        </p>
-                                        <p class="name">{{m.projectName}}</p>
-                                    </div>
-                                </div>
-                                <a href="javascript:;" class="more"
-                                   @click="$router.push({name:'B_TaskCheck',query: { id: m.id, taskId:m.taskId }})">{{$lang('去验收')}}&gt;</a>&nbsp;&nbsp;&nbsp;
-                                <!--<a href="javascript:;" class="more" @click="$router.push({name:'B-detail',query: { id: $route.query.id }})">{{$lang('查看详情')}}&gt;</a>&nbsp;&nbsp;&nbsp;-->
-                                <a href="javascript:;" class="more"
-                                   @click="$router.push({name:'B_ChatD',query: { id: m.id, taskId:m.taskId }})">{{$lang('查看')}}&gt;</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <!--&lt;!&ndash;S验收中&ndash;&gt;-->
+                    <!--<li class="chart-left-li">-->
+                        <!--<div class="box-flex-media-box cl-top">-->
+                            <!--<a href="javascript:;" class="title flex1">-->
+                                <!--<h4>{{$lang('S验收中')}}</h4>-->
+                            <!--</a>-->
+                        <!--</div>-->
+                        <!--<ul class="chose-people-ul" v-if="getChilds(5).length">-->
+                            <!--<li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(5)" :key="i" v-show="m.sSubmitAcceptance==0">-->
+                                <!--<div class="flex1">-->
+                                    <!--<div class="box-flex-media-box">-->
+                                        <!--<p class="user-header">-->
+                                            <!--<img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>-->
+                                        <!--</p>-->
+                                        <!--<p class="name">{{m.projectName}}</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<a href="javascript:;" class="more"-->
+                                   <!--@click="$router.push({name:'B_TaskCheck',query: { id: m.id, taskId:m.taskId }})">{{$lang('去验收')}}&gt;</a>&nbsp;&nbsp;&nbsp;-->
+                                <!--&lt;!&ndash;<a href="javascript:;" class="more" @click="$router.push({name:'B-detail',query: { id: $route.query.id }})">{{$lang('查看详情')}}&gt;</a>&nbsp;&nbsp;&nbsp;&ndash;&gt;-->
+                                <!--<a href="javascript:;" class="more"-->
+                                   <!--@click="$router.push({name:'B_ChatD',query: { id: m.id, taskId:m.taskId }})">{{$lang('查看')}}&gt;</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
 
                     <!--完成-->
                     <li class="chart-left-li">

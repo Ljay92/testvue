@@ -151,7 +151,7 @@
                             </a>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(4).length">
-                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(4)" :key="i" v-show="m.sSubmitAcceptance==1">
+                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(4)" :key="i" v-show="m.sSubmitAcceptance==0">
                                 <div class="flex1">
                                     <div class="box-flex-media-box">
                                         <p class="user-header">
@@ -175,7 +175,7 @@
                             </a>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(4).length">
-                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(4)" :key="i" v-show="m.sSubmitAcceptance==0">
+                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(4)" :key="i" v-show="m.sSubmitAcceptance==1">
                                 <div class="flex1">
                                     <div class="box-flex-media-box">
                                         <p class="user-header">
@@ -620,7 +620,6 @@
             }
             const stateGroup = [];
             const res = await ChildTaskList(id);
-
             if (res.success) {
                 const list = res.data ? res.data : [];
                 ChildTaskState("S").map((value, i) => {
@@ -642,6 +641,7 @@
                 // console.log("stateGroup", stateGroup);
 
                 this.stateGroup = stateGroup;
+                console.log(this.getChilds(4))
             } else {
                 this.$message.warning(res.msg);
             }

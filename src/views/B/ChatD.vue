@@ -37,42 +37,42 @@
                             </dd>
                         </dl>
                     </li>
-                    <li class="chart-left-li" v-if="['5','6','7','8'].includes(subTask.state)">
-                        <div class="box-flex-media-box cl-top">
-                            <p class="num">
-                                <em>{{taskStage.length + 1}}</em>
-                            </p>
-                            <a href="javascript:;" class="title flex1">
-                                <h4>{{statemsg}}</h4>
-                                <p>{{$lang('截止时间')}}：{{subTask.taskEndTime}}</p>
-                            </a>
-                            <el-button size="small" type="info"
-                                       @click="$router.push({name:'B_TaskCheck',query: { id: subTask.id }})"
-                                       v-if="$route.query.state==6">{{$lang('去验收')}}
-                            </el-button>
-                            <el-button size="small" type="info"
-                                       @click="$router.push({name:'B_DTaskCheck',query: { id: subTask.id }})" v-else>
-                                {{$lang('预览')}}
-                            </el-button>
-                            <el-button size="small" type="info"
-                                       @click="$router.push({name:'B_History',query: { id: subTask.id, index: -1 }})">
-                                {{$lang('查看历史')}}
-                            </el-button>
-                        </div>
-                        <dl class="box-flex cl-info">
-                            <dt>{{$lang('阶段详情')}}：</dt>
-                            <dd class="flex1">
-                                <div v-html="subTask.remarks"></div>
-                            </dd>
-                        </dl>
-                    </li>
+                    <!--<li class="chart-left-li" v-if="['5','6','7','8'].includes(subTask.state)">-->
+                        <!--<div class="box-flex-media-box cl-top">-->
+                            <!--<p class="num">-->
+                                <!--<em>{{taskStage.length + 1}}</em>-->
+                            <!--</p>-->
+                            <!--<a href="javascript:;" class="title flex1">-->
+                                <!--<h4>{{statemsg}}</h4>-->
+                                <!--<p>{{$lang('截止时间')}}：{{subTask.taskEndTime}}</p>-->
+                            <!--</a>-->
+                            <!--<el-button size="small" type="info"-->
+                                       <!--@click="$router.push({name:'B_TaskCheck',query: { id: subTask.id }})"-->
+                                       <!--v-if="$route.query.state==6">{{$lang('去验收')}}-->
+                            <!--</el-button>-->
+                            <!--<el-button size="small" type="info"-->
+                                       <!--@click="$router.push({name:'B_DTaskCheck',query: { id: subTask.id }})" v-else>-->
+                                <!--{{$lang('预览')}}-->
+                            <!--</el-button>-->
+                            <!--<el-button size="small" type="info"-->
+                                       <!--@click="$router.push({name:'B_History',query: { id: subTask.id, index: -1 }})">-->
+                                <!--{{$lang('查看历史')}}-->
+                            <!--</el-button>-->
+                        <!--</div>-->
+                        <!--<dl class="box-flex cl-info">-->
+                            <!--<dt>{{$lang('阶段详情')}}：</dt>-->
+                            <!--<dd class="flex1">-->
+                                <!--<div v-html="subTask.remarks"></div>-->
+                            <!--</dd>-->
+                        <!--</dl>-->
+                    <!--</li>-->
 
                     <!--最终文件-->
                     <li class="chart-left-li">
                         <div class="box-flex-media-box cl-top"
                              style="border-left: 0;padding-left: 20px;border-top: 5px solid #161f40;">
                             <p class="num">
-                                <em>{{taskStage.length + 2}}</em>
+                                <em>{{taskStage.length + 1}}</em>
                             </p>
                             <a href="javascript:;" class="title flex1">
                                 <h4>{{$lang('最终文件')}}</h4>

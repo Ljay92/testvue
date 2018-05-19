@@ -75,7 +75,7 @@
                                 <el-input v-model="form.total"></el-input>
                             </el-form-item>
                             <el-form-item :label="$lang('任务截止时间:')" required>
-                                <el-date-picker v-model="form.rangeTime" type="datetime" :placeholder="$lang('任务截止时间')" format="yyyy-MM-dd HH" :picker-options="pickerOptions0"></el-date-picker>
+                                <el-date-picker v-model="form.taskEndTime" type="datetime" :placeholder="$lang('任务截止时间')" format="yyyy-MM-dd HH" :picker-options="pickerOptions0"></el-date-picker>
                             </el-form-item>
                             <!--<el-form-item :label="$lang('任务截止时间:">
                                                                                                                                                                                     <el-date-picker v-model="form.taskEndTime" type="datetime" placeholder="请选择时间" format="yyyy-MM-dd HH:mm:ss" :picker-options="pickerOptions0"></el-date-picker>
@@ -395,7 +395,7 @@
                     groupId: "",
                     // taskEndTime: "",
                     // entryEndTime: "",
-                    rangeTime: "",
+                    taskEndTime: "",
                     chartlatProperty1: [],
                     chartlatProperty2: "",
                     chartlatProperty3: "",
@@ -580,18 +580,16 @@
                 this.childid = childid;
                 this.isUpdate = true;
                 const resc = await ChildTaskInfo(childid);
-                console.log(resc)
                 if (resc.success) {
                     // this.form.entryEndTime=new Date(this.form.entryEndTime);
                     // this.form.taskEndTime=new Date(this.form.taskEndTime);
                     // 为富文本编辑器赋值
                     this.$refs.ue.setUEContent(resc.data.subTask.remarks);
-                    this.form.rangeTime = new Date(resc.data.subTask.taskEndTime)
+                    this.form.taskEndTime = new Date(resc.data.subTask.taskEndTime)
                     // this.form.rangeTime = [
                     //     new Date(resc.data.subTask.entryEndTime),
                     //     new Date(resc.data.subTask.taskEndTime)
                     // ];
-                    console.log(this.form.rangeTime)
                     if (resc.data.subTask.chartlatProperty1) {
                         if (resc.data.subTask.chartlatProperty1.indexOf(",") > -1) {
                             resc.data.subTask.chartlatProperty1 = resc.data.subTask.chartlatProperty1.split(
@@ -711,10 +709,11 @@
                         // this.form.taskEndTime=new Date(this.form.taskEndTime);
                         // 为富文本编辑器赋值
                         me.$refs.ue.setUEContent(resc.data.subTask.remarks);
-                        me.form.rangeTime = [
-                            new Date(resc.data.subTask.entryEndTime),
-                            new Date(resc.data.subTask.taskEndTime)
-                        ];
+                        // me.form.rangeTime = [
+                        //     new Date(resc.data.subTask.entryEndTime),
+                        //
+                        // ];
+                        me.form.taskEndTime = new Date(resc.data.subTask.taskEndTime)
                         if (resc.data.subTask.chartlatProperty1) {
                             if (resc.data.subTask.chartlatProperty1.indexOf(",") > -1) {
                                 resc.data.subTask.chartlatProperty1 = resc.data.subTask.chartlatProperty1.split(
@@ -1054,8 +1053,7 @@
                 //     this.$message.warning("报名时间不可为空")
                 //     return false
                 // }
-                console.log()
-                if (!(this.form.rangeTime != '')) {
+                if (!(this.form.taskEndTime != '')) {
                     this.$message.warning($lang("请选择截至时间"));
                     return false;
                 }
@@ -1113,6 +1111,7 @@
                 this.form.remarks = this.$refs.ue.getUEContent();
 
                 this.loadinginstace = Loading.service({fullscreen: true});
+                this.form.taskEndTime=moment(this.form.taskEndTime).format("YYYY-MM-DD HH");
                 const res = await UpdateChildTask(this.form, this.form.state);
 
                 if (res.success) {
@@ -1130,6 +1129,7 @@
                 this.form.chartlatProperty1 = treenode
                     .filter(node => !node.children)
                     .map(node => node.label);
+                this.form.taskEndTime=moment(this.form.taskEndTime).format("YYYY-MM-DD HH");
                 if (
                     this.stage.stageName &&
                     this.stage.stageEndTime &&
@@ -1166,6 +1166,7 @@
                 this.form.chartlatProperty1 = treenode
                     .filter(node => !node.children)
                     .map(node => node.label);
+                me.form.taskEndTime=moment(me.form.taskEndTime).format("YYYY-MM-DD HH");
                 if (
                     this.stage.stageName &&
                     this.stage.stageEndTime &&

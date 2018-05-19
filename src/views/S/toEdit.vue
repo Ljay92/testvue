@@ -15,7 +15,7 @@
             <p>{{$lang('任务状态：')}}{{stateName(item.state)}}</p>
             <p style="width:270px;">
               <span>{{$lang('截止时间：')}}</span>
-              <el-date-picker type="date" placeholder="请选择日期" v-model="item.entryEndTime" @change="item._entryEndTime=item.entryEndTime,UpdateTime(item,$event)"></el-date-picker>
+              <el-date-picker type="date" placeholder="请选择日期" v-model="item.taskEndTime" @change="item._taskEndTime=item.taskEndTime,UpdateTime(item,$event)"></el-date-picker>
             </p>
             <!--<p v-if="item.total">总占比例：{{(item.total/total*100).toFixed(2)}}%</p>-->
             <el-button type="sure" @click="toRedirectEdit(item.id)" v-if="item.state<3">{{$lang('编辑')}}</el-button>
@@ -149,13 +149,13 @@ export default {
       this.form.totalType = data.totalType;
       this.form.total = data.total;
     },
-    async UpdateTime(task, entryEndTime) {
+    async UpdateTime(task, taskEndTime) {
       console.log(task);
-      const res = await UpdateTime(task.id, entryEndTime + " 00:00:00");
+      const res = await UpdateTime(task.id, taskEndTime + " 00");
       if (res.success) {
         this.$message($lang("修改成功"));
       } else {
-        task.entryEndTime = task._entryEndTime;
+        task.taskEndTime = task._taskEndTime;
       }
     }
   },

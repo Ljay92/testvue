@@ -65,7 +65,7 @@ async function subTaskList({ appType, appAreas, packageType, state, vUserId, pag
 }
 //创建子任务
 async function CreateChildTask(taskInfo, state) {
-    let { modelStyle, chartlatFormat, chartlatProperty1, rangeTime } = taskInfo;
+    let { modelStyle, chartlatFormat, chartlatProperty1, taskEndTime } = taskInfo;
     if (Array.isArray(modelStyle)) {
         modelStyle = modelStyle.join(',');
     }
@@ -75,15 +75,15 @@ async function CreateChildTask(taskInfo, state) {
     if (Array.isArray(chartlatProperty1)) {
         chartlatProperty1 = chartlatProperty1.join(',');
     }
-    let entryEndTime = moment(new Date(rangeTime[0])).format("YYYY-MM-DD HH:mm:ss");
-    let taskEndTime = moment(new Date(rangeTime[1])).format("YYYY-MM-DD HH:mm:ss");
-    const res = await axios.post(`/subtask/save/${state}`, { ...taskInfo, modelStyle, chartlatFormat, chartlatProperty1, entryEndTime, taskEndTime })
+    // let entryEndTime = moment(new Date(rangeTime[0])).format("YYYY-MM-DD HH:mm:ss");
+    // let taskEndTime = moment(new Date(rangeTime[1])).format("YYYY-MM-DD HH:mm:ss");
+    const res = await axios.post(`/subtask/save/${state}`, { ...taskInfo, modelStyle, chartlatFormat, chartlatProperty1, taskEndTime })
     return res.data;
 }
 
 //创建子任务模版
 async function CreateChildTaskDraft(taskInfo, state) {
-    let { modelStyle, chartlatFormat, chartlatProperty1, rangeTime } = taskInfo;
+    let { modelStyle, chartlatFormat, chartlatProperty1, taskEndTime } = taskInfo;
     if (Array.isArray(modelStyle)) {
         modelStyle = modelStyle.join(',');
     }
@@ -93,9 +93,9 @@ async function CreateChildTaskDraft(taskInfo, state) {
     if (Array.isArray(chartlatProperty1)) {
         chartlatProperty1 = chartlatProperty1.join(',');
     }
-    let entryEndTime = moment(new Date(rangeTime[0])).format("YYYY-MM-DD HH:mm:ss");
-    let taskEndTime = moment(new Date(rangeTime[1])).format("YYYY-MM-DD HH:mm:ss");
-    const res = await axios.post(`/subtask/savetemplet/${state}`, { ...taskInfo, modelStyle, chartlatFormat, chartlatProperty1, entryEndTime, taskEndTime })
+    // let entryEndTime = moment(new Date(rangeTime[0])).format("YYYY-MM-DD HH");
+    // let taskEndTime = moment(new Date(taskEndTimes)).format("YYYY-MM-DD HH");
+    const res = await axios.post(`/subtask/savetemplet/${state}`, { ...taskInfo, modelStyle, chartlatFormat, chartlatProperty1, taskEndTime })
     return res.data;
 }
 
@@ -107,7 +107,7 @@ async function subTaskDraftList() {
 
 //保存更新子任务
 async function UpdateChildTask(taskInfo, state) {
-    let { modelStyle, chartlatFormat, chartlatProperty1, rangeTime } = taskInfo;
+    let { modelStyle, chartlatFormat, chartlatProperty1, taskEndTime } = taskInfo;
     if (Array.isArray(modelStyle)) {
         modelStyle = modelStyle.join(',');
     }
@@ -117,9 +117,9 @@ async function UpdateChildTask(taskInfo, state) {
     if (Array.isArray(chartlatProperty1)) {
         chartlatProperty1 = chartlatProperty1.join(',');
     }
-    let entryEndTime = moment(new Date(rangeTime[0])).format("YYYY-MM-DD HH:mm:ss");
-    let taskEndTime = moment(new Date(rangeTime[1])).format("YYYY-MM-DD HH:mm:ss");
-    const res = await axios.post(`/subtask/update/${state}`, { ...taskInfo, modelStyle, chartlatFormat, chartlatProperty1, entryEndTime, taskEndTime })
+    // let entryEndTime = moment(new Date(rangeTime[0])).format("YYYY-MM-DD HH");
+    // let taskEndTime = moment(new Date(taskEndTimes)).format("YYYY-MM-DD HH");
+    const res = await axios.post(`/subtask/update/${state}`, { ...taskInfo, modelStyle, chartlatFormat, chartlatProperty1,taskEndTime })
     return res.data;
 }
 //保存更新子任务,至少用来确认，只带2个参数
@@ -242,13 +242,13 @@ async function AcceptanceTask(id,acceptanceType) {
     return res.data;
 }
 //完成验收任务
-async function AccomplishTask(id) {
-    const res = await axios.post(`/subtask/accomplishTask`, JSON.stringify({ id }))
+async function AccomplishTask(id,label) {
+    const res = await axios.post(`/subtask/accomplishTask`, JSON.stringify({ id,label }))
     return res.data;
 }
 //驳回验收任务
-async function OverruleTask(id, remarks) {
-    const res = await axios.post(`/subtask/overruleTask`, JSON.stringify({ id, remarks }))
+async function OverruleTask(id, remarks,label) {
+    const res = await axios.post(`/subtask/overruleTask`, JSON.stringify({ id, remarks ,label}))
     return res.data;
 }
 //banner列表
