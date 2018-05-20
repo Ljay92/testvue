@@ -143,15 +143,15 @@
                         </ul>
                     </li>
 
-                    <!--B验收中-->
+                    <!--S验收中-->
                     <li class="chart-left-li">
                         <div class="box-flex-media-box cl-top">
                             <a href="javascript:;" class="title flex1">
-                                <h4>{{$lang('B验收中')}}</h4>
+                                <h4>{{$lang('S验收中')}}</h4>
                             </a>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(4).length">
-                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(4)" :key="i" v-show="m.sSubmitAcceptance==0">
+                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(4)" :key="i" v-show="m.sSubmitAcceptance==1">
                                 <div class="flex1">
                                     <div class="box-flex-media-box">
                                         <p class="user-header">
@@ -167,15 +167,15 @@
                             </li>
                         </ul>
                     </li>
-                    <!--S验收中-->
+                    <!--B验收中-->
                     <li class="chart-left-li">
                         <div class="box-flex-media-box cl-top">
                             <a href="javascript:;" class="title flex1">
-                                <h4>{{$lang('S验收中')}}</h4>
+                                <h4>{{$lang('B验收中')}}</h4>
                             </a>
                         </div>
                         <ul class="chose-people-ul" v-if="getChilds(4).length">
-                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(4)" :key="i" v-show="m.sSubmitAcceptance==1">
+                            <li class="chose-people-li box-flex-media-box" v-for="(m,i) in getChilds(4)" :key="i" v-show="m.sSubmitAcceptance==0">
                                 <div class="flex1">
                                     <div class="box-flex-media-box">
                                         <p class="user-header">

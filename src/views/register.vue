@@ -14,7 +14,7 @@
                    <h3 class="main-title">{{$lang('欢迎注册VSWORK成为会员')}}</h3>
                    <div class="lr-form-wrap">
                         <el-form ref="form" :model="form" label-width="20" :rules="rules">
-                            <el-form-item prop=nickName' label=" " required  v-show="userType=='V'">
+                            <el-form-item prop='nickName' label=" " required  v-show="userType=='V'">
                                 <el-input v-model="form.nickName" type="text" :placeholder="$lang('昵称')"></el-input>
                             </el-form-item>
                             <VerifyCode ref="VerifyCode" :phone="form.phone"  :code="form.code" :getData="getData" :parentClass="'reg-wrapper'" :type="'register'" ></VerifyCode>

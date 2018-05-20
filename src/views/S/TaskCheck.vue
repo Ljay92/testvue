@@ -13,7 +13,7 @@
                 <div class="rating-wrap">
                     <div class="star-rating">
                         <div class="star-rating-item" v-for="(tagLable,index) in tagLableArr"
-                             @click="starRating($lang(tagLable.key),index+1)" v-bind:class="{'star-rating-selected': star_num == index+1}">
+                             @click="starRating($lang(tagLable.key),index+1)">
                             <div class="rating-label1">
                                 {{$lang(tagLable.valueExp)}}
                             </div>
@@ -96,8 +96,7 @@
                     </div>
                     <div class="tag-wrap">
                         <button v-for="(tagLable,index) in tagLableArr" :key="tagLable.key" class="tag-button"
-                                @click="tagSelected($lang(tagLable.key),index+1)"
-                                v-bind:class="{'tag-button-selected':star_num == index+1}">{{$lang(tagLable.valueExp)}}
+                                @click="tagSelected($lang(tagLable.key),index+1)">{{$lang(tagLable.valueExp)}}
                         </button>
                     </div>
                     <div class="reject-reason-wrap" v-show="isReject">
@@ -228,7 +227,7 @@
         data() {
             return {
                 submitmsg: $lang('驳回'),
-                star_num: 1, //星级评价的星星个数
+                star_num: 0, 
                 tagLableArr: ["预期差异太大", "颜色太亮", "不想要了，设计师没懂我的想法", "画面太满"],
                 label: "", //选中的评价标签
                 textarea: "",

@@ -507,9 +507,6 @@
                 ue1: "ue1", // 不同编辑器必须不同的id
             };
         },
-        created() {
-
-        },
         async mounted() {
             this.editServicePermissoins = getUserInfo().editServicePermissoins;
             this.pageTypePermissoins = getUserInfo().pageTypePermissoins;
@@ -519,9 +516,6 @@
 
             this.loadinginstace = Loading.service({fullscreen: true});
             const taskDraftList = await subTaskDraftList();
-            console.log("hhahahahhahahahahha");
-
-            console.log(taskDraftList);
             this.draftNameList = taskDraftList.map(item => {
                 return {
                     label: item.templetName,
@@ -529,23 +523,16 @@
                     subtaskId: item.subtaskId
                 };
             });
-            console.log("hhahahahhahahahahha22222");
-
-            console.log(this.draftNameList);
-
-
             const id = this.$route.query.id;
             this.form.taskId = id;
             const res = await getSubTaskParam(id);
             if (res.success) {
-                console.log(123)
-                console.log(res.data.sServiceRate)
                 if (res.data.sServiceRate != null && res.data.sServiceRate.length != 0) {
                     this.form.sServiceRate = res.data.sServiceRate[0];
-                    this.number.one = res.data.sServiceRate[0].substring(2, 3);
-                    this.number.two = res.data.sServiceRate[0].substring(3, 4)
+                    this.number.one = res.data.sServiceRate[0].cnValue.substr(2, 1);
+                    this.number.two = res.data.sServiceRate[0].cnValue.substr(3, 1)==''?'0':res.data.sServiceRate[0].cnValue.substr(3, 1)
                 } else {
-                    this.form.sServiceRate = '0.00';
+                    this.form.sServiceRate = [{cnValue:'0.00'}];
                     this.number.one = '0';
                     this.number.two = '0';
                 }
@@ -562,7 +549,6 @@
                     })
                 };
             });
-            // console.log("mapAtrr", res.data.mapAtrr)//configs.mapAtrr
             this.configs = res.data;
             // this.configs
 
@@ -585,7 +571,10 @@
                     // this.form.taskEndTime=new Date(this.form.taskEndTime);
                     // 为富文本编辑器赋值
                     this.$refs.ue.setUEContent(resc.data.subTask.remarks);
-                    this.form.taskEndTime = new Date(resc.data.subTask.taskEndTime)
+                    this.form.taskEndTime = resc.data.subTask.taskEndTime.length<19?resc.data.subTask.taskEndTime+':00:00':resc.data.subTask.taskEndTime;
+                    // this.form.taskEndTime= '2018-05-21 00:00:00';
+;                    // console.log(this.form.taskEndTime)
+                    // console.log(resc.data.subTask.taskEndTime)
                     // this.form.rangeTime = [
                     //     new Date(resc.data.subTask.entryEndTime),
                     //     new Date(resc.data.subTask.taskEndTime)
@@ -605,10 +594,6 @@
                     }
 
                     this.$refs.tree.setCheckedKeys(resc.data.subTask.chartlatProperty1);
-                    console.log(
-                        "resc.data.subTask.chartlatProperty1",
-                        resc.data.subTask.chartlatProperty1
-                    );
 
                     // if (resc.data.subTask.chartlatFormat) {
                     //     if (resc.data.subTask.chartlatFormat.indexOf(',') > -1) {
@@ -685,13 +670,16 @@
         methods: {
             handleCommandone(command) {
                 this.number.one = command;
-                this.form.sServiceRate = '0.' + command + this.number.two;
-                console.log(this.form.sServiceRate);
+                console.log()
+                this.form.sServiceRate = [{
+                    cnValue:'0.' + command + this.number.two
+                }];
             },
             handleCommandtwo(command) {
                 this.number.two = command;
-                this.form.sServiceRate = '0.' + command + this.number.one;
-                console.log(this.form.sServiceRate)
+                this.form.sServiceRate = [{
+                    cnValue:'0.' + this.number.one + command
+                }];
             },
             // 选中模板
             selectTemplet(id) {
@@ -703,7 +691,6 @@
                 this.isUpdate = true;
                 axios.get(`/subtask/query/${id}`).then(function (response) {
                     const resc = response.data
-                    console.log(resc)
                     if (resc.success) {
                         // this.form.entryEndTime=new Date(this.form.entryEndTime);
                         // this.form.taskEndTime=new Date(this.form.taskEndTime);
@@ -713,7 +700,7 @@
                         //     new Date(resc.data.subTask.entryEndTime),
                         //
                         // ];
-                        me.form.taskEndTime = new Date(resc.data.subTask.taskEndTime)
+                        me.form.taskEndTime = resc.data.subTask.taskEndTime.length<19?resc.data.subTask.taskEndTime+':00:00':resc.data.subTask.taskEndTime;
                         if (resc.data.subTask.chartlatProperty1) {
                             if (resc.data.subTask.chartlatProperty1.indexOf(",") > -1) {
                                 resc.data.subTask.chartlatProperty1 = resc.data.subTask.chartlatProperty1.split(
@@ -1111,7 +1098,7 @@
                 this.form.remarks = this.$refs.ue.getUEContent();
 
                 this.loadinginstace = Loading.service({fullscreen: true});
-                this.form.taskEndTime=moment(this.form.taskEndTime).format("YYYY-MM-DD HH");
+                this.form.taskEndTime=moment(this.form.taskEndTime).format("YYYY-MM-DD HH:mm:ss");
                 const res = await UpdateChildTask(this.form, this.form.state);
 
                 if (res.success) {
@@ -1129,7 +1116,7 @@
                 this.form.chartlatProperty1 = treenode
                     .filter(node => !node.children)
                     .map(node => node.label);
-                this.form.taskEndTime=moment(this.form.taskEndTime).format("YYYY-MM-DD HH");
+                this.form.taskEndTime=moment(this.form.taskEndTime).format("YYYY-MM-DD HH:mm:ss");
                 if (
                     this.stage.stageName &&
                     this.stage.stageEndTime &&
@@ -1138,12 +1125,12 @@
                     form.taskStages.push({
                         backup: {
                             stageName: this.stage.stageName,
-                            stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD"),
+                            stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD HH"),
                             stageRemarks: this.stage.stageRemarks
                         },
                         editable: false,
                         stageName: this.stage.stageName,
-                        stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD"),
+                        stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD HH"),
                         stageRemarks: this.stage.stageRemarks
                     });
                 }
@@ -1166,7 +1153,7 @@
                 this.form.chartlatProperty1 = treenode
                     .filter(node => !node.children)
                     .map(node => node.label);
-                me.form.taskEndTime=moment(me.form.taskEndTime).format("YYYY-MM-DD HH");
+                me.form.taskEndTime=moment(me.form.taskEndTime).format("YYYY-MM-DD HH:mm:ss");
                 if (
                     this.stage.stageName &&
                     this.stage.stageEndTime &&
@@ -1175,12 +1162,12 @@
                     form.taskStages.push({
                         backup: {
                             stageName: this.stage.stageName,
-                            stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD"),
+                            stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD HH"),
                             stageRemarks: this.stage.stageRemarks
                         },
                         editable: false,
                         stageName: this.stage.stageName,
-                        stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD"),
+                        stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD HH"),
                         stageRemarks: this.stage.stageRemarks
                     });
                 }
@@ -1214,12 +1201,12 @@
                 this.form.taskStages.push({
                     backup: {
                         stageName: this.stage.stageName,
-                        stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD"),
+                        stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD HH"),
                         stageRemarks: this.stage.stageRemarks
                     },
                     editable: false,
                     stageName: this.stage.stageName,
-                    stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD"),
+                    stageEndTime: moment(this.stage.stageEndTime).format("YYYY-MM-DD HH"),
                     stageRemarks: this.stage.stageRemarks
                 });
                 this.stage.stageName = "";

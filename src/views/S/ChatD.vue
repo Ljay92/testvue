@@ -25,8 +25,8 @@
                                 <input type="file" @change="UploadExpandFile" multiple
                                        accept="image/png, image/jpeg, .zip " ref="expandStageFile" hidden/>
                             </el-button>
-                            <el-button size="small" type="info" @click="viewUploadHistory">查看记录</el-button>
-                            <el-button size="small" type="info" @click="viewHistory">查看记录2</el-button>
+                            <!--<el-button size="small" type="info" @click="viewUploadHistory">查看记录</el-button>-->
+                            <el-button size="small" type="info" @click="viewHistory">查看记录</el-button>
                         </div>
                     </li>
 
@@ -929,6 +929,7 @@
                         }
                     })
                     this.uploadHistoryList = arr;
+                    console.log(arr)
                     this.uploadHistoryLoading = false;
 
                     if (res.data.length === 0) {

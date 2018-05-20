@@ -316,8 +316,8 @@ async function removeTask(id) {
 }
 
 //删除组修改
-async function UpdateTime(id, entryEndTime) {
-    const res = await axios.post(`/subtask/updateTime`, JSON.stringify({ id, entryEndTime }));
+async function UpdateTime(id,taskEndTime ) {
+    const res = await axios.post(`/subtask/updateTime`, JSON.stringify({ id, taskEndTime }));
     return res.data;
 }
 // 获取评分
