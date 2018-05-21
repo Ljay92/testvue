@@ -89,6 +89,7 @@
                                                 <img :src="`${m.url}?x-oss-process=image/resize,w_50,h_50`"/>
                                             </p>
                                             <p class="name" style="width:50px;">{{m.projectName}}</p>
+                                            <p style="text-align:center;width:120px;"><CountDown :time="m.payEndTime" type="pay" :id="m.id"></CountDown></p>
                                         </div>
                                     </div>
                                     <div class="moey">
