@@ -201,7 +201,8 @@ export default {
           this.form.bUserInfo.headUrl ||
           "http://vsdata.oss-cn-hangzhou.aliyuncs.com/head.jpg";
         // this.User.firstName = this.form.bUserInfo.nickName || "";
-        if(this.User.bUserType === '1'){
+
+        if(this.form.bUserInfo.bUserType === '1'){
             this.User.firstName = this.form.bUserInfo.nickName || "";
             this.User.secondName = this.form.bUserInfo.name || "";
         } else {
