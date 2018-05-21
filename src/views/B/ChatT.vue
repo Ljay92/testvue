@@ -326,38 +326,58 @@
 
                 <!--点击申请支付后 付款-->
                 <div class="payment-method-wrap">
-                    <div class="box-flex-media-box">
-                        <p class="flex1">{{$lang('付款金额')}}：
-                            <em>{{total}}</em>{{$lang('元')}}</p>
-                        <div class="pm-cz-btn">
-                            <div class="box-flex-media-box">
-                                <!--<el-button type="sure">{{$lang('充值')}}</el-button>-->
-                                <p class="marg-left-10">{{$lang('余额')}}：{{balance}} {{$lang('元')}} </p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="yebz-tips" v-if="cashType == 3 && balance < total">*{{$lang('余额不足请充值。')}}</p>
+                    <!--<div class="box-flex-media-box">-->
+                        <!--<p class="flex1">{{$lang('付款金额')}}：-->
+                            <!--<em>{{total}}</em>{{$lang('元')}}</p>-->
+                        <!--<div class="pm-cz-btn">-->
+                            <!--<div class="box-flex-media-box">-->
+                                <!--&lt;!&ndash;<el-button type="sure">{{$lang('充值')}}</el-button>&ndash;&gt;-->
+                                <!--<p class="marg-left-10">{{$lang('余额')}}：{{balance}} {{$lang('元')}} </p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <p class="yebz-tips" v-if="cashType == 3 && balance < total">*{{$lang('当余额不足时，可以选择余额+支付宝/微信，或者直接选择支付宝、微信支付。')}}</p>
                     <div class="zffs-div">
+                        <el-row>
+                            <el-col :span="24">
+
+                                <div class="zffs-li" :class="yueSelect&&'active'" @click="selectPayYue()">
+                                    <span class="zf-ye">
+                                        <i></i>
+                                    </span>
+                                        <p>{{$lang('余额支付')}}</p>
+                                </div>
+                            </el-col>
+                        </el-row>
+
                         <ul class="clearfix">
-                            <li class="zffs-li" :class="cashType==1&&'active'" @click="cashType=1">
+                            <li class="zffs-li" :class="zfbSelect&&'active'" @click="selectPayZfb()">
                                 <span class="zf-zfb">
                                     <i></i>
                                 </span>
                                 <p>{{$lang('支付宝支付')}}</p>
                             </li>
-                            <li class="zffs-li" :class="cashType==2&&'active'" @click="cashType=2">
-                                <span class="zf-wx">
-                                    <i></i>
-                                </span>
+
+                            <li class="zffs-li" :class="weixinSelect&&'active'" @click="selectPayWeXin()">
+                                    <span class="zf-wx">
+                                        <i></i>
+                                    </span>
                                 <p>{{$lang('微信支付')}}</p>
                             </li>
-                            <li class="zffs-li" :class="cashType==3&&'active'" @click="cashType=3">
-                                <span class="zf-ye">
-                                    <i></i>
-                                </span>
-                                <p>{{$lang('余额支付')}}</p>
-                            </li>
+
                         </ul>
+
+                        <div class="box-flex-media-box">
+                            <p class="flex1 money-color">{{$lang('付款金额')}}：
+                                <em>{{total}}</em>{{$lang('元')}}</p>
+                            <div class="pm-cz-btn">
+                                <div class="box-flex-media-box">
+                                    <!--<el-button type="sure">{{$lang('充值')}}</el-button>-->
+                                    <p class="marg-left-10">{{$lang('余额')}}：{{balance}} {{$lang('元')}} </p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="payment-btn-wrap">
                         <el-button type="sure" @click="toPay">{{$lang('付款')}}</el-button>
@@ -382,7 +402,6 @@
                     <td>任务名称</td>
                     <td>V端佣金</td>
                     <td>S端服务费</td>
-                    <td>平台服务</td>
                     <td>任务详情</td>
                     <td>小计</td>
                 </tr>
@@ -442,6 +461,9 @@
     .offer-form-table tr > td:last-child {
         border-right: none;
     }
+    .money-color{
+        color:#161f40;
+    }
 </style>
 
 <script>
@@ -477,7 +499,10 @@
                 acceptancemsg:$lang('验收中'),
                 zhifuIds: [],
                 payDialogVisible: false, //去支付
-                cashType: 1,
+                cashType: 3,
+                yueSelect:true,
+                zfbSelect:false,
+                weixinSelect:false,
                 total: 0,
                 balance: 0, //余额
                 orderId: "",
@@ -584,6 +609,16 @@
                 //                    alert(res.msg)
                 //                })
                 const me = this;
+
+                if(!me.yueSelect && !me.weixinSelect && !me.zfbSelect){
+                    me.$message("请选择支付方式");
+                    return;
+                }
+                if(me.cashType == 4 || me.cashType == 5){
+                    if(me.balance >= me.total){
+                        me.cashType = 3;
+                    }
+                }
                 if (me.cashType == 3) {
                     //余额支付
                     if (me.balance < me.total) {
@@ -594,7 +629,7 @@
                         .$confirm(`确定用余额支付${me.total}元？`)
                         .then(async data => {
                             if (data == "confirm") {
-                                const data = await balancePay({orderId: me.orderId});
+                                const data = await balancePay({orderId: me.orderId, payType:3});
                                 //                        console.log(data);
                                 if (data.success) {
                                     me.$message("操作成功");
@@ -609,26 +644,27 @@
                         .catch(data => {
                         });
                 }
-                if (me.cashType == 1) {
+                if (me.cashType == 2 || me.cashType == 5) {
                     //支付宝支付
                     const alipayData = await getAliapyInfo({
                         outTradeNo: me.orderId,
                         subject: "子订单选择支付：" + me.orderId,
                         totalFee: me.total,
-                        body: `1&&${location.href}`
+                        body: `1&&${location.href}`,
+                        payType: me.cashType
                     });
                     let div = document.createElement("div");
                     div.innerHTML = alipayData.data;
                     document.body.appendChild(div);
                     document.forms["alipaysubmit"].submit();
                 }
-                if (me.cashType == 2) {
+                if (me.cashType == 1 || me.cashType == 4) {
                     //微信支付
                     //                'http://api.vswork.com/api/wxpay/createOrder?orderId=170730202640d04e4c198f8226b11c&attach=1'
                     //                'http://api.vswork.com/api/wxpay/createOrder?orderId=170730202813d7563f411c8b26b11c&attach=1'
                     me.WXPayImgShow = true;
                     me.WXImgSrc = `${axios.defaults
-                        .baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1`;
+                        .baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1&payType=${me.cashType}`;
                     me.WXPaying = true;
                     me.WXPayTimes = setInterval(me.queryWXPayState, 5000);
                 }
@@ -686,6 +722,60 @@
                     .catch(data => {
                     });
             },
+            selectPayYue(){
+                this.yueSelect = !this.yueSelect;
+                if(this.yueSelect){
+                    if(this.zfbSelect){
+                        this.cashType = 5;
+                    } else if(this.weixinSelect){
+                        this.cashType = 4;
+                    } else {
+                        this.cashType = 3;
+                    }
+                } else {
+                    if(this.zfbSelect){
+                        this.cashType = 2;
+                    } else if(this.weixinSelect){
+                        this.cashType = 1;
+                    }
+                }
+            },
+            selectPayZfb(){
+                this.zfbSelect = !this.zfbSelect;
+                if(this.yueSelect){
+                    if(this.zfbSelect){
+                        this.cashType = 5;
+                    } else if(this.weixinSelect){
+                        this.cashType = 4;
+                    } else {
+                        this.cashType = 3;
+                    }
+                } else {
+                    if(this.zfbSelect){
+                        this.cashType = 2;
+                    } else if(this.weixinSelect){
+                        this.cashType = 1;
+                    }
+                }
+            },
+            selectPayWeXin(){
+                this.weixinSelect = !this.weixinSelect;
+                if(this.yueSelect){
+                    if(this.zfbSelect){
+                        this.cashType = 5;
+                    } else if(this.weixinSelect){
+                        this.cashType = 4;
+                    } else {
+                        this.cashType = 3;
+                    }
+                } else {
+                    if(this.zfbSelect){
+                        this.cashType = 2;
+                    } else if(this.weixinSelect){
+                        this.cashType = 1;
+                    }
+                }
+            },
             async openPayDialog (state) {
 
                 this.payLoading = true;
@@ -709,7 +799,7 @@
                     me.balance = moneyData.data.money;
                 }
                 me.orderId = data.data.orderId;
-                me.total = data.data.total;
+                me.total = data.data.total ;
 
                 if (this.parentId == null) me.payDialogVisible = true;
                 else location.reload();

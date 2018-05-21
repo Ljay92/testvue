@@ -133,6 +133,10 @@
                                         <p class="name">{{m.projectName}}</p>
                                     </div>
                                 </div>
+
+                                <el-button  type="sure" @click="openModifyEndTimeDialog()">申请修改结束时间</el-button>
+
+
                                 <a href="javascript:;" class="more"
                                    @click="$router.push({name:'S_ChatD',query: { id: m.id }})">{{$lang('查看')}}&gt;</a>&nbsp;&nbsp;&nbsp;
                                 <a href="javascript:;" class="more"
@@ -373,6 +377,11 @@
         </el-dialog>
         <SlideBtns :type="'back'"></SlideBtns>
 
+        <!--<el-dialog :title="$lang('申请修改结束时间')" size="tiny" :visible.sync="dialog.modifyEndTime.show">-->
+            <!--<el-date-picker type="datetime" v-model="dialog.modifyEndTime.form.time" :placeholder="$lang('请选择时间')" format='yyyy-MM-dd HH:mm:ss' style="width:100%">-->
+            <!--</el-date-picker>-->
+        <!--</el-dialog>-->
+
         <el-dialog :title="$lang('申请退款')" size="tiny" :visible.sync="dialog.applyRefund.show">
             <el-form :model="dialog.applyRefund.form" :rules="dialog.applyRefund.rules" ref="form">
                 <el-form-item :label="$lang('百分比：')" prop="percent">
@@ -518,6 +527,12 @@
                 chatConfig: {},
 
                 dialog: {
+                    modifyEndTime:{
+                        show: false,
+                        form: {
+                            time: null
+                        },
+                    },
                     applyRefund: {
                         show: false,
                         form: {
@@ -770,6 +785,10 @@
                 });
 
                 this.offerFormDialogVisible = true;
+            },
+
+            openModifyEndTimeDialog (){
+                this.dialog.modifyEndTime.show = true;
             },
             downloadExcel () {
                 taskDownloadExcel({task_id:this.taskInfo.id,state:this.currentExcelState}).then(res => {
