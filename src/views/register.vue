@@ -112,6 +112,7 @@ export default {
         password: this.form.password1,
         userType: this.userType,
         code: this.form.code,
+          nickName: this.form.nickName,
         type: "register"
       };
       const res = await Register(param);

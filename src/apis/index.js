@@ -10,7 +10,7 @@ async function Login({ phone, password }) {
     return res.data;
 }
 //注册
-async function Register({ phone, password, userType, code, type }) {
+async function Register({ phone, password, userType, code, type ,nickName}) {
     //var base = new Base64();
     password = encode(password);
     //alert(result);
@@ -20,12 +20,14 @@ async function Register({ phone, password, userType, code, type }) {
         userType: userType,
         code: code,
         type: type,
+        nickName:nickName,
         headUrl: 'http://vsdata.oss-cn-hangzhou.aliyuncs.com/head.jpg'
     }
     const res = await axios.post("/user/register", JSON.stringify(param))
     return res.data;
 }
 async function UpdateForgetPwd({ phone, password, type, code }) {
+    password = encode(password);
     const res = await axios.post("/user/updateForgetPwd", JSON.stringify({ phone, password, type, code }));
     return res.data
 }

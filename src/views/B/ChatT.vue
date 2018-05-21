@@ -687,6 +687,7 @@
                     });
             },
             async openPayDialog (state) {
+
                 this.payLoading = true;
                 const me = this;
                 if (me.zhifuIds.length == 0) {

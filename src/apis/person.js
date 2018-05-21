@@ -103,6 +103,7 @@ async function GetChildListB() {
 //B端新增子账号
 //bUserType:1表示 子发包商(一个总账户有多个1) 2表示财务(一个总账户1个2)
 async function AddChildB({ nickName, bUserType, password, phone, phoneCode }) {
+    password = encode(password);
     const res = await axios.post(`/user/addChild`, JSON.stringify({ nickName, bUserType, password, phone, phoneCode }))
     return res.data;
 }
@@ -118,6 +119,7 @@ async function editChildB({ nickName, id, phone, phoneCode }) {
 }
 //修改子账户密码
 async function resetChildPwd({ id, password }) {
+    password = encode(password);
     const res = await axios.post(`/user/resetChildPwd`, JSON.stringify({ id, password }))
     return res.data
 
@@ -154,6 +156,60 @@ async function delHistory(id) {
     const res = await axios.post(`workCollection/delete`, JSON.stringify({ id }))
     return res.data
 }
+
+
+
+// private property
+var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+// public method for encoding
+function encode(input) {
+    var output = "";
+    var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+    var i = 0;
+    input = _utf8_encode(input);
+    while (i < input.length) {
+        chr1 = input.charCodeAt(i++);
+        chr2 = input.charCodeAt(i++);
+        chr3 = input.charCodeAt(i++);
+        enc1 = chr1 >> 2;
+        enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+        enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+        enc4 = chr3 & 63;
+        if (isNaN(chr2)) {
+            enc3 = enc4 = 64;
+        } else if (isNaN(chr3)) {
+            enc4 = 64;
+        }
+        output = output +
+            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
+            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
+    }
+    return output;
+}
+
+
+// private method for UTF-8 encoding
+function _utf8_encode(string) {
+    string = string.replace(/\r\n/g,"\n");
+    var utftext = "";
+    for (var n = 0; n < string.length; n++) {
+        var c = string.charCodeAt(n);
+        if (c < 128) {
+            utftext += String.fromCharCode(c);
+        } else if((c > 127) && (c < 2048)) {
+            utftext += String.fromCharCode((c >> 6) | 192);
+            utftext += String.fromCharCode((c & 63) | 128);
+        } else {
+            utftext += String.fromCharCode((c >> 12) | 224);
+            utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+            utftext += String.fromCharCode((c & 63) | 128);
+        }
+
+    }
+    return utftext;
+}
+
 
 export {
     UserList,
