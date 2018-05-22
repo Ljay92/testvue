@@ -478,8 +478,7 @@
                 this.changestate = !this.changestate;
             },
             selectfile(i){
-                this.changestate = this.changestate;
-                console.log(1)
+                this.changestate = false;
                 if(i==1){
                     this.submitstate = 'final';
                     this.filesname='最终文件';

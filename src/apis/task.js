@@ -242,13 +242,13 @@ async function AcceptanceTask(id,acceptanceType) {
     return res.data;
 }
 //完成验收任务
-async function AccomplishTask(id,label) {
-    const res = await axios.post(`/subtask/accomplishTask`, JSON.stringify({ id,label }))
+async function AccomplishTask(id,key,labelkey) {
+    const res = await axios.post(`/subtask/accomplishTask`, JSON.stringify({ id,key,labelkey}))
     return res.data;
 }
 //驳回验收任务
-async function OverruleTask(id, remarks,label) {
-    const res = await axios.post(`/subtask/overruleTask`, JSON.stringify({ id, remarks ,label}))
+async function OverruleTask(id, remarks,key) {
+    const res = await axios.post(`/subtask/overruleTask`, JSON.stringify({ id, remarks ,key}))
     return res.data;
 }
 //banner列表

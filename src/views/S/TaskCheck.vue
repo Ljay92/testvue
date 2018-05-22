@@ -12,91 +12,18 @@
                 <h3 class="main-title">{{$lang('星级评价')}}</h3>
                 <div class="rating-wrap">
                     <div class="star-rating">
-                        <div class="star-rating-item" v-for="(tagLable,index) in tagLableArr"
-                             @click="starRating($lang(tagLable.key),index+1)">
-                            <div class="rating-label1">
-                                {{$lang(tagLable.valueExp)}}
-                            </div>
+                        <div class="star-rating-item" v-for="(tagLable,index) in tagLableArr" v-bind:class="{'star-rating-selected': key === tagLable.key}" @click="starRating($lang(tagLable.key),index+1)">
+                            <div class="rating-label1">{{$lang(tagLable.valueExp)}}</div>
                             <div class="rating-label2">
                       <span class="star-img">
                         <img src="/static/img/star-off.png" v-for="i in index+1">
                       </span>
                             </div>
                         </div>
-                        <!--<div class="star-rating-item" @click="starRating(2)" v-bind:class="{'star-rating-selected': star_num === 2}">-->
-                        <!--<div class="rating-label1">-->
-                        <!--不满意-->
-                        <!--</div>-->
-                        <!--<div class="rating-label2">-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="star-rating-item" @click="starRating(3)" v-bind:class="{'star-rating-selected': star_num === 3}">-->
-                        <!--<div class="rating-label1">-->
-                        <!--合格-->
-                        <!--</div>-->
-                        <!--<div class="rating-label2">-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="star-rating-item" @click="starRating(4)" v-bind:class="{'star-rating-selected': star_num === 4}">-->
-                        <!--<div class="rating-label1">-->
-                        <!--基本满意-->
-                        <!--</div>-->
-                        <!--<div class="rating-label2">-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="star-rating-item rating-item-last" @click="starRating(5)" v-bind:class="{'star-rating-selected': star_num === 5}">-->
-                        <!--<div class="rating-label1">-->
-                        <!--十分满意-->
-                        <!--</div>-->
-                        <!--<div class="rating-label2">-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--<span class="star-img">-->
-                        <!--<img src="/static/img/star-off.png">-->
-                        <!--</span>-->
-                        <!--</div>-->
-                        <!--</div>-->
                     </div>
                     <div class="tag-wrap">
-                        <button v-for="(tagLable,index) in tagLableArr" :key="tagLable.key" class="tag-button"
-                                @click="tagSelected($lang(tagLable.key),index+1)">{{$lang(tagLable.valueExp)}}
+                        <button v-for="(label) in intagLableArr" :key="label.key" class="tag-button"
+                                @click="tagSelected(label.key)" v-bind:class="{'tag-button-selected':labelkey.indexOf(label.key)>-1}">{{$lang(label.value)}}
                         </button>
                     </div>
                     <div class="reject-reason-wrap" v-show="isReject">
@@ -227,9 +154,11 @@
         data() {
             return {
                 submitmsg: $lang('驳回'),
-                star_num: 0, 
-                tagLableArr: ["预期差异太大", "颜色太亮", "不想要了，设计师没懂我的想法", "画面太满"],
-                label: "", //选中的评价标签
+                tagLableArr: [],
+                intagLableArr: [],
+                tagLableSelected:'',
+                labelkey:[],
+                key: "", //评分key
                 textarea: "",
                 isReject: false,
                 iframeSrc: ""
@@ -253,12 +182,25 @@
 
             let res = await getReasonParam('s_user');
             this.tagLableArr = res.data.score;
-            this.label = res.data.score[0].key;
+            for (let i = 0; i < res.data.score.length; i++) {
+                for (let j = 0; j < res.data.score[i].list.length; j++) {
+                    this.intagLableArr.push({
+                        value: res.data.score[i].list[j].valueExp,
+                        key: res.data.score[i].key
+                    })
+                }
+            }
+            this.tagLableArr = this.tagLableArr.reverse()
+            this.intagLableArr = this.intagLableArr.reverse()
         },
         methods: {
             async toPass() {
+                if(this.key==''){
+                    this.$message.warning($lang("请选择评分"));
+                    return false;
+                }
                 const id = this.$route.query.id;
-                const res = await AccomplishTask(id,this.label);
+                const res = await AccomplishTask(id, this.key,this.labelkey);
                 this.$message({
                     message: res.msg,
                     type: res.success ? "success" : "error",
@@ -273,11 +215,11 @@
                 let that = this;
                 if (that.isReject) {
                     const id = this.$route.query.id;
-                    if (this.textarea=='') {
+                    if (this.textarea == '') {
                         this.$message.warning($lang("驳回内容不可为空"));
                         return;
                     }
-                    const res = await OverruleTask(id, this.textarea,this.label);
+                    const res = await OverruleTask(id, this.textarea, this.key);
                     this.$message({
                         message: res.msg,
                         type: res.success ? "success" : "error",
@@ -300,16 +242,18 @@
                 ).call(iframe);
             },
             //评价星星个数
-            starRating(id,star_num) {
+            starRating(key, star_num) {
                 const t = this;
-                t.label=id;
-                t.star_num = star_num;
+                t.key = key;
             },
             //评价标签
-            tagSelected(id, index) {
-                const t = this;
-                t.star_num = index;
-                t.label=id;
+            tagSelected(key) {
+                const index = this.labelkey.indexOf(key);
+                if(index>-1){
+                    this.labelkey.splice(index, 1);
+                }else{
+                    this.labelkey.push(key);
+                }
             }
         }
     };
