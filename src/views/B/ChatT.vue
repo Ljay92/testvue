@@ -146,6 +146,8 @@
                                     </div>
                                 </div>
                                 <a href="javascript:;" class="more"
+                                   @click="checkTime">{{$lang('时间变更审核')}}&gt;</a>
+                                <a href="javascript:;" class="more"
                                    @click="$router.push({name:'B_ChatD',query: { id: m.id, taskId:m.taskId }})">{{$lang('查看')}}&gt;</a>
                             </li>
                         </ul>
@@ -432,6 +434,16 @@
         </el-dialog>
 
         <payDialog :payDialogstatus="payDialogVisible" :orderId="orderIdstr"  :orderprice="total" @status="changestatus"></payDialog>
+        <el-dialog title="时间变更审核"
+                :visible.sync="checkTimestatus"
+                width="30%"
+                center>
+            <span>确认同意变更时间吗？</span>
+            <span slot="footer" class="dialog-footer">
+    <el-button @click="checkTimestatus = false">驳回</el-button>
+    <el-button type="primary" @click="checkAgree">同意</el-button>
+  </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -564,7 +576,8 @@
                 offerList: [],
                 offerTotal: 0,
                 // 当前报价单的状态类型
-                currentExcelState: ''
+                currentExcelState: '',
+                checkTimestatus:false
             };
         },
         async mounted () {
@@ -640,6 +653,12 @@
             }
         },
         methods: {
+            checkTime(){
+                this.checkTimestatus=true
+            },
+            async checkAgree(){
+                me.$message("缺少接口");
+            },
             changestatus(msg) {
                 this.payDialogVisible = msg;
             },
