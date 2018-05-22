@@ -229,7 +229,7 @@
             return {
                 submitmsg: $lang('驳回'),
                 star_num: 1, //星级评价的星星个数
-                tagLableArr: ["预期差异太大", "颜色太亮", "不想要了，设计师没懂我的想法", "画面太满"],
+                tagLableArr: [""],
                 label: "", //选中的评价标签
                 textarea: "",
                 isReject: false,

@@ -571,82 +571,87 @@
             </span>
         </el-dialog>
 
-        <el-dialog title="支付" :visible.sync="payDialogVisible" size="tiny" :before-close="payDialogClose">
-            <div class="pay-dialog-wrap">
-                <hr style="border-top:1px dashed #000">
-                <!--点击申请支付后 付款-->
-                <div class="payment-method-wrap" style="width:80%;margin:0 auto;">
-                    <!--<p class="yebz-tips" v-if="payDialogCashType == 3 && totalMoney < payDialogTotal">-->
-                        <!--*{{$lang('余额不足请充值。')}}</p>-->
-                    <div class="zffs-div">
-                        <p style="line-height:30px;font-size:16px;">默认选择支付</p>
-                        <ul class="clearfix" style="margin-top:-10px;">
-                            <li class="zffs-li" :class="payDialogCashType==3?'active':''" @click="yepay">
-                                <span class="zf-ye">
-                                    <i></i>
-                                </span>
-                                <p>{{$lang('余额支付')}}</p>
-                            </li>
-                        </ul>
-                        <div style="text-align: center;font-size:16px;margin-bottom:10px;">{{$lang('余额')}}：{{totalMoney}} 元</div>
-                        <p class="yebz-tips">*余额不足时，可以选择余额+支付宝/微信支付，或者直接支付宝、微信支付</p>
-                        <ul class="clearfix">
-                            <li class="zffs-li" :class="paystatus==2||paystatus==5?'active':''" @click="zfbpay">
-                                <span class="zf-zfb">
-                                    <i></i>
-                                </span>
-                                <p>{{$lang('支付宝支付')}}</p>
-                            </li>
-                            <li class="zffs-li" :class="paystatus==1||paystatus==4?'active':''" @click="wxpay">
-                                <span class="zf-wx">
-                                    <i></i>
-                                </span>
-                                <p>{{$lang('微信支付')}}</p>
-                            </li>
-                        </ul>
-                        <div style="font-size:16px;">付款金额：<span style="color:deepskyblue">{{payDialogTotal}}</span><span style="font-size:12px;">元</span>（{{paymsg}}）</div>
-                    </div>
-                    <div class="payment-btn-wrap">
-                        <el-button type="sure" @click="payDialogCashTypeToPay">{{$lang('付款')}}</el-button>
-                    </div>
-                </div>
-            </div>
-        </el-dialog>
-
+        <!--<el-dialog title="支付" :visible.sync="payDialogVisible" size="tiny" :before-close="payDialogClose">-->
+        <!--<div class="pay-dialog-wrap">-->
+        <!--<hr style="border-top:1px dashed #000">-->
+        <!--&lt;!&ndash;点击申请支付后 付款&ndash;&gt;-->
+        <!--<div class="payment-method-wrap" style="width:80%;margin:0 auto;">-->
+        <!--&lt;!&ndash;<p class="yebz-tips" v-if="payDialogCashType == 3 && totalMoney < payDialogTotal">&ndash;&gt;-->
+        <!--&lt;!&ndash;*{{$lang('余额不足请充值。')}}</p>&ndash;&gt;-->
+        <!--<div class="zffs-div">-->
+        <!--<p style="line-height:30px;font-size:16px;">默认选择支付</p>-->
+        <!--<ul class="clearfix" style="margin-top:-10px;">-->
+        <!--<li class="zffs-li" :class="payDialogCashType==3?'active':''" @click="yepay">-->
+        <!--<span class="zf-ye">-->
+        <!--<i></i>-->
+        <!--</span>-->
+        <!--<p>{{$lang('余额支付')}}</p>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--<div style="text-align: center;font-size:16px;margin-bottom:10px;">{{$lang('余额')}}：{{totalMoney}} 元</div>-->
+        <!--<p class="yebz-tips">*余额不足时，可以选择余额+支付宝/微信支付，或者直接支付宝、微信支付</p>-->
+        <!--<ul class="clearfix">-->
+        <!--<li class="zffs-li" :class="paystatus==2||paystatus==5?'active':''" @click="zfbpay">-->
+        <!--<span class="zf-zfb">-->
+        <!--<i></i>-->
+        <!--</span>-->
+        <!--<p>{{$lang('支付宝支付')}}</p>-->
+        <!--</li>-->
+        <!--<li class="zffs-li" :class="paystatus==1||paystatus==4?'active':''" @click="wxpay">-->
+        <!--<span class="zf-wx">-->
+        <!--<i></i>-->
+        <!--</span>-->
+        <!--<p>{{$lang('微信支付')}}</p>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--<div style="font-size:16px;">付款金额：<span style="color:deepskyblue">{{payDialogTotal}}</span><span style="font-size:12px;">元</span>（{{paymsg}}）</div>-->
+        <!--</div>-->
+        <!--<div class="payment-btn-wrap">-->
+        <!--<el-button type="sure" @click="payDialogCashTypeToPay">{{$lang('付款')}}</el-button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</el-dialog>-->
+        <payDialog :payDialogstatus="payDialogVisible" :orderidArr="orderidArr"  :orderprice="payDialogTotal" @status="changestatus"></payDialog>
     </div>
 </template>
 <style>
-    .el-dialog--tiny{
-        width:44%;
+    .el-dialog--tiny {
+        width: 44%;
     }
-    .el-dialog__header{
-        text-align:center;
-        position:relative;
-        line-height:30px;
-        margin-bottom:10px;
+
+    .el-dialog__header {
+        text-align: center;
+        position: relative;
+        line-height: 30px;
+        margin-bottom: 10px;
     }
-    .el-dialog__headerbtn{
-        background:red;
-        width:30px;
-        height:30px;
-        text-align:center;
-        line-height:30px;
-        border-radius:50%;
+
+    .el-dialog__headerbtn {
+        background: red;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 50%;
         transform: scale(0.6);
-        position:absolute;
-        right:5px;
-        top:5px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
     }
-    .el-dialog__headerbtn .el-dialog__close{
-        font-size:9px;
-        color:#fff;
-        display:block;
+
+    .el-dialog__headerbtn .el-dialog__close {
+        font-size: 9px;
+        color: #fff;
+        display: block;
     }
-    .el-dialog__body{
-        padding-top:0;
+
+    .el-dialog__body {
+        padding-top: 0;
     }
 </style>
 <script>
+    import payDialog from '@/components/paydialog';
     import {
         addRecharge,
         getAliapyInfo,
@@ -663,10 +668,11 @@
     import axios from "axios";
 
     export default {
+        components: {payDialog},
         data() {
             return {
-                paymsg:'',
-                paystatus:3,
+                paymsg: '',
+                paystatus: 3,
                 userId: "",
                 loading1: false,
                 loading2: false,
@@ -678,6 +684,7 @@
                 billIndex: 1, //账单页tab
                 chargeType: 1, //充值方式
                 cashType: 1, //提现方式
+                orderidArr:[],
                 chargeForm: {money: ""},
                 cashForm: {
                     withdrawalsMoney: "",
@@ -774,55 +781,57 @@
             const state = me.$route.query.state; //加个页面状态，1：充值成功返回
         },
         methods: {
-            yepay(){
-                console.log(this.paystatus)
-                if(this.paystatus==3){
-                    this.payDialogCashType=''
-                    this.paystatus=''
-                    this.paymsg='请选择支付类型';
-                }else{
-                    this.payDialogCashType=3
-                    this.paystatus=3
-                    if(this.payDialogTotal>this.totalMoney){
-                        this.paymsg='余额：'+this.totalMoney+'元，请在选择补充支付类型';
-                    }else{
-                        this.paymsg='余额：'+this.payDialogTotal+'元';
+            changestatus(msg) {
+                this.payDialogVisible = msg;
+            },
+            yepay() {
+                if (this.paystatus == 3) {
+                    this.payDialogCashType = ''
+                    this.paystatus = ''
+                    this.paymsg = '请选择支付类型';
+                } else {
+                    this.payDialogCashType = 3
+                    this.paystatus = 3
+                    if (this.payDialogTotal > this.totalMoney) {
+                        this.paymsg = '余额：' + this.totalMoney + '元，请在选择补充支付类型';
+                    } else {
+                        this.paymsg = '余额：' + this.payDialogTotal + '元';
                     }
                 }
             },
-            wxpay(){
-                if(this.payDialogCashType==3){
-                    if(this.payDialogTotal>this.totalMoney){
-                        this.paystatus=4;
-                        this.paymsg='余额：'+this.totalMoney+'元、微信：'+(this.payDialogTotal-this.totalMoney)+'元';
-                    }else{
+            wxpay() {
+                if (this.payDialogCashType == 3) {
+                    if (this.payDialogTotal > this.totalMoney) {
+                        this.paystatus = 4;
+                        this.paymsg = '余额：' + this.totalMoney + '元、微信：' + (this.payDialogTotal - this.totalMoney) + '元';
+                    } else {
                         this.$message.error('您的余额足够支付。');
                     }
-                }else if(this.payDialogCashType==''){
-                    if(this.paystatus==1) {
-                        this.paystatus='';
-                        this.paymsg='请选择支付类型';
-                    }else{
+                } else if (this.payDialogCashType == '') {
+                    if (this.paystatus == 1) {
+                        this.paystatus = '';
+                        this.paymsg = '请选择支付类型';
+                    } else {
                         this.paystatus = 1;
                         this.paymsg = '微信：' + this.payDialogTotal + '元';
                     }
                 }
             },
-            zfbpay(){
-                if(this.payDialogCashType==3){
-                    if(this.payDialogTotal>this.totalMoney){
-                        this.paystatus=5;
-                        this.paymsg='余额：'+this.payDialogTotal+'元、支付宝：'+(this.payDialogTotal-this.totalMoney)+'元';
-                    }else{
+            zfbpay() {
+                if (this.payDialogCashType == 3) {
+                    if (this.payDialogTotal > this.totalMoney) {
+                        this.paystatus = 5;
+                        this.paymsg = '余额：' + this.payDialogTotal + '元、支付宝：' + (this.payDialogTotal - this.totalMoney) + '元';
+                    } else {
                         this.$message.error('您的余额足够支付。');
                     }
-                }else if(this.payDialogCashType==''){
-                    if(this.paystatus==2){
-                        this.paystatus='';
-                        this.paymsg='请选择支付类型';
-                    }else{
-                        this.paystatus=2;
-                        this.paymsg='支付宝：'+this.payDialogTotal+'元';
+                } else if (this.payDialogCashType == '') {
+                    if (this.paystatus == 2) {
+                        this.paystatus = '';
+                        this.paymsg = '请选择支付类型';
+                    } else {
+                        this.paystatus = 2;
+                        this.paymsg = '支付宝：' + this.payDialogTotal + '元';
                     }
                 }
             },
@@ -1212,15 +1221,11 @@
             },
             toPayRecordOrder(orderId, total) {
                 const me = this;
+                me.orderidArr=[orderId]
                 //                const orderData = await checkByOrderId({orderId, type: 1});
                 me.payDialogVisible = true;
                 me.orderId = orderId;
                 me.payDialogTotal = total;
-                if(total>me.totalMoney){
-                    me.paymsg = '余额：'+me.totalMoney+'元,请在选择补充支付类型'
-                }else{
-                    me.paymsg = '余额：'+total+'元'
-                }
                 //                console.log(orderData);
             },
             async payDialogCashTypeToPay() {
@@ -1275,9 +1280,9 @@
                     me.WXPaying = true;
                     me.WXPayTimes = setInterval(me.queryWXPayState, 5000);
                 }
-                if(me.paystatus == 4){
+                if (me.paystatus == 4) {
                     me
-                        .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付")+(me.payDialogTotal-me.totalMoney)+'元')
+                        .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付") + (me.payDialogTotal - me.totalMoney) + '元')
                         .then(async data => {
                             if (data == "confirm") {
                                 const data = await balancePay({orderId: res.data.orderId});
@@ -1301,9 +1306,9 @@
                         .catch(data => {
                         });
                 }
-                if(me.paystatus == 5){
+                if (me.paystatus == 5) {
                     me
-                        .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付")+(me.payDialogTotal-me.totalMoney)+'元')
+                        .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付") + (me.payDialogTotal - me.totalMoney) + '元')
                         .then(async data => {
                             if (data == "confirm") {
                                 const data = await balancePay({orderId: res.data.orderId});

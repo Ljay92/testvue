@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3c24b301-9432-4a0a-b9e3-abdc9c773e28" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/apis/task.js" afterPath="$PROJECT_DIR$/src/apis/task.js" />
-      <change beforePath="$PROJECT_DIR$/src/views/S/ChatD.vue" afterPath="$PROJECT_DIR$/src/views/S/ChatD.vue" />
-      <change beforePath="$PROJECT_DIR$/src/views/S/ChatT.vue" afterPath="$PROJECT_DIR$/src/views/S/ChatT.vue" />
-      <change beforePath="$PROJECT_DIR$/src/views/S/SdCutTask.vue" afterPath="$PROJECT_DIR$/src/views/S/SdCutTask.vue" />
+      <change beforePath="$PROJECT_DIR$/src/views/B/TaskCheck.vue" afterPath="$PROJECT_DIR$/src/views/B/TaskCheck.vue" />
+      <change beforePath="$PROJECT_DIR$/src/views/B/user/bagInfo.vue" afterPath="$PROJECT_DIR$/src/views/B/user/bagInfo.vue" />
       <change beforePath="$PROJECT_DIR$/src/views/S/TaskCheck.vue" afterPath="$PROJECT_DIR$/src/views/S/TaskCheck.vue" />
-      <change beforePath="$PROJECT_DIR$/src/views/S/taskhistory.vue" afterPath="$PROJECT_DIR$/src/views/S/taskhistory.vue" />
-      <change beforePath="$PROJECT_DIR$/src/views/S/toEdit.vue" afterPath="$PROJECT_DIR$/src/views/S/toEdit.vue" />
-      <change beforePath="$PROJECT_DIR$/src/views/register.vue" afterPath="$PROJECT_DIR$/src/views/register.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,119 +22,92 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="74" column="45" lean-forward="false" selection-start-line="74" selection-start-column="45" selection-end-line="74" selection-end-column="45" />
+            <state relative-caret-position="5880">
+              <caret line="285" column="5" lean-forward="true" selection-start-line="285" selection-start-column="5" selection-end-line="285" selection-end-column="5" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#72#119#0" expanded="true" />
-                <element signature="e#1084#1117#0" expanded="true" />
-                <element signature="e#1262#1305#0" expanded="true" />
-                <element signature="e#4817#4856#0" expanded="true" />
+                <element signature="e#477#1077#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SdCutTask.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/S/SdCutTask.vue">
+      <file leaf-file-name="TaskCheck.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/B/TaskCheck.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="1100" column="97" lean-forward="false" selection-start-line="1100" selection-start-column="38" selection-end-line="1100" selection-end-column="97" />
+            <state relative-caret-position="-3155">
+              <caret line="109" column="34" lean-forward="false" selection-start-line="109" selection-start-column="34" selection-end-line="109" selection-end-column="34" />
               <folding>
-                <element signature="n#el-row#0;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#el-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#!!top" expanded="false" />
+                <element signature="e#8765#8838#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="task.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/apis/task.js">
+      <file leaf-file-name="bagInfo.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/B/user/bagInfo.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2138">
-              <caret line="318" column="40" lean-forward="false" selection-start-line="318" selection-start-column="40" selection-end-line="318" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskCheck.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/views/S/TaskCheck.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="229" column="29" lean-forward="true" selection-start-line="229" selection-start-column="29" selection-end-line="229" selection-end-column="29" />
+            <state relative-caret-position="-575">
+              <caret line="1227" column="42" lean-forward="false" selection-start-line="1227" selection-start-column="42" selection-end-line="1227" selection-end-column="42" />
               <folding>
                 <element signature="n#style#0;n#!!top" expanded="false" />
+                <element signature="e#37115#37162#0" expanded="true" />
+                <marker date="1526983170287" expanded="false" signature="35123:35176" ph="..." />
+                <marker date="1526983170287" expanded="false" signature="35865:35880" ph="..." />
+                <marker date="1526983170287" expanded="false" signature="35900:35917" ph="..." />
+                <marker date="1526983170287" expanded="false" signature="35957:35972" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="toEdit.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/S/toEdit.vue">
+      <file leaf-file-name="paydialog.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/paydialog.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="152" column="51" lean-forward="false" selection-start-line="152" selection-start-column="51" selection-end-line="152" selection-end-column="51" />
+            <state relative-caret-position="475">
+              <caret line="204" column="52" lean-forward="true" selection-start-line="204" selection-start-column="52" selection-end-line="204" selection-end-column="52" />
+              <folding>
+                <element signature="n#style#0;n#hr#0;n#div#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#div#1;n#div#0;n#div#0;n#div#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#2463#2667#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="countdown.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/countdown.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="960">
+              <caret line="51" column="53" lean-forward="true" selection-start-line="51" selection-start-column="53" selection-end-line="51" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="ChatT.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/S/ChatT.vue">
+        <entry file="file://$PROJECT_DIR$/src/views/B/ChatT.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="9" column="93" lean-forward="true" selection-start-line="9" selection-start-column="93" selection-end-line="9" selection-end-column="93" />
+            <state relative-caret-position="1153">
+              <caret line="635" column="60" lean-forward="true" selection-start-line="635" selection-start-column="60" selection-end-line="635" selection-end-column="60" />
               <folding>
-                <element signature="n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#li#4;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#li#7;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#li#8;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#li#9;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#0;n#el-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#!!top" expanded="false" />
-                <element signature="e#25847#27983#0" expanded="false" />
-                <element signature="e#28342#30521#0" expanded="false" />
+                <element signature="n#style#0;n#p#2;n#div#0;n#div#1;n#li#0;n#el-checkbox-group#0;n#ul#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#el-dialog#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#el-dialog#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#el-dialog#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#25902#25939#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChatD.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/S/ChatD.vue">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="28" column="101" lean-forward="true" selection-start-line="28" selection-start-column="101" selection-end-line="28" selection-end-column="101" />
-              <folding>
-                <element signature="n#style#0;n#el-row#0;n#div#0;n#el-dialog#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#el-col#0;n#el-row#0;n#div#0;n#el-dialog#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#!!top" expanded="false" />
-                <element signature="e#24368#24437#0" expanded="false" />
-                <element signature="e#33588#33628#0" expanded="false" />
-                <element signature="e#36194#36976#0" expanded="false" />
-                <element signature="e#37022#37487#0" expanded="false" />
-                <element signature="e#37510#40254#0" expanded="false" />
-                <element signature="e#40302#41873#0" expanded="false" />
-                <element signature="e#42875#44525#0" expanded="false" />
-                <marker date="1526804650167" expanded="false" signature="14463:14478" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="taskhistory.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/S/taskhistory.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="11" column="49" lean-forward="true" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-              <folding>
-                <element signature="n#style#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#template#0;n#el-table-column#2;n#el-table#0;n#el-row#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#2042#2082#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="180">
+              <caret line="12" column="55" lean-forward="true" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -155,36 +123,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>entryEndTime</find>
-      <find>EndTime</find>
-      <find>getChilds(4)</find>
-      <find>check</find>
-      <find>tagSelected</find>
-      <find>评价</find>
-      <find>OverruleTask</find>
-      <find>rejectReason</find>
-      <find>tagLableSelected</find>
-      <find>iframeSrc</find>
-      <find>starRating</find>
-      <find>toPass</find>
-      <find>getSubTaskParam</find>
-      <find>AccomplishTask</find>
-      <find>验收中</find>
-      <find>return</find>
-      <find>console.log</find>
-      <find>task</find>
-      <find>form.sServiceRate</find>
-      <find>form</find>
-      <find>updateTask</find>
-      <find>截止时间</find>
-      <find>stageEndTime</find>
-      <find>number.two</find>
-      <find>viewUploadHistory</find>
-      <find>taskEndTime</find>
-      <find>UpdateTime</find>
-      <find>moment</find>
-      <find>handleCommandone</find>
-      <find>uploadHistoryList</find>
+      <find>payDialogCashType</find>
+      <find>yepay</find>
+      <find>paystatus</find>
+      <find>zfbpay</find>
+      <find>payDialogCashTypeToPay</find>
+      <find>balancePay</find>
+      <find>getUser</find>
+      <find>queryWXPayState</find>
+      <find>getAliapyInfo</find>
+      <find>checkByOrderId</find>
+      <find>recharge</find>
+      <find>chargeType</find>
+      <find>WXPayOrderId</find>
+      <find>payDialogClose</find>
+      <find>payDialog</find>
+      <find>payDialogVisible</find>
+      <find>orderList</find>
+      <find>待支付</find>
+      <find>totalMoney</find>
+      <find>moneyData</find>
+      <find>getTotalMoney</find>
+      <find>getMoney</find>
+      <find>bill</find>
+      <find>billTable21</find>
+      <find>toPayRecordOrder</find>
+      <find>_orderIdarr</find>
+      <find>orderIdarr</find>
+      <find>_orderidArr</find>
+      <find>payDialogTotal</find>
+      <find>payDialogOrderId</find>
     </findStrings>
     <dirStrings>
       <dir>G:\vue\testvue\src\views\V</dir>
@@ -212,12 +180,9 @@
         <option value="$PROJECT_DIR$/src/apis/money.js" />
         <option value="$PROJECT_DIR$/src/views/S/user/financeInfo.vue" />
         <option value="$PROJECT_DIR$/src/assets/css/other.css" />
-        <option value="$PROJECT_DIR$/src/views/B/user/bagInfo.vue" />
         <option value="$PROJECT_DIR$/src/components/TsInfo.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
-        <option value="$PROJECT_DIR$/src/views/B/ChatT.vue" />
         <option value="$PROJECT_DIR$/src/views/B/ChatD.vue" />
-        <option value="$PROJECT_DIR$/src/views/B/TaskCheck.vue" />
         <option value="$PROJECT_DIR$/src/views/register.vue" />
         <option value="$PROJECT_DIR$/src/views/S/ChatT.vue" />
         <option value="$PROJECT_DIR$/src/apis/task.js" />
@@ -226,6 +191,10 @@
         <option value="$PROJECT_DIR$/src/views/S/taskhistory.vue" />
         <option value="$PROJECT_DIR$/src/views/S/ChatD.vue" />
         <option value="$PROJECT_DIR$/src/views/S/TaskCheck.vue" />
+        <option value="$PROJECT_DIR$/src/views/B/TaskCheck.vue" />
+        <option value="$PROJECT_DIR$/src/views/B/ChatT.vue" />
+        <option value="$PROJECT_DIR$/src/views/B/user/bagInfo.vue" />
+        <option value="$PROJECT_DIR$/src/components/paydialog.vue" />
       </list>
     </option>
   </component>
@@ -299,20 +268,24 @@
             <path>
               <item name="testvue" type="b2602c69:ProjectViewProjectNode" />
               <item name="testvue" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testvue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testvue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="testvue" type="b2602c69:ProjectViewProjectNode" />
               <item name="testvue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="testvue" type="b2602c69:ProjectViewProjectNode" />
               <item name="testvue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="S" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -403,11 +376,14 @@
       <workItem from="1526720409480" duration="1561000" />
       <workItem from="1526726798872" duration="8674000" />
       <workItem from="1526795519857" duration="9194000" />
+      <workItem from="1526882680663" duration="153000" />
+      <workItem from="1526885600966" duration="924000" />
+      <workItem from="1526952219351" duration="21993000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170289000" />
+    <option name="totallyTimeSpent" value="193359000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -422,16 +398,16 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1721225" sideWeight="0.36486486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1721225" sideWeight="0.35472974" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5042239" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1721225" sideWeight="0.6351351" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1721225" sideWeight="0.6452703" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3385475" sideWeight="0.49577615" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.49788806" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3385475" sideWeight="0.49577615" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -458,25 +434,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="68" column="24" lean-forward="true" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/V/detail.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="10" column="38" lean-forward="true" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/modocker/modocker.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -530,12 +492,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="125" column="34" lean-forward="false" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
-          <folding>
-            <element signature="e#23913#25523#0" expanded="false" />
-            <element signature="e#25561#31024#0" expanded="false" />
-            <element signature="e#31074#31612#0" expanded="false" />
-            <marker date="1526283171628" expanded="false" signature="13117:13132" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -655,7 +611,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="18" column="55" lean-forward="true" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="73" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -680,25 +635,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/countdown.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="51" column="53" lean-forward="true" selection-start-line="51" selection-start-column="53" selection-end-line="51" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/B/user/bagInfo.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="1294" column="76" lean-forward="false" selection-start-line="1294" selection-start-column="76" selection-end-line="1294" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/apis/money.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="35" column="1" lean-forward="false" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -734,9 +674,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-44">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#25#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -754,17 +691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="74" column="58" lean-forward="false" selection-start-line="74" selection-start-column="58" selection-end-line="74" selection-end-column="58" />
-          <folding>
-            <element signature="e#10477#12328#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/B/ChatT.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="177" column="54" lean-forward="true" selection-start-line="177" selection-start-column="54" selection-end-line="177" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -772,56 +698,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="19" column="177" lean-forward="true" selection-start-line="19" selection-start-column="177" selection-end-line="19" selection-end-column="177" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/B/TaskCheck.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
-          <caret line="242" column="17" lean-forward="false" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="74" column="45" lean-forward="false" selection-start-line="74" selection-start-column="45" selection-end-line="74" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#72#119#0" expanded="true" />
-            <element signature="e#1084#1117#0" expanded="true" />
-            <element signature="e#1262#1305#0" expanded="true" />
-            <element signature="e#4817#4856#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/apis/task.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2138">
+        <state relative-caret-position="9510">
           <caret line="318" column="40" lean-forward="false" selection-start-line="318" selection-start-column="40" selection-end-line="318" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/S/toEdit.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/S/ChatD.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="152" column="51" lean-forward="false" selection-start-line="152" selection-start-column="51" selection-end-line="152" selection-end-column="51" />
-          <folding />
+        <state relative-caret-position="840">
+          <caret line="28" column="101" lean-forward="true" selection-start-line="28" selection-start-column="101" selection-end-line="28" selection-end-column="101" />
+          <folding>
+            <element signature="n#style#0;n#el-row#0;n#div#0;n#el-dialog#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#el-col#0;n#el-row#0;n#div#0;n#el-dialog#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#!!top" expanded="false" />
+            <element signature="e#24368#24437#0" expanded="false" />
+            <element signature="e#33588#33628#0" expanded="false" />
+            <element signature="e#36194#36976#0" expanded="false" />
+            <element signature="e#37022#37487#0" expanded="false" />
+            <element signature="e#37510#40254#0" expanded="false" />
+            <element signature="e#40302#41873#0" expanded="false" />
+            <element signature="e#42875#44525#0" expanded="false" />
+            <marker date="1526804650167" expanded="false" signature="14463:14478" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/S/SdCutTask.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/S/taskhistory.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="1100" column="97" lean-forward="false" selection-start-line="1100" selection-start-column="38" selection-end-line="1100" selection-end-column="97" />
+        <state relative-caret-position="330">
+          <caret line="11" column="49" lean-forward="true" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
           <folding>
-            <element signature="n#el-row#0;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#el-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#template#0;n#el-table-column#2;n#el-table#0;n#el-row#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#2042#2082#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/S/TaskCheck.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="274" column="52" lean-forward="false" selection-start-line="274" selection-start-column="52" selection-end-line="274" selection-end-column="52" />
+          <folding>
             <element signature="n#style#0;n#!!top" expanded="false" />
           </folding>
         </state>
@@ -840,50 +764,108 @@
             <element signature="n#li#9;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#div#1;n#div#0;n#el-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#!!top" expanded="false" />
-            <element signature="e#25847#27983#0" expanded="false" />
-            <element signature="e#28342#30521#0" expanded="false" />
+            <element signature="e#26307#28637#0" expanded="false" />
+            <element signature="e#28996#31175#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/S/ChatD.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/S/toEdit.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="28" column="101" lean-forward="true" selection-start-line="28" selection-start-column="101" selection-end-line="28" selection-end-column="101" />
+        <state relative-caret-position="478">
+          <caret line="152" column="51" lean-forward="false" selection-start-line="152" selection-start-column="51" selection-end-line="152" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/S/SdCutTask.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="1100" column="97" lean-forward="false" selection-start-line="1100" selection-start-column="38" selection-end-line="1100" selection-end-column="97" />
           <folding>
-            <element signature="n#style#0;n#el-row#0;n#div#0;n#el-dialog#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-col#0;n#el-row#0;n#div#0;n#el-dialog#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#el-row#0;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#el-form#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#el-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#!!top" expanded="false" />
-            <element signature="e#24368#24437#0" expanded="false" />
-            <element signature="e#33588#33628#0" expanded="false" />
-            <element signature="e#36194#36976#0" expanded="false" />
-            <element signature="e#37022#37487#0" expanded="false" />
-            <element signature="e#37510#40254#0" expanded="false" />
-            <element signature="e#40302#41873#0" expanded="false" />
-            <element signature="e#42875#44525#0" expanded="false" />
-            <marker date="1526804650167" expanded="false" signature="14463:14478" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/S/taskhistory.vue">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="11" column="49" lean-forward="true" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
+        <state relative-caret-position="180">
+          <caret line="12" column="55" lean-forward="true" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/B/ChatT.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1153">
+          <caret line="635" column="60" lean-forward="true" selection-start-line="635" selection-start-column="60" selection-end-line="635" selection-end-column="60" />
           <folding>
-            <element signature="n#style#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#template#0;n#el-table-column#2;n#el-table#0;n#el-row#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#2042#2082#0" expanded="true" />
+            <element signature="n#style#0;n#p#2;n#div#0;n#div#1;n#li#0;n#el-checkbox-group#0;n#ul#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#el-dialog#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#el-dialog#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#el-dialog#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#25902#25939#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/S/TaskCheck.vue">
+    <entry file="file://$PROJECT_DIR$/src/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="229" column="29" lean-forward="true" selection-start-line="229" selection-start-column="29" selection-end-line="229" selection-end-column="29" />
+        <state relative-caret-position="5880">
+          <caret line="285" column="5" lean-forward="true" selection-start-line="285" selection-start-column="5" selection-end-line="285" selection-end-column="5" />
+          <folding>
+            <element signature="e#477#1077#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/B/TaskCheck.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3155">
+          <caret line="109" column="34" lean-forward="false" selection-start-line="109" selection-start-column="34" selection-end-line="109" selection-end-column="34" />
+          <folding>
+            <element signature="e#8765#8838#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/countdown.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="51" column="53" lean-forward="true" selection-start-line="51" selection-start-column="53" selection-end-line="51" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/B/user/bagInfo.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-575">
+          <caret line="1227" column="42" lean-forward="false" selection-start-line="1227" selection-start-column="42" selection-end-line="1227" selection-end-column="42" />
           <folding>
             <element signature="n#style#0;n#!!top" expanded="false" />
+            <element signature="e#37115#37162#0" expanded="true" />
+            <marker date="1526983170287" expanded="false" signature="35123:35176" ph="..." />
+            <marker date="1526983170287" expanded="false" signature="35865:35880" ph="..." />
+            <marker date="1526983170287" expanded="false" signature="35900:35917" ph="..." />
+            <marker date="1526983170287" expanded="false" signature="35957:35972" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/paydialog.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="204" column="52" lean-forward="true" selection-start-line="204" selection-start-column="52" selection-end-line="204" selection-end-column="52" />
+          <folding>
+            <element signature="n#style#0;n#hr#0;n#div#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#div#1;n#div#0;n#div#0;n#div#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#2463#2667#0" expanded="true" />
           </folding>
         </state>
       </provider>

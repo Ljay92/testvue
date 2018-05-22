@@ -258,7 +258,6 @@
         methods: {
             async toPass() {
                 const id = this.$route.query.id;
-                console.log(this.label)
                 const res = await AccomplishTask(id,this.label);
                 this.$message({
                     message: res.msg,
@@ -274,7 +273,6 @@
                 let that = this;
                 if (that.isReject) {
                     const id = this.$route.query.id;
-                    console.log(this.textarea)
                     if (this.textarea=='') {
                         this.$message.warning($lang("驳回内容不可为空"));
                         return;
