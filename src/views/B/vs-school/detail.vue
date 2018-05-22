@@ -8,9 +8,8 @@
                     <div class="prd-center-search_main">
                         <el-form label-width="90px">
                             <el-form-item :label="$lang('操作:')">
-                                <el-button :type="item.checked?'sure':'dir'" v-for="(item, i) in operateTypes"
-                                           @click="handleLabelClick(operateTypes,i)"
-                                           :key="i">{{item.name}}
+                                <el-button type="dir" v-for="(item, i) in operateTypes"
+                                           :key="i">{{item.valueExp}}
                                 </el-button>
                             </el-form-item>
                         </el-form>
@@ -21,7 +20,7 @@
             <div class="content-container">
                 <video class="video-container"
                        width="100%"
-                       src="http://pgccdn.v.baidu.com/1210560493_3087179974_20170419102015.mp4?authorization=bce-auth-v1%2Fc308a72e7b874edd9115e4614e1d62f6%2F2017-04-19T02%3A20%3A21Z%2F-1%2F%2F2ca5576a1e04e558cc8b5bb38cb7bbd7be04600a7088ab5d5ac5150f6f300340&responseCacheControl=max-age%3D8640000&responseExpires=Fri%2C+28+Jul+2017+10%3A20%3A21+GMT&xcode=48dd840cbde3b2d51a478385f648c4724e79ae8c0dcb2cf1&time=1524226647&_=1524140551361"
+                       :src="currentData.url"
                        controls="controls">
                     您的浏览器不支持 video 标签。
                 </video>
@@ -32,17 +31,7 @@
                             {{activeCollapse[0]&&(activeCollapse[0] === '1')?'收起':'展开'}}
                         </template>
 
-                        <div class="describe">
-                            你好，世界！就爱上咖啡就爱上了咖啡就爱上了咖啡就爱上了咖啡机撒可富举案说法举案说法就爱上了房间爱上了房间发生就开了房间爱上了咖啡就爱上房间卡萨规划是两个哈建设路口嘎斯建了个
-                        </div>
-
-                        <div class="describe">
-                            你好，世界！就爱上咖啡就爱上了咖啡就爱上了咖啡就爱上了咖啡机撒可富举案说法举案说法就爱上了房间爱上了房间发生就开了房间爱上了咖啡就爱上房间卡萨规划是两个哈建设路口嘎斯建了个
-                        </div>
-
-                        <div class="describe">
-                            你好，世界！就爱上咖啡就爱上了咖啡就爱上了咖啡就爱上了咖啡机撒可富举案说法举案说法就爱上了房间爱上了房间发生就开了房间爱上了咖啡就爱上房间卡萨规划是两个哈建设路口嘎斯建了个
-                        </div>
+                        <div v-html="currentData.info"></div>
                     </el-collapse-item>
                 </el-collapse>
             </div>
@@ -51,24 +40,26 @@
 </template>
 
 <script>
+    import {vsSchoolDetail} from '@/apis/vsSchool';
+
     export default {
         name: "vs-school-detail",
         data () {
             return {
                 // 操作类型
                 operateTypes: [],
-                activeCollapse: ['1']
+                activeCollapse: ['1'],
+                currentData: {}
             }
         },
-        mounted () {
+        async mounted () {
+            let data = await vsSchoolDetail(this.$route.query.id);
+
+            console.log('data', data);
 
             // 获取操作类型数据
-            this.operateTypes = [
-                {name: '操作一', checked: false},
-                {name: '操作二', checked: false},
-                {name: '操作三', checked: false},
-                {name: '操作四', checked: false},
-                {name: '操作五', checked: false}];
+            this.operateTypes = data.data.label;
+            this.currentData = data.data.vssschool;
 
         },
         methods: {
