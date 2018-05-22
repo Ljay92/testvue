@@ -78,8 +78,8 @@
             payDialogstatus: {
                 type: Boolean
             },
-            orderidArr: {
-                type: Array
+            orderId: {
+                type:String
             },
             orderprice: {
                 type: Number
@@ -104,6 +104,7 @@
                     }
                 }
             },
+            // 余额支付按钮
             yepay() {
                 if (this.paystatus == 3) {
                     this.payDialogCashType = ''
@@ -119,6 +120,7 @@
                     }
                 }
             },
+            // 支付宝支付按钮
             zfbpay() {
                 if (this.payDialogCashType == 3) {
                     if (this.orderprice > this.totalMoney) {
@@ -137,6 +139,7 @@
                     }
                 }
             },
+            // 微信支付按钮
             wxpay() {
                 if (this.payDialogCashType == 3) {
                     if (this.orderprice > this.totalMoney) {
@@ -222,19 +225,6 @@
                         });
                 }
                 if (me.paystatus == 1) {
-                    //支付宝支付
-                    const alipayData = await getAliapyInfo({
-                        outTradeNo: res.data.orderId,
-                        subject: $lang("订单支付：") + res.data.orderId,
-                        totalFee: res.data.total,
-                        body: `1&&${location.href}`
-                    });
-                    let div = document.createElement("div");
-                    div.innerHTML = alipayData.data;
-                    document.body.appendChild(div);
-                    document.forms["alipaysubmit"].submit();
-                }
-                if (me.paystatus == 2) {
                     //微信支付
                     me.WXPayImgShow = true;
                     me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${res
@@ -268,19 +258,37 @@
                         .catch(data => {
                         });
                 }
+                if (me.paystatus == 2) {
+                    //支付宝支付
+                    const alipayData = await getAliapyInfo({
+                        outTradeNo: res.data.orderId,
+                        subject: $lang("订单支付：") + res.data.orderId,
+                        totalFee: res.data.total,
+                        body: `1&&${location.href}`
+                    });
+                    let div = document.createElement("div");
+                    div.innerHTML = alipayData.data;
+                    document.body.appendChild(div);
+                    document.forms["alipaysubmit"].submit();
+                }
                 if (me.paystatus == 5) {
                     me
-                        .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付") + parseFloat(me.orderprice - me.totalMoney).toFixed(2) + '元')
+                        .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，支付宝支付") + parseFloat(me.orderprice - me.totalMoney).toFixed(2) + '元')
                         .then(async data => {
                             if (data == "confirm") {
                                 const data = await balancePay({orderId: res.data.orderId});
                                 if (data.success) {
-                                    me.$message($lang("操作成功"));
-                                    me.WXPayImgShow = true;
-                                    me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${res
-                                        .data.orderId}&attach=1`;
-                                    me.WXPaying = true;
-                                    me.WXPayTimes = setInterval(me.queryWXPayState, 5000);
+                                    //支付宝支付
+                                    const alipayData = await getAliapyInfo({
+                                        outTradeNo: res.data.orderId,
+                                        subject: $lang("订单支付：") + res.data.orderId,
+                                        totalFee: res.data.total,
+                                        body: `1&&${location.href}`
+                                    });
+                                    let div = document.createElement("div");
+                                    div.innerHTML = alipayData.data;
+                                    document.body.appendChild(div);
+                                    document.forms["alipaysubmit"].submit();
                                 } else {
                                     me.$message.error(data.msg);
                                 }

@@ -289,102 +289,102 @@
             <div class="chart-msg">{{msg}}</div>
         </div>
         <!--去支付弹层-->
-        <el-dialog :title="$lang('支付')" :visible.sync="payDialogVisible" size="tiny" :before-close="payDialogClose">
-            <div class="pay-dialog-wrap">
-                <!--申请支付-->
-                <div class="apply-payment-wrap" style="display:none;">
-                    <div class="apply-people-wrap">
-                        <h4 class="title-h4-dig">{{$lang('确定任务')}}：</h4>
-                        <div class="apply-pay-people">
-                            <div class="box-flex-media-box">
-                                <p class="user-header">
-                                    <img src="../../assets/images/user-header.png"/>
-                                </p>
-                                <p class="name">{{$lang('呵呵哈哈')}}</p>
-                            </div>
-                            <div class="box-flex-media-box">
-                                <p class="user-header">
-                                    <img src="../../assets/images/user-header.png"/>
-                                </p>
-                                <p class="name">{{$lang('呵呵哈哈')}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="money-num">
-                        <p>{{$lang('付款金额')}}：
-                            <em>2000</em>{{$lang('元')}}</p>
-                    </div>
-
-                    <!--申请付款 和 已发起付款 两种选择-->
-                    <div class="fqfk-wrap">
-                        <span>{{$lang('已发起付款')}}</span>
-                    </div>
-                    <div class="payment-btn-wrap">
-                        <el-button type="sure">{{$lang('申请支付')}}</el-button>
-                    </div>
-                </div>
-
-                <!--点击申请支付后 付款-->
-                <div class="payment-method-wrap">
-                    <!--<div class="box-flex-media-box">-->
-                        <!--<p class="flex1">{{$lang('付款金额')}}：-->
-                            <!--<em>{{total}}</em>{{$lang('元')}}</p>-->
-                        <!--<div class="pm-cz-btn">-->
+        <!--<el-dialog :title="$lang('支付')" :visible.sync="payDialogVisible" size="tiny" :before-close="payDialogClose">-->
+            <!--<div class="pay-dialog-wrap">-->
+                <!--&lt;!&ndash;申请支付&ndash;&gt;-->
+                <!--<div class="apply-payment-wrap" style="display:none;">-->
+                    <!--<div class="apply-people-wrap">-->
+                        <!--<h4 class="title-h4-dig">{{$lang('确定任务')}}：</h4>-->
+                        <!--<div class="apply-pay-people">-->
                             <!--<div class="box-flex-media-box">-->
-                                <!--&lt;!&ndash;<el-button type="sure">{{$lang('充值')}}</el-button>&ndash;&gt;-->
-                                <!--<p class="marg-left-10">{{$lang('余额')}}：{{balance}} {{$lang('元')}} </p>-->
+                                <!--<p class="user-header">-->
+                                    <!--<img src="../../assets/images/user-header.png"/>-->
+                                <!--</p>-->
+                                <!--<p class="name">{{$lang('呵呵哈哈')}}</p>-->
+                            <!--</div>-->
+                            <!--<div class="box-flex-media-box">-->
+                                <!--<p class="user-header">-->
+                                    <!--<img src="../../assets/images/user-header.png"/>-->
+                                <!--</p>-->
+                                <!--<p class="name">{{$lang('呵呵哈哈')}}</p>-->
                             <!--</div>-->
                         <!--</div>-->
                     <!--</div>-->
-                    <p class="yebz-tips" v-if="cashType == 3 && balance < total">*{{$lang('当余额不足时，可以选择余额+支付宝/微信，或者直接选择支付宝、微信支付。')}}</p>
-                    <div class="zffs-div">
-                        <el-row>
-                            <el-col :span="24">
+                    <!--<div class="money-num">-->
+                        <!--<p>{{$lang('付款金额')}}：-->
+                            <!--<em>2000</em>{{$lang('元')}}</p>-->
+                    <!--</div>-->
 
-                                <div class="zffs-li" :class="yueSelect&&'active'" @click="selectPayYue()">
-                                    <span class="zf-ye">
-                                        <i></i>
-                                    </span>
-                                        <p>{{$lang('余额支付')}}</p>
-                                </div>
-                            </el-col>
-                        </el-row>
+                    <!--&lt;!&ndash;申请付款 和 已发起付款 两种选择&ndash;&gt;-->
+                    <!--<div class="fqfk-wrap">-->
+                        <!--<span>{{$lang('已发起付款')}}</span>-->
+                    <!--</div>-->
+                    <!--<div class="payment-btn-wrap">-->
+                        <!--<el-button type="sure">{{$lang('申请支付')}}</el-button>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-                        <ul class="clearfix">
-                            <li class="zffs-li" :class="zfbSelect&&'active'" @click="selectPayZfb()">
-                                <span class="zf-zfb">
-                                    <i></i>
-                                </span>
-                                <p>{{$lang('支付宝支付')}}</p>
-                            </li>
+                <!--&lt;!&ndash;点击申请支付后 付款&ndash;&gt;-->
+                <!--<div class="payment-method-wrap">-->
+                    <!--&lt;!&ndash;<div class="box-flex-media-box">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<p class="flex1">{{$lang('付款金额')}}：&ndash;&gt;-->
+                            <!--&lt;!&ndash;<em>{{total}}</em>{{$lang('元')}}</p>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="pm-cz-btn">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="box-flex-media-box">&ndash;&gt;-->
+                                <!--&lt;!&ndash;&lt;!&ndash;<el-button type="sure">{{$lang('充值')}}</el-button>&ndash;&gt;&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p class="marg-left-10">{{$lang('余额')}}：{{balance}} {{$lang('元')}} </p>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--<p class="yebz-tips" v-if="cashType == 3 && balance < total">*{{$lang('当余额不足时，可以选择余额+支付宝/微信，或者直接选择支付宝、微信支付。')}}</p>-->
+                    <!--<div class="zffs-div">-->
+                        <!--<el-row>-->
+                            <!--<el-col :span="24">-->
 
-                            <li class="zffs-li" :class="weixinSelect&&'active'" @click="selectPayWeXin()">
-                                    <span class="zf-wx">
-                                        <i></i>
-                                    </span>
-                                <p>{{$lang('微信支付')}}</p>
-                            </li>
+                                <!--<div class="zffs-li" :class="yueSelect&&'active'" @click="selectPayYue()">-->
+                                    <!--<span class="zf-ye">-->
+                                        <!--<i></i>-->
+                                    <!--</span>-->
+                                        <!--<p>{{$lang('余额支付')}}</p>-->
+                                <!--</div>-->
+                            <!--</el-col>-->
+                        <!--</el-row>-->
 
-                        </ul>
+                        <!--<ul class="clearfix">-->
+                            <!--<li class="zffs-li" :class="zfbSelect&&'active'" @click="selectPayZfb()">-->
+                                <!--<span class="zf-zfb">-->
+                                    <!--<i></i>-->
+                                <!--</span>-->
+                                <!--<p>{{$lang('支付宝支付')}}</p>-->
+                            <!--</li>-->
 
-                        <div class="box-flex-media-box">
-                            <p class="flex1 money-color">{{$lang('付款金额')}}：
-                                <em>{{total}}</em>{{$lang('元')}}</p>
-                            <div class="pm-cz-btn">
-                                <div class="box-flex-media-box">
-                                    <!--<el-button type="sure">{{$lang('充值')}}</el-button>-->
-                                    <p class="marg-left-10">{{$lang('余额')}}：{{balance}} {{$lang('元')}} </p>
-                                </div>
-                            </div>
-                        </div>
+                            <!--<li class="zffs-li" :class="weixinSelect&&'active'" @click="selectPayWeXin()">-->
+                                    <!--<span class="zf-wx">-->
+                                        <!--<i></i>-->
+                                    <!--</span>-->
+                                <!--<p>{{$lang('微信支付')}}</p>-->
+                            <!--</li>-->
 
-                    </div>
-                    <div class="payment-btn-wrap">
-                        <el-button type="sure" @click="toPay">{{$lang('付款')}}</el-button>
-                    </div>
-                </div>
-            </div>
-        </el-dialog>
+                        <!--</ul>-->
+
+                        <!--<div class="box-flex-media-box">-->
+                            <!--<p class="flex1 money-color">{{$lang('付款金额')}}：-->
+                                <!--<em>{{total}}</em>{{$lang('元')}}</p>-->
+                            <!--<div class="pm-cz-btn">-->
+                                <!--<div class="box-flex-media-box">-->
+                                    <!--&lt;!&ndash;<el-button type="sure">{{$lang('充值')}}</el-button>&ndash;&gt;-->
+                                    <!--<p class="marg-left-10">{{$lang('余额')}}：{{balance}} {{$lang('元')}} </p>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                    <!--<div class="payment-btn-wrap">-->
+                        <!--<el-button type="sure" @click="toPay">{{$lang('付款')}}</el-button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</el-dialog>-->
         <el-dialog :title="$lang('微信支付二维码')" ref="WXImg" :visible.sync="WXPayImgShow" size="tiny"
                    :before-close="WXPayImgClose">
             <div v-if="WXPaying" style="text-align: center">
@@ -430,6 +430,8 @@
                 <el-button @click="downloadExcel" type="sure">导出EXCEL</el-button>
             </div>
         </el-dialog>
+
+        <payDialog :payDialogstatus="payDialogVisible" :orderId="orderIdstr"  :orderprice="total" @status="changestatus"></payDialog>
     </div>
 </template>
 
@@ -464,12 +466,46 @@
     .money-color{
         color:#161f40;
     }
+    .el-dialog--tiny {
+        width: 44%;
+    }
+
+    .el-dialog__header {
+        text-align: center;
+        position: relative;
+        line-height: 30px;
+        margin-bottom: 10px;
+    }
+
+    .el-dialog__headerbtn {
+        background: red;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 50%;
+        transform: scale(0.6);
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+
+    .el-dialog__headerbtn .el-dialog__close {
+        font-size: 9px;
+        color: #fff;
+        display: block;
+    }
+
+    .el-dialog__body {
+        padding-top: 0;
+    }
 </style>
 
 <script>
     import Chat from "@/components/Chat";
     import SlideBtns from "@/components/SlideBtns";
     import CountDown from "@/components/countdown";
+    import payDialog from '@/components/paydialog';
     import {
         ChildTaskList,
         ChildTaskState,
@@ -493,10 +529,11 @@
     import {getUser} from "@/apis/storage";
 
     export default {
-        components: {Chat, SlideBtns,CountDown},
+        components: {Chat, SlideBtns,CountDown,payDialog},
         data () {
             return {
                 acceptancemsg:$lang('验收中'),
+                orderIdstr:'',
                 zhifuIds: [],
                 payDialogVisible: false, //去支付
                 cashType: 3,
@@ -603,6 +640,9 @@
             }
         },
         methods: {
+            changestatus(msg) {
+                this.payDialogVisible = msg;
+            },
             async toPay () {
                 //                const id = this.zhifuIds[0];
                 //                PayChildTask(id).then((res) => {
@@ -782,27 +822,31 @@
                 const me = this;
                 if (me.zhifuIds.length == 0) {
                     me.$message("选择为空");
+                    this.payLoading = false;
                     return;
                 }
                 const subtaskId = me.zhifuIds.join(",");
                 const data = await addOrder({subtaskId});
                 if (!data.success) {
                     me.$message({type: "error", message: data.msg});
+                    this.payLoading = false;
                     return false;
                 }
-                this.payLoading = false;
                 //获取余额
                 const userId = getUser().userId;
                 const moneyData = await getMoney({userId});
-                console.log(moneyData);
                 if (moneyData.success) {
                     me.balance = moneyData.data.money;
                 }
                 me.orderId = data.data.orderId;
                 me.total = data.data.total ;
+                me.orderIdstr=data.data.orderId;
 
-                if (this.parentId == null) me.payDialogVisible = true;
-                else location.reload();
+                if (this.parentId == null) {
+                    me.payDialogVisible = true;
+                } else {
+                    location.reload();
+                }
             },
             toRedirectT () {
                 let id = this.$route.query.id;

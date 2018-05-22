@@ -612,7 +612,7 @@
         <!--</div>-->
         <!--</div>-->
         <!--</el-dialog>-->
-        <payDialog :payDialogstatus="payDialogVisible" :orderidArr="orderidArr"  :orderprice="payDialogTotal" @status="changestatus"></payDialog>
+        <payDialog :payDialogstatus="payDialogVisible" :orderId="orderIdstr"  :orderprice="payDialogTotal" @status="changestatus"></payDialog>
     </div>
 </template>
 <style>
@@ -684,7 +684,7 @@
                 billIndex: 1, //账单页tab
                 chargeType: 1, //充值方式
                 cashType: 1, //提现方式
-                orderidArr:[],
+                orderIdstr:'',
                 chargeForm: {money: ""},
                 cashForm: {
                     withdrawalsMoney: "",
@@ -1221,7 +1221,7 @@
             },
             toPayRecordOrder(orderId, total) {
                 const me = this;
-                me.orderidArr=[orderId]
+                me.orderIdstr=orderId
                 //                const orderData = await checkByOrderId({orderId, type: 1});
                 me.payDialogVisible = true;
                 me.orderId = orderId;
