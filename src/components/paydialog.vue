@@ -237,22 +237,29 @@
                         .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付") + parseFloat(me.orderprice - me.totalMoney).toFixed(2) + '元')
                         .then(async data => {
                             if (data == "confirm") {
-                                const data = await balancePay({orderId: res.data.orderId, payType:me.paystatus});
-                                if (data.success) {
-                                    me.$message($lang("操作成功"));
-                                    const alipayData = await getAliapyInfo({
-                                        outTradeNo: res.data.orderId,
-                                        subject: $lang("订单支付：") + res.data.orderId,
-                                        totalFee: res.data.total,
-                                        body: `1&&${location.href}`
-                                    });
-                                    let div = document.createElement("div");
-                                    div.innerHTML = alipayData.data;
-                                    document.body.appendChild(div);
-                                    document.forms["alipaysubmit"].submit();
-                                } else {
-                                    me.$message.error(data.msg);
-                                }
+                                //微信支付
+                                me.WXPayImgShow = true;
+                                me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${res
+                                    .data.orderId}&attach=1&payType=${me.paystatus}`;
+                                me.WXPaying = true;
+                                me.WXPayTimes = setInterval(me.queryWXPayState, 5000);
+
+                                // const data = await balancePay({orderId: res.data.orderId, payType:me.paystatus});
+                                // if (data.success) {
+                                //     me.$message($lang("操作成功"));
+                                //     const alipayData = await getAliapyInfo({
+                                //         outTradeNo: res.data.orderId,
+                                //         subject: $lang("订单支付：") + res.data.orderId,
+                                //         totalFee: res.data.total,
+                                //         body: `1&&${location.href}`
+                                //     });
+                                //     let div = document.createElement("div");
+                                //     div.innerHTML = alipayData.data;
+                                //     document.body.appendChild(div);
+                                //     document.forms["alipaysubmit"].submit();
+                                // } else {
+                                //     me.$message.error(data.msg);
+                                // }
                             }
                         })
                         .catch(data => {
@@ -277,8 +284,8 @@
                         .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，支付宝支付") + parseFloat(me.orderprice - me.totalMoney).toFixed(2) + '元')
                         .then(async data => {
                             if (data == "confirm") {
-                                const data = await balancePay({orderId: res.data.orderId});
-                                if (data.success) {
+                                //const data = await balancePay({orderId: res.data.orderId});
+                                //if (data.success) {
                                     //支付宝支付
                                     const alipayData = await getAliapyInfo({
                                         outTradeNo: res.data.orderId,
@@ -291,9 +298,9 @@
                                     div.innerHTML = alipayData.data;
                                     document.body.appendChild(div);
                                     document.forms["alipaysubmit"].submit();
-                                } else {
-                                    me.$message.error(data.msg);
-                                }
+                                // } else {
+                                //     me.$message.error(data.msg);
+                                // }
                             }
                         })
                         .catch(data => {
