@@ -200,7 +200,8 @@
                     return false;
                 }
                 const id = this.$route.query.id;
-                const res = await AccomplishTask(id, this.key,this.label);
+                const label = this.label.join(',');
+                const res = await AccomplishTask(id, this.key,label);
                 this.$message({
                     message: res.msg,
                     type: res.success ? "success" : "error",
