@@ -177,27 +177,31 @@
                 const me = this;
                 const orderId = me.WXPayOrderId;
                 const WXPayState = await checkByOrderId({orderId, type: 2});
-                if (WXPayState.data.state == "2") {
-                    me.$message.success($lang("支付成功"));
-                    clearInterval(me.WXPayTimes);
-                    me.WXPayImgShow = false;
-                    me.WXImgSrc = "";
-                    me.operateType = "index";
-                    me.getTotalMoney();
-                    me.rechargeList();
-                } else if (WXPayState.data.state == "3") {
-                    me.$message.error($lang("支付失败"));
-                    clearInterval(me.WXPayTimes);
-                    me.WXPayImgShow = false;
-                    me.WXImgSrc = "";
-                    me.operateType = "index";
+                if(WXPayState){
+                    if (WXPayState.data.state == "2") {
+                        me.$message.success($lang("支付成功"));
+                        clearInterval(me.WXPayTimes);
+                        me.WXPayImgShow = false;
+                        me.WXImgSrc = "";
+                        me.operateType = "index";
+                        me.getTotalMoney();
+                        me.rechargeList();
+                    } else if (WXPayState.data.state == "3") {
+                        me.$message.error($lang("支付失败"));
+                        clearInterval(me.WXPayTimes);
+                        me.WXPayImgShow = false;
+                        me.WXImgSrc = "";
+                        me.operateType = "index";
+                    }
                 }
             },
             async payDialogCashTypeToPay() {
                 const me = this;
                 const res = await checkByOrderId({orderId: me.orderId, type: 1});
+
+
                 if (me.paystatus == 3) {
-                    alert('余额');
+                    //alert('余额');
                     //余额支付
                     if (me.totalMoney < me.orderprice) {
                         me.$message($lang("余额不足"));
@@ -207,7 +211,7 @@
                         .$confirm($lang("确定用余额支付") + me.orderprice + $lang("元"))
                         .then(async data => {
                             if (data == "confirm") {
-                                const data = await balancePay({orderId: res.data.orderId});
+                                const data = await balancePay({orderId: me.orderId});
                                 if (data.success) {
                                     me.$message($lang("操作成功"));
                                     setTimeout(function () {
@@ -226,24 +230,23 @@
                         });
                 }
                 if (me.paystatus == 1) {
-                    alert('微信 余额');
+                    //alert('微信 余额');
                     //微信支付
                     me.WXPayImgShow = true;
-                    me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${res
-                        .data.orderId}&attach=1&payType=1`;
+                    me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1&payType=1`;
                     me.WXPaying = true;
                     me.WXPayTimes = setInterval(me.queryWXPayState, 5000);
                 }
                 if (me.paystatus == 4) {
-                    alert('微信 余额');
+                    //alert('微信 余额');
                     me
                         .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付") + parseFloat(me.orderprice - me.totalMoney).toFixed(2) + '元')
                         .then(async data => {
+                            alert(data);
                             if (data == "confirm") {
                                 //微信支付
                                 me.WXPayImgShow = true;
-                                me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${res
-                                    .data.orderId}&attach=1&payType=4`;
+                                me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1&payType=4`;
                                 me.WXPaying = true;
                                 me.WXPayTimes = setInterval(me.queryWXPayState, 5000);
 
@@ -269,11 +272,11 @@
                         });
                 }
                 if (me.paystatus == 2) {
-                    alert('支付宝 ');
+                    //alert('支付宝 ');
                     //支付宝支付
                     const alipayData = await getAliapyInfo({
                         outTradeNo: res.data.orderId,
-                        subject: $lang("订单支付：") + res.data.orderId,
+                        subject: $lang("订单支付：") + me.orderId,
                         totalFee: res.data.total,
                         body: `1&&${location.href}`,
                         payType:2
@@ -284,7 +287,7 @@
                     document.forms["alipaysubmit"].submit();
                 }
                 if (me.paystatus == 5) {
-                    alert('支付宝 余额');
+                    //alert('支付宝 余额');
                     me
                         .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，支付宝支付") + parseFloat(me.orderprice - me.totalMoney).toFixed(2) + '元')
                         .then(async data => {
@@ -295,7 +298,7 @@
                                 alert('payType');
                                     const alipayData = await getAliapyInfo({
                                         outTradeNo: res.data.orderId,
-                                        subject: $lang("订单支付：") + res.data.orderId,
+                                        subject: $lang("订单支付：") + me.orderId,
                                         totalFee: res.data.total,
                                         body: `1&&${location.href}`,
                                         payType: 5
