@@ -19,14 +19,14 @@
                             <el-form-item :label="$lang('操作:')">
                                 <el-button :type="item.checked?'sure':'dir'" v-for="(item, i) in operateTypes"
                                            @click="handleLabelClick(operateTypes,i)"
-                                           :key="i">{{item.name}}
+                                           :key="i">{{item.cnValue}}
                                 </el-button>
                             </el-form-item>
 
                             <el-form-item :label="$lang('技术:')">
                                 <el-button :type="item.checked?'sure':'dir'" v-for="(item, i) in skillTypes"
                                            @click="handleLabelClick(skillTypes,i)"
-                                           :key="i">{{item.name}}
+                                           :key="i">{{item.cnValue}}
                                 </el-button>
                             </el-form-item>
                         </el-form>
@@ -38,14 +38,19 @@
         <div class="project-container">
             <el-row :gutter="20">
                 <el-col class="project-item" :span="8" v-for="(item,i) in projectList" :key="i">
-                    <div class="project-name">{{item.name}}</div>
-                    <div class="project-img" @click="clickItem(item)"><img :src="item.imgSrc"
-                                                                           alt=""></div>
+                    <div class="project-name">{{item.title}}</div>
+                    <div class="project-img" @click="clickItem(item)">
+                        <video width="100%"
+                               :src="item.url"
+                               controls="controls">
+                            您的浏览器不支持 video 标签。
+                        </video>
+                    </div>
                 </el-col>
             </el-row>
 
             <div class="pagination">
-                <el-pagination layout="prev, pager, next" :page-size="10" :total="100"
+                <el-pagination layout="prev, pager, next" :page-size="12" :total="total"
                                @current-change="handlePageChange"/>
             </div>
 
@@ -54,6 +59,8 @@
 </template>
 
 <script>
+    import {vsSchoolList, vsSchoolLabel} from '@/apis/vsSchool';
+
     export default {
         name: "vs-school-list",
         data () {
@@ -65,40 +72,59 @@
                 // 项目数据
                 projectList: [],
                 // 搜索框关键字
-                searchKeyword: ''
+                searchKeyword: '',
+                total: 0,
+                currentPage: 1
             }
         },
-        mounted () {
-            // 获取技术类型数据
-            this.skillTypes = [{name: 'angular', checked: false}, {name: 'ionic', checked: false}, {
-                name: 'react',
-                checked: false
-            }, {name: 'vue', checked: false}];
+        async mounted () {
+            let labelData = await vsSchoolLabel();
 
-            // 获取操作类型数据
-            this.operateTypes = [{name: '操作一', checked: false}, {name: '操作二', checked: false}];
+            labelData.data.forEach(item => {
+                if (item.cnValue == '技术') {
+                    this.skillTypes = item.list.map(item => {
+                        item.checked = false;
+                        return item;
+                    });
+                }
+                if (item.cnValue == '操作') {
+                    this.operateTypes = item.list.map(item => {
+                        item.checked = false;
+                        return item;
+                    });
+                }
+            });
 
-            this.projectList = [
-                {name: 'U3D建筑模型9种', imgSrc: 'http://pic32.photophoto.cn/20140714/0022005854369630_b.jpg'},
-                {name: 'U3D建筑模型9种', imgSrc: 'http://pic32.photophoto.cn/20140714/0022005854369630_b.jpg'},
-                {name: 'U3D建筑模型9种', imgSrc: 'http://pic32.photophoto.cn/20140714/0022005854369630_b.jpg'},
-                {name: 'U3D建筑模型9种', imgSrc: 'http://pic32.photophoto.cn/20140714/0022005854369630_b.jpg'},
-                {name: 'U3D建筑模型9种', imgSrc: 'http://pic32.photophoto.cn/20140714/0022005854369630_b.jpg'},
-                {name: 'U3D建筑模型9种', imgSrc: 'http://pic32.photophoto.cn/20140714/0022005854369630_b.jpg'},
-                {name: 'U3D建筑模型9种', imgSrc: 'http://pic32.photophoto.cn/20140714/0022005854369630_b.jpg'},
-            ];
+            this.getData();
         },
         methods: {
+            async getData () {
+                let keys = [];
+                keys = keys.concat(this.operateTypes.filter(item => item.checked)).concat(this.skillTypes.filter(item => item.checked));
+                keys = keys.map(item => item.key);
+
+                let data = await vsSchoolList({ index: this.currentPage, size: 12, data: { labelKey: keys.join(',') } });
+                this.projectList = data.data.list;
+                this.total = data.data.total;
+            },
             // 处理标签点击事件
             handleLabelClick (arr, i) {
-                // 清除其他所有项选中
-                arr.forEach(item => (item.checked = false));
-                // 选中当前项
-                arr[i].checked = true;
+                if (arr[i].checked) {
+                    arr[i].checked = false;
+                }
+                else {
+                    // 清除其他所有项选中
+                    arr.forEach(item => (item.checked = false));
+                    // 选中当前项
+                    arr[i].checked = true;
+                }
+
+                this.getData();
             },
             // 处理分页改变
-            handlePageChange () {
-
+            handlePageChange (val) {
+                this.currentPage = val;
+                this.getData();
             },
             // 点击视频
             clickItem (item) {
@@ -107,7 +133,7 @@
                 this.$route.name === 'S_VsSchool' ?
                     detailUrl = 'S_VsSchool-detail' : this.$route.name === 'V_VsSchool' ?
                     detailUrl = 'V_VsSchool-detail' : detailUrl = 'B_VsSchool-detail';
-                this.$router.push({name: detailUrl});
+                this.$router.push({ name: detailUrl, query: { id: item.id } });
             }
         }
     }
