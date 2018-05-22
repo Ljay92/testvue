@@ -22,8 +22,8 @@
                         </div>
                     </div>
                     <div class="tag-wrap">
-                        <button v-for="(label) in intagLableArr" :key="label.key" class="tag-button"
-                                @click="tagSelected(label.key)" v-bind:class="{'tag-button-selected':labelkey.indexOf(label.key)>-1}">{{$lang(label.value)}}
+                        <button v-for="(list) in intagLableArr" :key="label.key" class="tag-button"
+                                @click="tagSelected(list.key)" v-bind:class="{'tag-button-selected':label.indexOf(list.key)>-1}">{{$lang(list.value)}}
                         </button>
                     </div>
                     <div class="reject-reason-wrap" v-show="isReject">
@@ -157,7 +157,7 @@
                 tagLableArr: [],
                 intagLableArr: [],
                 tagLableSelected:'',
-                labelkey:[],
+                label:[],
                 key: "", //评分key
                 textarea: "",
                 isReject: false,
@@ -200,7 +200,8 @@
                     return false;
                 }
                 const id = this.$route.query.id;
-                const res = await AccomplishTask(id, this.key,this.labelkey);
+                const label = this.label.join(',');
+                const res = await AccomplishTask(id, this.key,label);
                 this.$message({
                     message: res.msg,
                     type: res.success ? "success" : "error",
@@ -248,11 +249,11 @@
             },
             //评价标签
             tagSelected(key) {
-                const index = this.labelkey.indexOf(key);
+                const index = this.label.indexOf(key);
                 if(index>-1){
-                    this.labelkey.splice(index, 1);
+                    this.label.splice(index, 1);
                 }else{
-                    this.labelkey.push(key);
+                    this.label.push(key);
                 }
             }
         }

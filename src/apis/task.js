@@ -242,8 +242,8 @@ async function AcceptanceTask(id,acceptanceType) {
     return res.data;
 }
 //完成验收任务
-async function AccomplishTask(id,key,labelkey) {
-    const res = await axios.post(`/subtask/accomplishTask`, JSON.stringify({ id,key,labelkey}))
+async function AccomplishTask(id,key,label) {
+    const res = await axios.post(`/subtask/accomplishTask`, JSON.stringify({ id,key,label}))
     return res.data;
 }
 //驳回验收任务
