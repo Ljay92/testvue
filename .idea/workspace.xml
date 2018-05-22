@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c24b301-9432-4a0a-b9e3-abdc9c773e28" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/src/views/B/TaskCheck.vue" afterPath="$PROJECT_DIR$/src/views/B/TaskCheck.vue" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/components/paydialog.vue" afterPath="$PROJECT_DIR$/src/components/paydialog.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -41,21 +42,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskCheck.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TaskCheck.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/B/TaskCheck.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="206" column="60" lean-forward="true" selection-start-line="206" selection-start-column="60" selection-end-line="206" selection-end-column="60" />
+            <state relative-caret-position="286">
+              <caret line="202" column="48" lean-forward="false" selection-start-line="202" selection-start-column="48" selection-end-line="202" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="paydialog.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="paydialog.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/paydialog.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="120" column="17" lean-forward="true" selection-start-line="120" selection-start-column="17" selection-end-line="120" selection-end-column="17" />
+            <state relative-caret-position="344">
+              <caret line="92" column="57" lean-forward="false" selection-start-line="92" selection-start-column="57" selection-end-line="92" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -150,10 +151,10 @@
         <option value="$PROJECT_DIR$/src/views/B/user/bagInfo.vue" />
         <option value="$PROJECT_DIR$/src/views/B/ChatT.vue" />
         <option value="$PROJECT_DIR$/src/views/S/ChatD.vue" />
-        <option value="$PROJECT_DIR$/src/components/paydialog.vue" />
         <option value="$PROJECT_DIR$/src/views/S/TaskCheck.vue" />
         <option value="$PROJECT_DIR$/src/apis/task.js" />
         <option value="$PROJECT_DIR$/src/views/B/TaskCheck.vue" />
+        <option value="$PROJECT_DIR$/src/components/paydialog.vue" />
       </list>
     </option>
   </component>
@@ -358,7 +359,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="203978000" />
+    <option name="totallyTimeSpent" value="204843000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -656,9 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="18" column="26" lean-forward="false" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="39" />
-          <folding>
-            <element signature="e#1719#1769#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -711,7 +709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
           <caret line="152" column="51" lean-forward="false" selection-start-line="152" selection-start-column="51" selection-end-line="152" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -822,18 +819,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/paydialog.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/B/TaskCheck.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="120" column="17" lean-forward="true" selection-start-line="120" selection-start-column="17" selection-end-line="120" selection-end-column="17" />
+        <state relative-caret-position="286">
+          <caret line="202" column="48" lean-forward="false" selection-start-line="202" selection-start-column="48" selection-end-line="202" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/B/TaskCheck.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/paydialog.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="206" column="60" lean-forward="true" selection-start-line="206" selection-start-column="60" selection-end-line="206" selection-end-column="60" />
+        <state relative-caret-position="344">
+          <caret line="92" column="57" lean-forward="false" selection-start-line="92" selection-start-column="57" selection-end-line="92" selection-end-column="57" />
           <folding />
         </state>
       </provider>
