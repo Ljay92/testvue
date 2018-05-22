@@ -26,13 +26,13 @@ async function addRecharge({money}) {
     return res.data;
 }
 //支付宝下单
-async function getAliapyInfo({outTradeNo, subject, totalFee, body}) {
-    const res = await axios.post(`/alipay/getAliapyInfo`, JSON.stringify({outTradeNo, subject, totalFee, body}));
+async function getAliapyInfo({outTradeNo, subject, totalFee, body,payType}) {
+    const res = await axios.post(`/alipay/getAliapyInfo`, JSON.stringify({outTradeNo, subject, totalFee, body,payType}));
     return res.data;
 }
 //微信下单
-async function createWXPayOrder({orderId, attach}) {
-    const res = await axios.post(`/wxpay/createOrder`, JSON.stringify({orderId, attach}));
+async function createWXPayOrder({orderId, attach,payType}) {
+    const res = await axios.post(`/wxpay/createOrder`, JSON.stringify({orderId, attach,payType}));
     return res.data;
 }
 //订单支付查看
