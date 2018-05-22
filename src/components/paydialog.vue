@@ -125,7 +125,7 @@
                 if (this.payDialogCashType == 3) {
                     if (this.orderprice > this.totalMoney) {
                         this.paystatus = 5;
-                        this.paymsg = '余额：' + this.orderprice + '元、支付宝：' + parseFloat(this.orderprice - this.totalMoney).toFixed(2) + '元';
+                        this.paymsg = '余额：' + this.totalMoney + '元、支付宝：' + parseFloat(this.orderprice - this.totalMoney).toFixed(2) + '元';
                     } else {
                         this.$message.error('您的余额足够支付。');
                     }
