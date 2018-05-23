@@ -242,7 +242,6 @@
                     me
                         .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付") + parseFloat(me.orderprice - me.totalMoney).toFixed(2) + '元')
                         .then(async data => {
-                            alert(data);
                             if (data == "confirm") {
                                 //微信支付
                                 me.WXPayImgShow = true;
@@ -295,7 +294,7 @@
                                 //const data = await balancePay({orderId: res.data.orderId});
                                 //if (data.success) {
                                     //支付宝支付
-                                alert('payType');
+
                                     const alipayData = await getAliapyInfo({
                                         outTradeNo: res.data.orderId,
                                         subject: $lang("订单支付：") + me.orderId,
