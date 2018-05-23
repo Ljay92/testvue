@@ -134,7 +134,7 @@
                                     </div>
                                 </div>
 
-                                <el-button  type="sure" @click="openModifyEndTimeDialog()">申请修改结束时间</el-button>
+                                <el-button  type="sure" @click="openModifyEndTimeDialog(m.id)">申请修改结束时间</el-button>
 
 
                                 <a href="javascript:;" class="more"
@@ -377,10 +377,10 @@
         </el-dialog>
         <SlideBtns :type="'back'"></SlideBtns>
 
-        <!--<el-dialog :title="$lang('申请修改结束时间')" size="tiny" :visible.sync="dialog.modifyEndTime.show">-->
-            <!--<el-date-picker type="datetime" v-model="dialog.modifyEndTime.form.time" :placeholder="$lang('请选择时间')" format='yyyy-MM-dd HH:mm:ss' style="width:100%">-->
-            <!--</el-date-picker>-->
-        <!--</el-dialog>-->
+        <el-dialog :title="$lang('申请修改结束时间')" size="tiny" :visible.sync="dialog.modifyEndTime.show">
+            <el-date-picker type="datetime" v-model="dialog.modifyEndTime.form.Time" :placeholder="$lang('请选择时间')" format='yyyy-MM-dd HH' style="width:100%" @change="changeTime">
+            </el-date-picker>
+        </el-dialog>
 
         <el-dialog :title="$lang('申请退款')" size="tiny" :visible.sync="dialog.applyRefund.show">
             <el-form :model="dialog.applyRefund.form" :rules="dialog.applyRefund.rules" ref="form">
@@ -485,6 +485,7 @@
     import Chat from "@/components/Chat";
     import CountDown from "@/components/countdown";
     import SlideBtns from "@/components/SlideBtns";
+    import moment from "moment";
     import {
         ChildTaskList,
         ChildTaskState,
@@ -494,7 +495,8 @@
         UpdateChildTask,
         UpdateChildTaskForSure,
         applyRefund,
-        taskDownloadExcel
+        taskDownloadExcel,
+        changeTime
     } from "@/apis/task";
     import {SToVpayMoney, SToVTopayMoney} from "@/apis/money";
     import {getUser} from '@/apis/storage';
@@ -530,7 +532,8 @@
                     modifyEndTime:{
                         show: false,
                         form: {
-                            time: null
+                            Time: '',
+                            changeTimeId:''
                         },
                     },
                     applyRefund: {
@@ -569,7 +572,6 @@
             };
         },
         async mounted () {
-
             // alert(this.tabState)
             let id = this.$route.query.id;
             if (id.indexOf("SubTask-") > -1) {
@@ -662,6 +664,17 @@
             }
         },
         methods: {
+            async changeTime(){
+                const Time = this.dialog.modifyEndTime.Time;
+                const id = this.dialog.modifyEndTime.changeTimeId;
+                const res = await changeTime(id, moment(Time).format("YYYY-MM-DD HH:mm:ss"));
+                if (res.success) {
+                    this.$message($lang("修改成功"));
+                    task.taskEndTime = task._taskEndTime;
+                } else {
+                    this.$message(res.msg);
+                }
+            },
             changStateToPay (id) {
                 const me = this;
                 me
@@ -787,8 +800,9 @@
                 this.offerFormDialogVisible = true;
             },
 
-            openModifyEndTimeDialog (){
+            openModifyEndTimeDialog (id){
                 this.dialog.modifyEndTime.show = true;
+                this.dialog.modifyEndTime.changeTimeId=id;
             },
             downloadExcel () {
                 taskDownloadExcel({task_id:this.taskInfo.id,state:this.currentExcelState}).then(res => {

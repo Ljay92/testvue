@@ -85,6 +85,15 @@
                 type: Number
             }
         },
+        watch: {
+            payDialogstatus: function () {
+                if (this.orderprice > this.totalMoney) {
+                    this.paymsg = '余额：' + this.totalMoney + '元，请在选择补充支付类型';
+                } else {
+                    this.paymsg = '余额：' + this.totalMoney+ '元';
+                }
+            }
+        },
         created() {
             this.getTotalMoney();
         },
@@ -321,6 +330,7 @@
                     .$confirm($lang("确认取消支付？"))
                     .then(data => {
                         if (data == "confirm") {
+                            me.paystatus=3;
                             me.$emit('status', false)
                         }
                     })

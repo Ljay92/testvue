@@ -241,6 +241,13 @@ async function AcceptanceTask(id,acceptanceType) {
     const res = await axios.post(`/subtask/acceptanceTask`, JSON.stringify({ id,acceptanceType }))
     return res.data;
 }
+
+//S完成验收任务
+async function sAcceptanceTask(id,key,label) {
+    const res = await axios.post(`/subtask/sAcceptanceTask`, JSON.stringify({ id,key,label}))
+    return res.data;
+}
+
 //完成验收任务
 async function AccomplishTask(id,key,label) {
     const res = await axios.post(`/subtask/accomplishTask`, JSON.stringify({ id,key,label}))
@@ -314,6 +321,17 @@ async function removeTask(id) {
     const res = await axios.get(`/task/delete/${id}`);
     return res.data;
 }
+// 任务截止时间修改
+async function changeTime(id,changeTime ) {
+    const res = await axios.post(`/subtask/changeTime`, JSON.stringify({ id, changeTime }));
+    return res.data;
+}
+
+// 审核任务截止时间修改
+async function applyTime(id,state ) {
+    const res = await axios.post(`/subtask/applyTime`, JSON.stringify({ id, state }));
+    return res.data;
+}
 
 //删除组修改
 async function UpdateTime(id,taskEndTime ) {
@@ -378,6 +396,7 @@ export {
 
 
     AssignedTask,
+    sAcceptanceTask,
     AcceptanceTask,
     AccomplishTask,
     OverruleTask,
@@ -392,7 +411,8 @@ export {
     removeGroup,
 
     removeTask,
-
+    changeTime,
+    applyTime,
     UpdateTime,
     subTaskDraftList,
 

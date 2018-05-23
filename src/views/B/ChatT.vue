@@ -146,6 +146,8 @@
                                     </div>
                                 </div>
                                 <a href="javascript:;" class="more"
+                                   @click="checkTime(m.id)">{{$lang('时间变更审核')}}&gt;</a>
+                                <a href="javascript:;" class="more"
                                    @click="$router.push({name:'B_ChatD',query: { id: m.id, taskId:m.taskId }})">{{$lang('查看')}}&gt;</a>
                             </li>
                         </ul>
@@ -432,6 +434,16 @@
         </el-dialog>
 
         <payDialog :payDialogstatus="payDialogVisible" :orderId="orderIdstr"  :orderprice="total" @status="changestatus"></payDialog>
+        <el-dialog title="时间变更审核"
+                :visible.sync="checkTimestatus"
+                width="30%"
+                center>
+            <span>确认同意变更时间吗？</span>
+            <span slot="footer" class="dialog-footer">
+    <el-button @click="checkcancel(1)">驳回</el-button>
+    <el-button type="primary" @click="checkAgree(2)">同意</el-button>
+  </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -513,7 +525,8 @@
         PayChildTask,
         getTalkByGroupId,
         ChildTaskInfo,
-        taskDownloadExcel
+        taskDownloadExcel,
+        applyTime
     } from "@/apis/task";
     import {
         addOrder,
@@ -564,7 +577,9 @@
                 offerList: [],
                 offerTotal: 0,
                 // 当前报价单的状态类型
-                currentExcelState: ''
+                currentExcelState: '',
+                checkTimestatus:false,
+                changeTimeId:''
             };
         },
         async mounted () {
@@ -640,6 +655,30 @@
             }
         },
         methods: {
+            checkTime(id){
+                this.checkTimestatus=true;
+                this.changeTimeId=id;
+            },
+            async checkAgree(i){
+                this.checkTimestatus=false
+                const id= this.changeTimeId;
+                const res = await applyTime({id,i})
+                if(res.success){
+                    me.$message(res.msg)
+                }else{
+                    me.$message.error(res.msg);
+                }
+            },
+            async checkcancel(i){
+                this.checkTimestatus=false
+                const id= this.changeTimeId;
+                const res = await applyTime({id,i})
+                if(res.success){
+                    me.$message(res.msg)
+                }else{
+                    me.$message.error(res.msg);
+                }
+            },
             changestatus(msg) {
                 this.payDialogVisible = msg;
             },
