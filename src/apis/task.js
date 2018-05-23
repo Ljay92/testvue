@@ -241,6 +241,13 @@ async function AcceptanceTask(id,acceptanceType) {
     const res = await axios.post(`/subtask/acceptanceTask`, JSON.stringify({ id,acceptanceType }))
     return res.data;
 }
+
+//S完成验收任务
+async function sAcceptanceTask(id,key,label) {
+    const res = await axios.post(`/subtask/sAcceptanceTask`, JSON.stringify({ id,key,label}))
+    return res.data;
+}
+
 //完成验收任务
 async function AccomplishTask(id,key,label) {
     const res = await axios.post(`/subtask/accomplishTask`, JSON.stringify({ id,key,label}))
@@ -389,6 +396,7 @@ export {
 
 
     AssignedTask,
+    sAcceptanceTask,
     AcceptanceTask,
     AccomplishTask,
     OverruleTask,

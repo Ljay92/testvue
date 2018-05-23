@@ -146,7 +146,7 @@
 </style>
 
 <script>
-    import {AccomplishTask, OverruleTask, getReasonParam} from "@/apis/task";
+    import {sAcceptanceTask, OverruleTask, getReasonParam} from "@/apis/task";
     import {getAllFile} from "@/apis/files";
     import {client} from "@/apis/uploadFile";
 
@@ -201,7 +201,7 @@
                 }
                 const id = this.$route.query.id;
                 const label = this.label.join(',');
-                const res = await AccomplishTask(id, this.key,label);
+                const res = await sAcceptanceTask(id, this.key,label);
                 this.$message({
                     message: res.msg,
                     type: res.success ? "success" : "error",
