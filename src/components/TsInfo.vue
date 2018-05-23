@@ -53,14 +53,15 @@
 
                 </el-col>
                 <el-col :span="3" v-if="isZong">
-                    <p class="all-task-price" v-if="form.totalType==2">
+
+                    <p class="all-task-price" v-if="form.totalType==2 && $route.query.origin!='index'">
                         <em>¥</em>{{form.total}}</p>
                     <p class="all-task-price" v-else>
                         <em>{{$lang('询价')}}</em>
                     </p>
                 </el-col>
                 <el-col :span="3" v-else>
-                    <p class="all-task-price">
+                    <p class="all-task-price" v-if="$route.query.origin!='index'">
                         <em>¥</em>{{form.total}}</p>
                 </el-col>
             </el-row>

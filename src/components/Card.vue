@@ -8,7 +8,7 @@
                     <p>{{$lang('任务名称：')}}{{projectName}}</p>
 
                     <p>{{$lang('任务截止时间：')}}{{time == "Invalid date" ? '' : time}}</p>
-                    <p>{{$lang('任务金额：')}}
+                    <p v-if="$route.path.indexOf('/index') < 0">{{$lang('任务金额：')}}
                         <span v-if="totalType == '1'">{{$lang('询价')}}</span>
                         <span v-else>¥{{total || '未填写'}}</span>
                     </p>

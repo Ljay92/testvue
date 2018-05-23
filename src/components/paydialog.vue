@@ -174,7 +174,7 @@
                     .then(data => {
                         if (data == "confirm") {
                             me.WXImgSrc = "";
-                            me.WXPayOrderId = "";
+                            //me.WXPayOrderId = "";
                             me.WXPayImgShow = false;
                             clearInterval(me.WXPayTimes);
                         }
@@ -184,9 +184,9 @@
             },
             async queryWXPayState() {
                 const me = this;
-                const orderId = me.WXPayOrderId;
-                const WXPayState = await checkByOrderId({orderId, type: 2});
-                if(WXPayState){
+                const orderId = me.orderId;
+                const WXPayState = await checkByOrderId({orderId, type: 1});
+                if(WXPayState && WXPayState.data){
                     if (WXPayState.data.state == "2") {
                         me.$message.success($lang("支付成功"));
                         clearInterval(me.WXPayTimes);
