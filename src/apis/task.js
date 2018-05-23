@@ -314,9 +314,15 @@ async function removeTask(id) {
     const res = await axios.get(`/task/delete/${id}`);
     return res.data;
 }
-// 审核任务截止时间修改
+// 任务截止时间修改
 async function changeTime(id,changeTime ) {
     const res = await axios.post(`/subtask/changeTime`, JSON.stringify({ id, changeTime }));
+    return res.data;
+}
+
+// 审核任务截止时间修改
+async function applyTime(id,state ) {
+    const res = await axios.post(`/subtask/applyTime`, JSON.stringify({ id, state }));
     return res.data;
 }
 
@@ -398,6 +404,7 @@ export {
 
     removeTask,
     changeTime,
+    applyTime,
     UpdateTime,
     subTaskDraftList,
 
