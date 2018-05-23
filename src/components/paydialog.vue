@@ -124,7 +124,7 @@
             },
             // 余额支付按钮
             yepay() {
-                if (this.paystatus == 3) {
+                if (this.payDialogCashType == 3) {
                     this.payDialogCashType = ''
                     this.paystatus = ''
                     this.paymsg = '请选择支付类型';
