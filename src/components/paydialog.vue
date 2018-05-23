@@ -249,7 +249,7 @@
                     //alert('微信 余额');
                     //微信支付
                     me.WXPayImgShow = true;
-                    me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1&payType=1`;
+                    me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1&payType=${me.paystatus}`;
                     me.WXPaying = true;
                     me.WXPayTimes = setTimeout(me.queryWXPayState, 5000);
 
