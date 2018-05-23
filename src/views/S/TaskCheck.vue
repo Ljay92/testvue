@@ -23,7 +23,7 @@
                     </div>
                     <div class="tag-wrap">
                         <button v-for="(list) in intagLableArr" :key="label.key" class="tag-button"
-                                @click="tagSelected(list.key)" v-bind:class="{'tag-button-selected':label.indexOf(list.key)>-1}">{{$lang(list.value)}}
+                                @click="tagSelected(list.key)" v-bind:class="{'tag-button-selected':label.indexOf(list.key)>-1}" v-show="list.parentkey==key">{{$lang(list.value)}}
                         </button>
                     </div>
                     <div class="reject-reason-wrap" v-show="isReject">
@@ -146,7 +146,7 @@
 </style>
 
 <script>
-    import {sAcceptanceTask, OverruleTask, getReasonParam} from "@/apis/task";
+    import {AccomplishTask, OverruleTask, getReasonParam} from "@/apis/task";
     import {getAllFile} from "@/apis/files";
     import {client} from "@/apis/uploadFile";
 
@@ -185,6 +185,7 @@
             for (let i = 0; i < res.data.score.length; i++) {
                 for (let j = 0; j < res.data.score[i].list.length; j++) {
                     this.intagLableArr.push({
+                        parentkey:res.data.score[i].key,
                         value: res.data.score[i].list[j].valueExp,
                         key: res.data.score[i].key
                     })
@@ -200,8 +201,8 @@
                     return false;
                 }
                 const id = this.$route.query.id;
-                const label = this.label.join(',');
-                const res = await sAcceptanceTask(id, this.key,label);
+                const label = this.label.join(',')
+                const res = await AccomplishTask(id, this.key,label);
                 this.$message({
                     message: res.msg,
                     type: res.success ? "success" : "error",

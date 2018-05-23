@@ -245,48 +245,29 @@
                         .catch(data => {
                         });
                 }
-                if (me.paystatus == 1 || me.paystatus == 4) {
-                    //alert('微信 余额');
+                if (me.paystatus == 1 ) {
                     //微信支付
                     me.WXPayImgShow = true;
-                    me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1&payType=${me.paystatus}`;
+                    me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1&payType=1`;
                     me.WXPaying = true;
                     me.WXPayTimes = setTimeout(me.queryWXPayState, 5000);
-
                 }
-                // if (me.paystatus == 4) {
-                //     //alert('微信 余额');
-                //     me
-                //         .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付") + parseFloat(me.orderprice - me.totalMoney).toFixed(2) + '元')
-                //         .then(async data => {
-                //             if (data == "confirm") {
-                //                 //微信支付
-                //                 me.WXPayImgShow = true;
-                //                 me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1&payType=4`;
-                //                 me.WXPaying = true;
-                //                 me.WXPayTimes = setInterval(me.queryWXPayState, 5000);
-                //
-                //                 // const data = await balancePay({orderId: res.data.orderId, payType:me.paystatus});
-                //                 // if (data.success) {
-                //                 //     me.$message($lang("操作成功"));
-                //                 //     const alipayData = await getAliapyInfo({
-                //                 //         outTradeNo: res.data.orderId,
-                //                 //         subject: $lang("订单支付：") + res.data.orderId,
-                //                 //         totalFee: res.data.total,
-                //                 //         body: `1&&${location.href}`
-                //                 //     });
-                //                 //     let div = document.createElement("div");
-                //                 //     div.innerHTML = alipayData.data;
-                //                 //     document.body.appendChild(div);
-                //                 //     document.forms["alipaysubmit"].submit();
-                //                 // } else {
-                //                 //     me.$message.error(data.msg);
-                //                 // }
-                //             }
-                //         })
-                //         .catch(data => {
-                //         });
-                // }
+                if (me.paystatus == 4) {
+                    //alert('微信 余额');
+                    me
+                        .$confirm($lang("确定用余额支付") + me.totalMoney + $lang("元，微信支付") + parseFloat(me.orderprice - me.totalMoney).toFixed(2) + '元')
+                        .then(async data => {
+                            if (data == "confirm") {
+                                //微信支付
+                                me.WXPayImgShow = true;
+                                me.WXImgSrc = `${axios.defaults.baseURL}/wxpay/createOrder?orderId=${me.orderId}&attach=1&payType=4`;
+                                me.WXPaying = true;
+                                me.WXPayTimes = setTimeout(me.queryWXPayState, 5000);
+                            }
+                        })
+                        .catch(data => {
+                        });
+                }
                 if (me.paystatus == 2) {
                     //alert('支付宝 ');
                     //支付宝支付
